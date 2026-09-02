@@ -16,7 +16,9 @@ class ProcessStepResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-flag';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Homepage';
+
+    protected static ?int $navigationSort = 8;
 
     protected static ?string $navigationLabel = 'Work Process Steps';
 

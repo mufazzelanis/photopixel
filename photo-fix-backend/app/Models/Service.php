@@ -6,6 +6,7 @@ use App\Models\Concerns\ClearsSiteCache;
 use App\Models\Concerns\Sortable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
@@ -43,6 +44,20 @@ class Service extends Model implements HasMedia
     public function points(): HasMany
     {
         return $this->hasMany(ServicePoint::class)->orderBy('sort_order');
+    }
+
+    /** Itemized "Basic Clipping Path — $0.39" rows on /pricing. A service
+     *  only shows up there once it has at least one of these. */
+    public function priceItems(): HasMany
+    {
+        return $this->hasMany(ServicePriceItem::class)->orderBy('sort_order');
+    }
+
+    /** The matching Portfolio category, so the detail page can show its
+     *  real "Work Samples" gallery. Optional — not every service has one. */
+    public function workSampleCategory(): BelongsTo
+    {
+        return $this->belongsTo(WorkSampleCategory::class);
     }
 
     public function scopeFeatured(Builder $query): Builder

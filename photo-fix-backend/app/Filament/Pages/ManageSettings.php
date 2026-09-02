@@ -2,7 +2,9 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Resources\SectionResource;
 use App\Models\SiteSetting;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Textarea;
@@ -39,6 +41,7 @@ class ManageSettings extends Page implements HasForms
         'contact.email' => ['Public email', 'text'],
         'contact.phone' => ['Phone', 'text'],
         'contact.quote_notify_email' => ['Send lead notifications to', 'text'],
+        'contact.map_embed_url' => ['Google Maps embed URL', 'text'],
         'newsletter.heading' => ['Newsletter heading', 'text'],
         'newsletter.placeholder' => ['Newsletter input placeholder', 'text'],
         'newsletter.button_label' => ['Newsletter button label', 'text'],
@@ -93,9 +96,17 @@ class ManageSettings extends Page implements HasForms
 
         return $form->statePath('data')->schema([
             Tabs::make('groups')->tabs(
-                collect($tabs)->map(fn ($fields, $group) => Tabs\Tab::make($labels[$group] ?? ucfirst($group))->schema([
-                    Section::make()->schema($fields),
-                ]))->values()->all()
+                collect($tabs)->map(function ($fields, $group) use ($labels) {
+                    $schema = [];
+                    if ($group === 'contact') {
+                        $schema[] = Placeholder::make('contact_photo_note')
+                            ->label('')
+                            ->content('Looking for the Contact page photo? That\'s uploaded separately — go to Homepage → Section Manager → "Contact — Page Heading" → Image field.');
+                    }
+                    $schema[] = Section::make()->schema($fields);
+
+                    return Tabs\Tab::make($labels[$group] ?? ucfirst($group))->schema($schema);
+                })->values()->all()
             )->persistTabInQueryString(),
         ]);
     }
@@ -121,5 +132,10 @@ class ManageSettings extends Page implements HasForms
     protected function getFormActions(): array
     {
         return [\Filament\Actions\Action::make('save')->label('Save')->submit('save')];
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [SectionResource::editHeadingAction('contact', 'Upload Contact Page Photo')];
     }
 }

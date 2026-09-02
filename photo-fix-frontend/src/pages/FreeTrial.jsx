@@ -4,7 +4,6 @@ import { useAsync } from "../hooks/useAsync";
 import { Loader, ErrorState } from "../components/ui/Loader";
 import { Reveal } from "../components/ui/Reveal";
 import { Section } from "../components/ui/Section";
-import { CmsButton } from "../components/ui/CmsButton";
 import { Icon } from "../lib/Icon";
 import { InfoPanel } from "../components/free-trial/InfoPanel";
 import { FreeTrialPageForm } from "../forms/FreeTrialPageForm";
@@ -46,7 +45,6 @@ function UploadBlock({ servers = [] }) {
             {u.name}
           </a>
         ))}
-        <CmsButton label="Get a Custom Quote for your Photo Editing Project" url="#quote" variant="outline" />
       </Reveal>
     </Section>
   );

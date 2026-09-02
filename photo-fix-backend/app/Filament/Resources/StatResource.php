@@ -16,7 +16,9 @@ class StatResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Homepage';
+
+    protected static ?int $navigationSort = 13;
 
     protected static ?string $navigationLabel = 'Magnificent Numbers';
 

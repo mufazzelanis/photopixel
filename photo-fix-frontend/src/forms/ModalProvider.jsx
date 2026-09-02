@@ -34,19 +34,21 @@ export const useModal = () => {
 
 /**
  * Resolve an href/url from the CMS into an action:
- * "#quote" / "#free-trial" open modals; "#id" scrolls; anything else is a link.
+ * "#quote" goes to the /free-trial page (not a modal — every "Get a Quote"
+ * entry point sitewide funnels here); "#free-trial" still opens the quick
+ * modal; "#id" scrolls; anything else is a link.
  */
 export function useCmsAction() {
-  const { openQuote, openFreeTrial } = useModal();
+  const { openFreeTrial } = useModal();
   return useCallback(
     (url) => {
       if (!url) return { type: "none" };
-      if (url === "#quote") return { type: "action", run: openQuote };
+      if (url === "#quote") return { type: "route", to: "/free-trial" };
       if (url === "#free-trial") return { type: "action", run: openFreeTrial };
       if (url.startsWith("#")) return { type: "anchor", to: url };
       if (url.startsWith("http")) return { type: "external", to: url };
       return { type: "route", to: url };
     },
-    [openQuote, openFreeTrial],
+    [openFreeTrial],
   );
 }

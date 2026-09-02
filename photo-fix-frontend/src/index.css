@@ -166,7 +166,21 @@ iframe {
 }
 .pfz-float { animation: pfz-float 6s ease-in-out infinite; }
 
+/* Continuous right-to-left auto-scroller (e.g. Testimonials). The track
+   renders its children twice back to back; sliding exactly -50% loops
+   seamlessly regardless of how many items or how wide they are. */
+@keyframes pfz-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.pfz-marquee-track {
+  animation: pfz-marquee var(--pfz-marquee-duration, 30s) linear infinite;
+}
+.pfz-marquee-pause-on-hover:hover .pfz-marquee-track {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .pfz-animated-gradient, .pfz-float { animation: none !important; }
+  .pfz-animated-gradient, .pfz-float, .pfz-marquee-track { animation: none !important; }
 }

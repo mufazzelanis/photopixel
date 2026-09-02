@@ -22,6 +22,8 @@ export function Hero({ content }) {
     const a = resolve(btn.url);
     if (a.type === "action")
       return <Button key={variant} as="button" type="button" onClick={a.run} variant={variant} size="lg">{btn.label}</Button>;
+    if (a.type === "route")
+      return <Button key={variant} to={a.to} variant={variant} size="lg">{btn.label}</Button>;
     return <Button key={variant} href={a.to || btn.url} variant={variant} size="lg">{btn.label}</Button>;
   };
 

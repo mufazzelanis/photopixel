@@ -19,6 +19,8 @@ class FooterColumnResource extends Resource
 
     protected static ?string $navigationGroup = 'Settings';
 
+    protected static ?int $navigationSort = 2;
+
     protected static ?string $navigationLabel = 'Footer Columns';
 
     protected static ?string $recordTitleAttribute = 'title';

@@ -19,6 +19,7 @@ trait ClearsSiteCache
         'api.blog.index',
         'api.about_page',
         'api.free_trial_page',
+        'api.pricing_page',
         'site_settings.all',
     ];
 

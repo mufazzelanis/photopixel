@@ -25,10 +25,10 @@ class ContentSeeder extends Seeder
             'heading' => 'Get Stunning & Flawless Photo Editing Services At Photo Fix Zone!',
             'highlight_text' => 'Photo Fix Zone',
             'sub_text' => 'We are the leading photo editing service provider working with result-oriented professionals who can lead with flawless images. Get in touch with us.',
-            'primary_btn_label' => 'Try For Free',
+            'primary_btn_label' => 'Get a Quote',
             'primary_btn_url' => '/free-trial',
             'secondary_btn_label' => 'SEE SAMPLES',
-            'secondary_btn_url' => '#work-samples',
+            'secondary_btn_url' => '/portfolio',
         ]);
 
         // ---- About (singleton) ----------------------------------------

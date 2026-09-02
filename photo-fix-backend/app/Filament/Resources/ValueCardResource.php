@@ -16,7 +16,9 @@ class ValueCardResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Homepage';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationLabel = 'Value Cards';
 

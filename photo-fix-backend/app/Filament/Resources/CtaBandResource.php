@@ -17,7 +17,9 @@ class CtaBandResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-megaphone';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Homepage';
+
+    protected static ?int $navigationSort = 6;
 
     protected static ?string $navigationLabel = 'CTA Bands';
 

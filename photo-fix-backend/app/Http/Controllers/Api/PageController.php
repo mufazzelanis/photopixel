@@ -24,4 +24,10 @@ class PageController extends Controller
     {
         return response()->json($payload->freeTrialPage());
     }
+
+    /** Copy + itemized per-service pricing tables for the Pricing page. */
+    public function pricing(SitePayload $payload)
+    {
+        return response()->json($payload->pricingPage());
+    }
 }

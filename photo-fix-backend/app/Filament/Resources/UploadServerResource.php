@@ -16,7 +16,9 @@ class UploadServerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cloud-arrow-up';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Homepage';
+
+    protected static ?int $navigationSort = 14;
 
     protected static ?string $navigationLabel = 'Upload Servers';
 

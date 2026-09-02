@@ -18,7 +18,7 @@ class WhyPointResource extends Resource
 
     protected static ?string $navigationGroup = 'Homepage';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 10;
 
     protected static ?string $navigationLabel = 'Why Us — Points';
 

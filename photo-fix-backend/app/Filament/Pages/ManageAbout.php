@@ -21,7 +21,7 @@ class ManageAbout extends Page implements HasForms
 
     protected static ?string $navigationGroup = 'Homepage';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $title = 'About / Accelerate Your Journey';
 

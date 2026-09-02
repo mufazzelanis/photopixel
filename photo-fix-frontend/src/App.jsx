@@ -18,6 +18,7 @@ const FreeTrial = lazy(() => import("./pages/FreeTrial").then((m) => ({ default:
 const Contact = lazy(() => import("./pages/Contact").then((m) => ({ default: m.Contact })));
 const Pricing = lazy(() => import("./pages/Pricing").then((m) => ({ default: m.Pricing })));
 const Portfolio = lazy(() => import("./pages/Portfolio").then((m) => ({ default: m.Portfolio })));
+const PortfolioCategory = lazy(() => import("./pages/PortfolioCategory").then((m) => ({ default: m.PortfolioCategory })));
 const Blog = lazy(() => import("./pages/Blog").then((m) => ({ default: m.Blog })));
 const BlogPost = lazy(() => import("./pages/BlogPost").then((m) => ({ default: m.BlogPost })));
 const NotFound = lazy(() => import("./pages/NotFound").then((m) => ({ default: m.NotFound })));
@@ -48,6 +49,7 @@ export default function App() {
                     <Route path="contact" element={<Contact />} />
                     <Route path="pricing" element={<Pricing />} />
                     <Route path="portfolio" element={<Portfolio />} />
+                    <Route path="portfolio/:slug" element={<PortfolioCategory />} />
                     <Route path="blog" element={<Blog />} />
                     <Route path="blog/:slug" element={<BlogPost />} />
                     <Route path="*" element={<NotFound />} />

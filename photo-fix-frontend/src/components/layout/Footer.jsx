@@ -12,9 +12,11 @@ const CONTACT_ROWS = [
 
 function ContactStrip({ contact = {} }) {
   return (
-    // negative top margin lifts the card up into the section above; the footer
-    // grid then flows normally beneath the full card height (no overlap).
-    <div className="pfz-container relative z-10 -mt-14 sm:-mt-16">
+    // Footer is global and sits after whatever section a given page ends
+    // with, so this can't reach up into the previous section (that section's
+    // own content isn't guaranteed to leave room) — the card stays inside
+    // the footer's own top padding instead.
+    <div className="pfz-container relative z-10 pt-10 sm:pt-14">
       <Reveal className="grid overflow-hidden rounded-[var(--pfz-radius-lg)] pfz-gradient-brand text-white shadow-[var(--pfz-shadow-card)] sm:grid-cols-3 sm:divide-x sm:divide-white/15">
         {CONTACT_ROWS.map((row) => (
           <div key={row.key} className="flex items-center gap-3 px-5 py-4 sm:px-6 sm:py-5">

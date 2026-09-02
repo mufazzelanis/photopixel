@@ -18,6 +18,8 @@ class MenuItemResource extends Resource
 
     protected static ?string $navigationGroup = 'Settings';
 
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $navigationLabel = 'Header Menu';
 
     protected static ?string $recordTitleAttribute = 'label';

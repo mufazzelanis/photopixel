@@ -13,6 +13,7 @@ export const getPageSeo = (key) =>
   api.get(`/page/${key}/seo`).then((r) => r.data.data);
 export const getAbout = () => api.get("/about").then((r) => r.data);
 export const getFreeTrialPage = () => api.get("/free-trial").then((r) => r.data);
+export const getPricing = () => api.get("/pricing").then((r) => r.data);
 
 export const submitQuote = (payload) => api.post("/quote", payload);
 export const submitContact = (payload) => api.post("/contact", payload);

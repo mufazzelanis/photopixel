@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\ClientType;
 use App\Models\Testimonial;
-use App\Models\WorkSample;
 use Illuminate\Database\Seeder;
 
 class SocialProofSeeder extends Seeder
@@ -31,15 +30,7 @@ class SocialProofSeeder extends Seeder
         foreach ($testimonials as $i => $t) {
             Testimonial::updateOrCreate(['name' => $t['name'], 'role' => $t['role']], $t + ['sort_order' => $i + 1]);
         }
-
-        // ---- Work samples (images uploaded later in admin) -------------
-        foreach ([
-            ['title' => 'Apparel — Model Retouching', 'category' => 'Retouching'],
-            ['title' => 'Portrait — Color Grade', 'category' => 'Color Correction'],
-            ['title' => 'Fashion — Skin & Tone', 'category' => 'Retouching'],
-            ['title' => 'Product — Background Removal', 'category' => 'Background Removal'],
-        ] as $i => $s) {
-            WorkSample::updateOrCreate(['title' => $s['title']], $s + ['sort_order' => $i + 1]);
-        }
+        // Work sample categories + samples now live in WorkSampleCategorySeeder,
+        // since each category is its own admin-editable /portfolio/{slug} page.
     }
 }

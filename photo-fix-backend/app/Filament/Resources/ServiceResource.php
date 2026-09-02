@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ServiceResource\Pages;
 use App\Filament\Resources\ServiceResource\RelationManagers\PointsRelationManager;
+use App\Filament\Resources\ServiceResource\RelationManagers\PriceItemsRelationManager;
 use App\Models\Service;
+use App\Models\WorkSampleCategory;
 use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
@@ -18,7 +20,9 @@ class ServiceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Homepage';
+
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $recordTitleAttribute = 'title';
 
@@ -30,8 +34,15 @@ class ServiceResource extends Resource
                     ->afterStateUpdated(fn ($state, Forms\Set $set, string $operation) => $operation === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null),
                 Forms\Components\TextInput::make('slug')->required()->unique(ignoreRecord: true),
                 Forms\Components\TextInput::make('icon')->helperText('Icon key rendered on the frontend, e.g. scissors, layers, palette.'),
+                Forms\Components\Select::make('work_sample_category_id')
+                    ->label('Portfolio category')
+                    ->helperText('Optional — shows that category\'s real "Work Samples" gallery on this service\'s page.')
+                    ->options(fn () => WorkSampleCategory::query()->ordered()->pluck('name', 'id'))
+                    ->searchable(),
                 Forms\Components\TextInput::make('btn_label')->required()->default('More About'),
                 Forms\Components\TextInput::make('btn_url')->helperText('Leave blank to link to /services/{slug}.'),
+                Forms\Components\TextInput::make('starting_price')
+                    ->helperText('e.g. $0.39 — add price items below to make this service appear on /pricing.'),
                 Forms\Components\Textarea::make('short_desc')->rows(3)->columnSpanFull(),
                 Forms\Components\RichEditor::make('long_desc')->columnSpanFull(),
             ]),
@@ -69,7 +80,7 @@ class ServiceResource extends Resource
 
     public static function getRelations(): array
     {
-        return [PointsRelationManager::class];
+        return [PointsRelationManager::class, PriceItemsRelationManager::class];
     }
 
     public static function getPages(): array

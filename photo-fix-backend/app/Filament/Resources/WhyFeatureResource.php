@@ -18,7 +18,7 @@ class WhyFeatureResource extends Resource
 
     protected static ?string $navigationGroup = 'Homepage';
 
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 11;
 
     protected static ?string $navigationLabel = 'Why Us — Features';
 

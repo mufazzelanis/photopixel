@@ -17,7 +17,9 @@ class ClientTypeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Homepage';
+
+    protected static ?int $navigationSort = 7;
 
     protected static ?string $navigationLabel = 'Top-Tier Clients';
 

@@ -10,6 +10,7 @@ use App\Models\PaymentMethod;
 use App\Models\Service;
 use App\Models\Testimonial;
 use App\Models\WorkSample;
+use App\Models\WorkSampleCategory;
 use Illuminate\Database\Seeder;
 
 /**
@@ -33,6 +34,7 @@ class MediaSeeder extends Seeder
 
         $this->hero();
         $this->services();
+        $this->workSampleCategories();
         $this->workSamples();
         $this->testimonials();
         $this->countries();
@@ -64,6 +66,20 @@ class MediaSeeder extends Seeder
                 ->usingFileName('before.png')->toMediaCollection('before');
             $service->addMediaFromString($this->gradient(900, 900, '#6C4CF1', '#2F6BFF', 'AFTER'))
                 ->usingFileName('after.png')->toMediaCollection('after');
+        }
+    }
+
+    private function workSampleCategories(): void
+    {
+        $palettes = [
+            ['#6C4CF1', '#2F6BFF'], ['#EC4899', '#8B5CF6'], ['#0EA5E9', '#22D3EE'], ['#F59E0B', '#EF4444'],
+            ['#10B981', '#2F6BFF'], ['#8B5CF6', '#EC4899'], ['#64748B', '#334155'], ['#DB2777', '#7C3AED'],
+        ];
+        foreach (WorkSampleCategory::all()->values() as $i => $cat) {
+            $cat->clearMediaCollection('cover');
+            [$a, $b] = $palettes[$i % count($palettes)];
+            $cat->addMediaFromString($this->gradient(900, 700, $a, $b, mb_strtoupper($cat->name)))
+                ->usingFileName('cover.png')->toMediaCollection('cover');
         }
     }
 

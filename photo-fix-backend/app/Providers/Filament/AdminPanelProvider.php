@@ -33,11 +33,17 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::hex('#6C4CF1'),
             ])
             ->navigationGroups([
+                // Ordered to match how a non-technical admin thinks about the
+                // site: look and feel first, then each page top to bottom in
+                // the order a visitor actually scrolls through it, then the
+                // supporting/back-office areas last. Each item already carries
+                // its own icon, so the groups themselves stay icon-less —
+                // Filament doesn't allow both on the same menu.
                 NavigationGroup::make('Design'),
                 NavigationGroup::make('Homepage'),
+                NavigationGroup::make('Portfolio'),
                 NavigationGroup::make('About Page'),
                 NavigationGroup::make('Free Trial'),
-                NavigationGroup::make('Content'),
                 NavigationGroup::make('Blog'),
                 NavigationGroup::make('Leads'),
                 NavigationGroup::make('Settings'),

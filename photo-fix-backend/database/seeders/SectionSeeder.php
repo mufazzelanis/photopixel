@@ -122,6 +122,14 @@ class SectionSeeder extends Seeder
                 'highlight_text' => 'Articles',
                 'sub_heading' => 'Get the best blog and article to know more about photo editing and why you need to stick with the best editing service.',
             ],
+            [
+                'key' => 'contact',
+                'name' => 'Contact — Page Heading',
+                'heading' => 'All Great Things Start With A Conversation',
+                'highlight_text' => 'Conversation',
+                'sub_heading' => "For any inquiries, simply send us a message here and we'll reply back instantly. In some cases it usually takes up to 24 hours.",
+                'settings' => ['bg' => 'gradient-hero'],
+            ],
         ];
 
         foreach ($sections as $i => $data) {

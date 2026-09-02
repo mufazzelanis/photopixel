@@ -18,6 +18,8 @@ class BlogCategoryResource extends Resource
 
     protected static ?string $navigationGroup = 'Blog';
 
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $navigationLabel = 'Categories';
 
     protected static ?string $recordTitleAttribute = 'name';

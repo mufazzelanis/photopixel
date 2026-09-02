@@ -21,6 +21,7 @@ Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/blog/{post}', [BlogController::class, 'show']);
 Route::get('/about', [PageController::class, 'about']);
 Route::get('/free-trial', [PageController::class, 'freeTrial']);
+Route::get('/pricing', [PageController::class, 'pricing']);
 Route::get('/page/{key}/seo', [PageController::class, 'seo']);
 
 // ---- Lead capture (POST, throttled + honeypot) ---------------------------

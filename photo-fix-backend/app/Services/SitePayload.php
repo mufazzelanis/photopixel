@@ -27,6 +27,8 @@ use App\Models\Theme;
 use App\Models\UploadServer;
 use App\Models\ValueCard;
 use App\Models\WhyChooseSection;
+use App\Models\WorkSample;
+use App\Models\WorkSampleCategory;
 use App\Support\Media;
 use Illuminate\Support\Facades\Cache;
 
@@ -52,6 +54,7 @@ class SitePayload
                 'client_types' => $this->clientTypes(),
                 'process_steps' => $this->processSteps(),
                 'work_samples' => $this->workSamples(),
+                'work_sample_categories' => $this->workSampleCategories(),
                 'why_choose' => $this->whyChoose(),
                 'testimonials' => $this->testimonials(),
                 'stats' => $this->stats(),
@@ -118,6 +121,35 @@ class SitePayload
                 'socials' => SocialLink::query()->visible()->get()
                     ->map(fn ($s) => ['platform' => $s->platform, 'url' => $s->url, 'icon' => $s->icon])->values(),
                 'upload_servers' => $this->uploadServers(),
+            ]);
+        });
+    }
+
+    /** Copy + itemized per-service pricing tables for the /pricing page.
+     *  A service only appears here once it has at least one price item. */
+    public function pricingPage(): array
+    {
+        return Cache::rememberForever('api.pricing_page', function () {
+            $section = Section::where('key', 'pricing')->first();
+
+            return $this->plain([
+                'seo' => $this->seo('pricing'),
+                'heading' => $section?->heading,
+                'highlight' => $section?->highlight_text,
+                'sub_text' => $section?->sub_heading,
+                'services' => Service::query()->active()->ordered()->has('priceItems')
+                    ->with('priceItems', 'workSampleCategory')->get()
+                    ->map(fn (Service $s) => [
+                        'slug' => $s->slug,
+                        'title' => $s->title,
+                        'starting_price' => $s->starting_price,
+                        'before_image' => Media::url($s, 'before', 'web'),
+                        'after_image' => Media::url($s, 'after', 'web'),
+                        'items' => $s->priceItems->map(fn ($i) => ['label' => $i->label, 'price' => $i->price])->values(),
+                        'samples_url' => $s->workSampleCategory ? "/portfolio/{$s->workSampleCategory->slug}" : "/services/{$s->slug}",
+                    ])->values(),
+                'faqs' => Faq::query()->where('group', 'pricing')->visible()->get()
+                    ->map(fn ($f) => ['question' => $f->question, 'answer' => $f->answer])->values(),
             ]);
         });
     }
@@ -197,6 +229,7 @@ class SitePayload
                         'label' => $c->label,
                         'url' => $c->url,
                         'target' => $c->target,
+                        'icon' => $c->icon,
                     ])->values(),
                 ])->values(),
         ]));
@@ -211,6 +244,7 @@ class SitePayload
                 'address' => SiteSetting::value('contact', 'address'),
                 'email' => SiteSetting::value('contact', 'email'),
                 'phone' => SiteSetting::value('contact', 'phone'),
+                'map_embed_url' => SiteSetting::value('contact', 'map_embed_url'),
             ],
             'newsletter' => [
                 'heading' => SiteSetting::value('newsletter', 'heading', 'Subscribe Now'),
@@ -240,6 +274,7 @@ class SitePayload
             'highlight_text' => $s->highlight_text,
             'sub_heading' => $s->sub_heading,
             'body' => $s->body,
+            'image' => Media::url($s, 'image', 'web'),
             'settings' => $s->settings ?? [],
         ])->values()->all();
     }
@@ -358,14 +393,38 @@ class SitePayload
         ])->all();
     }
 
+    /** Flat sample list (all categories mixed) for the homepage carousel. Each
+     *  one links straight to its /portfolio/{category_slug} page. */
     private function workSamples(): array
     {
-        return \App\Models\WorkSample::query()->visible()->get()->map(fn ($w) => [
+        return WorkSample::query()->visible()->with('category')->get()->map(fn ($w) => [
             'title' => $w->title,
-            'category' => $w->category,
             'before_image' => Media::url($w, 'before', 'web'),
             'after_image' => Media::url($w, 'after', 'web'),
+            'category_slug' => $w->category?->slug,
         ])->all();
+    }
+
+    /** Grouped by category, each with its own copy/buttons — powers /portfolio and /portfolio/{slug}. */
+    private function workSampleCategories(): array
+    {
+        return WorkSampleCategory::query()->visible()
+            ->with(['samples' => fn ($q) => $q->visible()])
+            ->get()
+            ->map(fn (WorkSampleCategory $cat) => [
+                'name' => $cat->name,
+                'slug' => $cat->slug,
+                'icon' => $cat->icon,
+                'description' => $cat->description,
+                'cover' => Media::url($cat, 'cover', 'web'),
+                'read_more' => ['label' => $cat->read_more_label, 'url' => $cat->read_more_url ?: '/services'],
+                'try_free' => ['label' => $cat->try_free_label, 'url' => $cat->try_free_url ?: '/free-trial'],
+                'samples' => $cat->samples->map(fn ($s) => [
+                    'title' => $s->title,
+                    'before_image' => Media::url($s, 'before', 'web'),
+                    'after_image' => Media::url($s, 'after', 'web'),
+                ])->values(),
+            ])->values()->all();
     }
 
     private function whyChoose(): array

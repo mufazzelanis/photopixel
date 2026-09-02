@@ -19,6 +19,8 @@ class PaymentMethodResource extends Resource
 
     protected static ?string $navigationGroup = 'Settings';
 
+    protected static ?int $navigationSort = 4;
+
     protected static ?string $navigationLabel = 'Payment Methods';
 
     protected static ?string $recordTitleAttribute = 'name';

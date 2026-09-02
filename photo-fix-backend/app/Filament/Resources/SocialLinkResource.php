@@ -18,6 +18,8 @@ class SocialLinkResource extends Resource
 
     protected static ?string $navigationGroup = 'Settings';
 
+    protected static ?int $navigationSort = 3;
+
     protected static ?string $navigationLabel = 'Social Links';
 
     protected static ?string $recordTitleAttribute = 'platform';

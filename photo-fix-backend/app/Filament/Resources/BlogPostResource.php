@@ -19,6 +19,8 @@ class BlogPostResource extends Resource
 
     protected static ?string $navigationGroup = 'Blog';
 
+    protected static ?int $navigationSort = 0;
+
     protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Form $form): Form

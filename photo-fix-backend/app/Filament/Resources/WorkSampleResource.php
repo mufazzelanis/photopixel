@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\WorkSampleResource\Pages;
 use App\Models\WorkSample;
+use App\Models\WorkSampleCategory;
 use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
@@ -17,9 +18,11 @@ class WorkSampleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = 'Portfolio';
 
-    protected static ?string $navigationLabel = 'Work Samples';
+    protected static ?int $navigationSort = 1;
+
+    protected static ?string $navigationLabel = 'All Samples';
 
     protected static ?string $recordTitleAttribute = 'title';
 
@@ -27,7 +30,17 @@ class WorkSampleResource extends Resource
     {
         return $form->schema([
             Forms\Components\TextInput::make('title'),
-            Forms\Components\TextInput::make('category')->helperText('e.g. Retouching, Color Correction'),
+            Forms\Components\Select::make('work_sample_category_id')
+                ->label('Category')
+                ->options(fn () => WorkSampleCategory::query()->ordered()->pluck('name', 'id'))
+                ->searchable()
+                ->createOptionForm([
+                    Forms\Components\TextInput::make('name')->required()
+                        ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', \Illuminate\Support\Str::slug($state)))
+                        ->live(onBlur: true),
+                    Forms\Components\TextInput::make('slug')->required(),
+                ])
+                ->createOptionUsing(fn (array $data) => WorkSampleCategory::create($data)->id),
             SpatieMediaLibraryFileUpload::make('before')->collection('before')->image()->imageEditor(),
             SpatieMediaLibraryFileUpload::make('after')->collection('after')->image()->imageEditor(),
             Forms\Components\Toggle::make('is_active')->default(true),
@@ -43,7 +56,7 @@ class WorkSampleResource extends Resource
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('before')->collection('before')->square()->label('Before'),
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('after')->collection('after')->square()->label('After'),
                 Tables\Columns\TextColumn::make('title')->searchable(),
-                Tables\Columns\TextColumn::make('category')->badge(),
+                Tables\Columns\TextColumn::make('category.name')->badge()->label('Category'),
                 Tables\Columns\ToggleColumn::make('is_active'),
             ])
             ->actions([Tables\Actions\EditAction::make()])

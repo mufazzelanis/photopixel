@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SectionResource\Pages;
 use App\Models\Section;
+use Filament\Actions\Action;
 use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -45,7 +47,10 @@ class SectionResource extends Resource
                 ->helperText('Intro paragraph. For link-style sub-headings use "Label|/url".'),
             Forms\Components\Textarea::make('body')
                 ->rows(5)
-                ->columnSpanFull(),
+                ->columnSpanFull()
+                ->helperText('Used by a few sections (e.g. "The Range Of Value We Provide") as several paragraphs — leave one fully blank line between paragraphs to split them.'),
+            SpatieMediaLibraryFileUpload::make('image')->collection('image')->image()->imageEditor()
+                ->helperText('Optional — only a few pages use this (e.g. the person photo on Contact). Leave blank otherwise.'),
             Forms\Components\KeyValue::make('settings')
                 ->keyLabel('Setting')
                 ->valueLabel('Value')
@@ -81,5 +86,23 @@ class SectionResource extends Resource
             'create' => Pages\CreateSection::route('/create'),
             'edit' => Pages\EditSection::route('/{record}/edit'),
         ];
+    }
+
+    /**
+     * One-click shortcut other "Homepage" list pages (Value Cards, Services,
+     * FAQ, ...) drop into their header actions so an admin never has to hunt
+     * for where a section's heading/intro text lives — it jumps straight to
+     * that section's row here.
+     */
+    public static function editHeadingAction(string $key, string $label = 'Edit Heading & Intro Text'): Action
+    {
+        $section = Section::where('key', $key)->first();
+
+        return Action::make('editSectionHeading')
+            ->label($label)
+            ->icon('heroicon-o-pencil-square')
+            ->color('gray')
+            ->url(fn () => static::getUrl('edit', ['record' => $section ?? Section::where('key', $key)->firstOrFail()]))
+            ->visible((bool) $section);
     }
 }

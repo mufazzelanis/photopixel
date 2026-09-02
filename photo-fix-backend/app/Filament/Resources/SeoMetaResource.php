@@ -19,6 +19,8 @@ class SeoMetaResource extends Resource
 
     protected static ?string $navigationGroup = 'Settings';
 
+    protected static ?int $navigationSort = 5;
+
     protected static ?string $navigationLabel = 'SEO Meta';
 
     protected static ?string $recordTitleAttribute = 'page_key';
