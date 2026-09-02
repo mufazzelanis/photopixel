@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+/*
+  Runtime-themeable design tokens.
+  ThemeProvider writes the --pfz-* custom properties on :root from GET /api/v1/theme.
+  `@theme inline` makes Tailwind emit the var() reference in utilities (bg-primary ->
+  background-color: var(--pfz-color-primary)), so changing a token re-skins instantly.
+*/
+:root {
+  /* colour — overwritten at runtime, these are the seeded defaults */
+  --pfz-color-primary: #6c4cf1;
+  --pfz-color-primary-600: #5a3fd6;
+  --pfz-color-primary-700: #4a32b8;
+  --pfz-color-secondary: #2f6bff;
+  --pfz-color-accent: #ec4899;
+  --pfz-color-bg: #ffffff;
+  --pfz-color-bg-alt: #f4f5f7;
+  --pfz-color-bg-soft: #f7f1fb;
+  --pfz-color-bg-dark: #1f2430;
+  --pfz-color-text: #1f2937;
+  --pfz-color-text-muted: #6b7280;
+  --pfz-color-heading: #141821;
+  --pfz-color-border: #e5e7eb;
+  --pfz-color-star: #f5a623;
+  --pfz-color-success: #16a34a;
+  --pfz-color-on-primary: #ffffff;
+
+  --pfz-gradient-brand: linear-gradient(90deg, #6c4cf1 0%, #2f6bff 100%);
+  --pfz-gradient-cta: linear-gradient(120deg, #7c3aed 0%, #db2777 100%);
+  --pfz-gradient-hero: linear-gradient(160deg, #f7f1fb 0%, #fdeef5 40%, #eef3ff 100%);
+  --pfz-gradient-dark: linear-gradient(120deg, #1f2430 0%, #2a2140 100%);
+
+  --pfz-font-body: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --pfz-font-heading: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  --pfz-radius-sm: 8px;
+  --pfz-radius-md: 14px;
+  --pfz-radius-lg: 24px;
+  --pfz-radius-pill: 999px;
+
+  --pfz-shadow-card: 0 12px 34px rgba(20, 24, 33, 0.1);
+  --pfz-shadow-soft: 0 8px 24px rgba(20, 24, 33, 0.06);
+  --pfz-shadow-glow: 0 10px 40px rgba(108, 76, 241, 0.35);
+
+  --pfz-section-container: 1200px;
+  --pfz-section-padding-y: 96px;
+  --pfz-section-padding-y-mobile: 56px;
+}
+
+@theme inline {
+  --color-primary: var(--pfz-color-primary);
+  --color-primary-600: var(--pfz-color-primary-600);
+  --color-primary-700: var(--pfz-color-primary-700);
+  --color-secondary: var(--pfz-color-secondary);
+  --color-accent: var(--pfz-color-accent);
+  --color-canvas: var(--pfz-color-bg);
+  --color-alt: var(--pfz-color-bg-alt);
+  --color-soft: var(--pfz-color-bg-soft);
+  --color-ink: var(--pfz-color-bg-dark);
+  --color-body: var(--pfz-color-text);
+  --color-muted: var(--pfz-color-text-muted);
+  --color-heading: var(--pfz-color-heading);
+  --color-line: var(--pfz-color-border);
+  --color-star: var(--pfz-color-star);
+  --color-success: var(--pfz-color-success);
+  --color-on-primary: var(--pfz-color-on-primary);
+
+  --radius-token-sm: var(--pfz-radius-sm);
+  --radius-token-md: var(--pfz-radius-md);
+  --radius-token-lg: var(--pfz-radius-lg);
+  --radius-token-pill: var(--pfz-radius-pill);
+
+  --shadow-card: var(--pfz-shadow-card);
+  --shadow-soft: var(--pfz-shadow-soft);
+  --shadow-glow: var(--pfz-shadow-glow);
+
+  --font-sans: var(--pfz-font-body);
+  --font-heading: var(--pfz-font-heading);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden; /* kill any accidental horizontal scroll on small screens */
+  background-color: var(--pfz-color-bg);
+  color: var(--pfz-color-text);
+  font-family: var(--pfz-font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 768px) {
+  body { font-size: 16px; }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--pfz-font-heading);
+  color: var(--pfz-color-heading);
+  text-wrap: balance;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+iframe {
+  max-width: 100%;
+}
+
+/* Utility helpers bound to tokens */
+.pfz-container {
+  width: 100%;
+  max-width: var(--pfz-section-container);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.pfz-section {
+  padding-block: var(--pfz-section-padding-y-mobile);
+}
+@media (min-width: 768px) {
+  .pfz-section {
+    padding-block: var(--pfz-section-padding-y);
+  }
+}
+
+.pfz-gradient-brand { background-image: var(--pfz-gradient-brand); }
+.pfz-gradient-cta { background-image: var(--pfz-gradient-cta); }
+.pfz-gradient-hero { background-image: var(--pfz-gradient-hero); }
+.pfz-gradient-dark { background-image: var(--pfz-gradient-dark); }
+
+.pfz-text-gradient {
+  background-image: var(--pfz-gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Animated hero gradient */
+@keyframes pfz-gradient-pan {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.pfz-animated-gradient {
+  background-size: 200% 200%;
+  animation: pfz-gradient-pan 14s ease infinite;
+}
+
+@keyframes pfz-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.pfz-float { animation: pfz-float 6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .pfz-animated-gradient, .pfz-float { animation: none !important; }
+}
