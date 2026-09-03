@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\WorkSampleCategoryResource\Pages;
 use App\Filament\Resources\WorkSampleCategoryResource\RelationManagers\SamplesRelationManager;
 use App\Models\WorkSampleCategory;
@@ -14,6 +16,13 @@ use Filament\Tables\Table;
 
 class WorkSampleCategoryResource extends Resource
 {
+    use GloballySearchable;
+
+    protected static array $globalSearch = ['name', 'slug', 'description'];
+
+    protected static array $globalSearchDetails = ['Slug' => 'slug'];
+
+
     protected static ?string $model = WorkSampleCategory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';

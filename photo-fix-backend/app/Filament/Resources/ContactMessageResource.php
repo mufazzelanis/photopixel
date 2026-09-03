@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\ContactMessageResource\Pages;
 use App\Models\ContactMessage;
 use Filament\Forms;
@@ -14,6 +16,15 @@ use Filament\Tables\Table;
 
 class ContactMessageResource extends Resource
 {
+    use GloballySearchable;
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    protected static array $globalSearch = ['name', 'email', 'phone', 'subject', 'message'];
+
+    protected static array $globalSearchDetails = ['Email' => 'email', 'Subject' => 'subject', 'Status' => 'status'];
+
+
     protected static ?string $model = ContactMessage::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-envelope';

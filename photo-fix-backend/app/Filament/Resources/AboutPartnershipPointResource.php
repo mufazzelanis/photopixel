@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\AboutPartnershipPointResource\Pages;
 use App\Models\AboutPartnershipPoint;
 use Filament\Forms;
@@ -12,6 +14,8 @@ use Filament\Tables\Table;
 
 class AboutPartnershipPointResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = AboutPartnershipPoint::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-check-badge';

@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\StatResource\Pages;
 use App\Models\Stat;
 use Filament\Forms;
@@ -12,6 +14,8 @@ use Filament\Tables\Table;
 
 class StatResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = Stat::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar';

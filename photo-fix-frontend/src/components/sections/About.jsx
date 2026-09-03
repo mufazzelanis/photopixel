@@ -34,7 +34,7 @@ export function About({ meta, content }) {
         </Reveal>
 
         <Reveal index={1}>
-          <h2 className="text-2xl font-extrabold leading-tight sm:text-3xl md:text-[2.4rem]">
+          <h2 className="text-[1.7rem] font-extrabold leading-tight sm:text-[2rem] md:text-[2.55rem]">
             {parts.map((p, i) => (
               <span key={i} className={p.accent ? "pfz-text-gradient" : ""}>{p.text}</span>
             ))}

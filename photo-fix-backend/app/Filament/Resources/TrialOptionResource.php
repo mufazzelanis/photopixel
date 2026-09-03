@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\TrialOptionResource\Pages;
 use App\Models\TrialOption;
 use Filament\Forms;
@@ -12,6 +14,8 @@ use Filament\Tables\Table;
 
 class TrialOptionResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = TrialOption::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-list-bullet';

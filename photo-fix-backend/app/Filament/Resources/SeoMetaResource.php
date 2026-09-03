@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\SeoMetaResource\Pages;
 use App\Models\SeoMeta;
 use Filament\Forms;
@@ -13,6 +15,8 @@ use Filament\Tables\Table;
 
 class SeoMetaResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = SeoMeta::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-magnifying-glass';

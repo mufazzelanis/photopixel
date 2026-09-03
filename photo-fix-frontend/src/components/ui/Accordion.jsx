@@ -16,7 +16,7 @@ export function Accordion({ items = [] }) {
             <button
               type="button"
               onClick={() => setOpen(isOpen ? -1 : i)}
-              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-heading"
+              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-base font-semibold text-heading sm:text-lg"
               aria-expanded={isOpen}
             >
               <span>
@@ -39,7 +39,7 @@ export function Accordion({ items = [] }) {
                   transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <div
-                    className="px-5 pb-5 text-muted leading-relaxed [&_a]:text-primary [&_a]:underline"
+                    className="px-5 pb-5 text-base leading-relaxed text-muted [&_a]:text-primary [&_a]:underline"
                     dangerouslySetInnerHTML={{ __html: item.answer }}
                   />
                 </motion.div>

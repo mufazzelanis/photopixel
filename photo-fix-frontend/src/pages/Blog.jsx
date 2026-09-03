@@ -6,14 +6,15 @@ import { useAsync } from "../hooks/useAsync";
 import { useSite } from "../theme/context";
 import { Section } from "../components/ui/Section";
 import { SectionHeading } from "../components/ui/SectionHeading";
-import { Loader, ErrorState } from "../components/ui/Loader";
+import { ErrorState } from "../components/ui/Loader";
 import { SmartImage } from "../components/ui/SmartImage";
 import { Reveal } from "../components/ui/Reveal";
 import { formatTime } from "../lib/utils";
+import { prefetchPost } from "../lib/prefetch";
 
 export function Blog() {
   const [page, setPage] = useState(1);
-  const { data, loading, error, reload } = useAsync(() => getBlog(page), [page]);
+  const { data, loading, error, reload } = useAsync(() => getBlog(page), [page], `blog:${page}`);
   const { data: site } = useSite();
   const meta = site?.sections.find((s) => s.key === "blog") ?? {
     heading: "Blogs & Articles",
@@ -28,18 +29,29 @@ export function Blog() {
       <Section settings={meta.settings}>
         <SectionHeading heading={meta.heading} highlight={meta.highlight_text} sub={meta.sub_heading} />
 
-        {loading ? (
-          <Loader label="Loading articles" />
-        ) : error ? (
+        {!data && error ? (
           <ErrorState onRetry={reload} />
+        ) : !data ? (
+          <div className="grid gap-6 md:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="animate-pulse overflow-hidden rounded-[var(--pfz-radius-lg)] bg-canvas shadow-[var(--pfz-shadow-card)]">
+                <div className="aspect-[16/10] bg-line" />
+                <div className="space-y-3 p-5">
+                  <div className="h-4 w-3/4 rounded bg-line" />
+                  <div className="h-3 w-1/3 rounded bg-line" />
+                </div>
+              </div>
+            ))}
+          </div>
         ) : (
-          <>
+          <div className={loading ? "opacity-60 transition-opacity" : "transition-opacity"}>
             <div className="grid gap-6 md:grid-cols-3">
               {data.data.map((p, i) => (
                 <Reveal
                   key={p.slug}
                   index={i}
                   as="article"
+                  onMouseEnter={() => prefetchPost(p.slug)}
                   className="overflow-hidden rounded-[var(--pfz-radius-lg)] bg-canvas shadow-[var(--pfz-shadow-card)] transition hover:-translate-y-1"
                 >
                   <Link to={`/blog/${p.slug}`}>
@@ -75,7 +87,7 @@ export function Blog() {
                 ))}
               </div>
             ) : null}
-          </>
+          </div>
         )}
       </Section>
     </>

@@ -25,7 +25,7 @@ class ContentSeeder extends Seeder
             'heading' => 'Get Stunning & Flawless Photo Editing Services At Photo Fix Zone!',
             'highlight_text' => 'Photo Fix Zone',
             'sub_text' => 'We are the leading photo editing service provider working with result-oriented professionals who can lead with flawless images. Get in touch with us.',
-            'primary_btn_label' => 'Get a Quote',
+            'primary_btn_label' => 'Try For Free',
             'primary_btn_url' => '/free-trial',
             'secondary_btn_label' => 'SEE SAMPLES',
             'secondary_btn_url' => '/portfolio',
@@ -115,7 +115,7 @@ class ContentSeeder extends Seeder
             'url' => 'https://wetransfer.com/', 'icon' => 'wetransfer', 'button_style' => 'primary', 'sort_order' => 1,
         ]);
         UploadServer::updateOrCreate(['name' => 'Upload Via Dropbox'], [
-            'url' => 'https://www.dropbox.com/request', 'icon' => 'dropbox', 'button_style' => 'outline', 'sort_order' => 2,
+            'url' => 'https://www.dropbox.com/requests', 'icon' => 'dropbox', 'button_style' => 'outline', 'sort_order' => 2,
         ]);
 
         // ---- CTA bands --------------------------------------------------

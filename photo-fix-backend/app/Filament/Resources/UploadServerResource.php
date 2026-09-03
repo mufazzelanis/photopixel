@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\UploadServerResource\Pages;
 use App\Models\UploadServer;
 use Filament\Forms;
@@ -12,6 +14,8 @@ use Filament\Tables\Table;
 
 class UploadServerResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = UploadServer::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-cloud-arrow-up';
@@ -28,7 +32,8 @@ class UploadServerResource extends Resource
     {
         return $form->schema([
             Forms\Components\TextInput::make('name')->required(),
-            Forms\Components\TextInput::make('url')->url()->required(),
+            Forms\Components\TextInput::make('url')->url()->required()
+                ->helperText('Paste your real upload link. Dropbox: create a File Request at dropbox.com/requests and paste its "dropbox.com/request/xxxx" link. WeTransfer: your Portals/board link.'),
             Forms\Components\TextInput::make('icon')->helperText('e.g. wetransfer, dropbox'),
             Forms\Components\Select::make('button_style')->options(['primary' => 'Primary', 'outline' => 'Outline'])->default('primary'),
             Forms\Components\Toggle::make('is_active')->default(true),

@@ -1,6 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
-import { getHome } from "../api/endpoints";
+import {
+  getHome,
+  getAbout,
+  getPricing,
+  getServices,
+  getBlog,
+  getFreeTrialPage,
+} from "../api/endpoints";
+import { setCached, prefetchQuery } from "../lib/queryCache";
 import { ThemeCtx } from "./context";
+
+const SS_KEY = "pfz.home.v1";
 
 const FALLBACK_ANIM = {
   enabled: true,
@@ -54,21 +64,68 @@ function applyTokens(tokens) {
   }
 }
 
+function readSession() {
+  try {
+    const raw = sessionStorage.getItem(SS_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeSession(data) {
+  try {
+    sessionStorage.setItem(SS_KEY, JSON.stringify(data));
+  } catch {
+    /* private mode / quota — fine */
+  }
+}
+
+/** Warm the cache for every other page so navigation is instant. */
+function prefetchRest() {
+  const idle = window.requestIdleCallback ?? ((cb) => setTimeout(cb, 300));
+  idle(() => {
+    prefetchQuery("about", getAbout);
+    prefetchQuery("pricing", getPricing);
+    prefetchQuery("services", getServices);
+    prefetchQuery("blog:1", () => getBlog(1));
+    prefetchQuery("free-trial", getFreeTrialPage);
+  });
+}
+
 export function ThemeProvider({ children }) {
-  const [state, setState] = useState({ loading: true, error: null, data: null });
+  const [seed] = useState(readSession);
+
+  const [state, setState] = useState(() => {
+    if (seed) applyTokens(seed.theme);
+    return { loading: !seed, error: null, data: seed ?? null };
+  });
 
   useEffect(() => {
+    if (seed) setCached("home", seed);
     let alive = true;
+
     getHome()
       .then((data) => {
         if (!alive) return;
         applyTokens(data.theme);
+        setCached("home", data);
+        writeSession(data);
         setState({ loading: false, error: null, data });
+        prefetchRest();
       })
-      .catch((error) => alive && setState({ loading: false, error, data: null }));
+      .catch((error) => {
+        if (!alive) return;
+        // keep showing the cached copy if we have one
+        setState((s) => (s.data ? s : { loading: false, error, data: null }));
+      });
+
+    if (seed) prefetchRest();
+
     return () => {
       alive = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const value = useMemo(() => {

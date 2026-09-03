@@ -85,7 +85,7 @@ export function WorkProcess({ meta, content }) {
 
               <div className="pb-1 md:mt-5 md:px-1">
                 <h3 className="font-bold text-heading">{step.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted md:mt-2">{step.body}</p>
+                <p className="mt-1.5 text-base leading-relaxed text-muted md:mt-2">{step.body}</p>
               </div>
             </Reveal>
           ))}

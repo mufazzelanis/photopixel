@@ -5,6 +5,7 @@ import { Reveal } from "../ui/Reveal";
 import { Button } from "../ui/Button";
 import { SmartImage } from "../ui/SmartImage";
 import { formatTime } from "../../lib/utils";
+import { prefetchPost } from "../../lib/prefetch";
 
 export function BlogTeaser({ meta, content }) {
   const posts = content ?? [];
@@ -17,6 +18,7 @@ export function BlogTeaser({ meta, content }) {
             key={p.slug}
             index={i}
             as="article"
+            onMouseEnter={() => prefetchPost(p.slug)}
             className="overflow-hidden rounded-[var(--pfz-radius-lg)] bg-canvas shadow-[var(--pfz-shadow-card)] transition hover:-translate-y-1"
           >
             <Link to={`/blog/${p.slug}`}>

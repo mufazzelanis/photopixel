@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\SocialLinkResource\Pages;
 use App\Models\SocialLink;
 use Filament\Forms;
@@ -12,6 +14,8 @@ use Filament\Tables\Table;
 
 class SocialLinkResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = SocialLink::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-share';

@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\TestimonialResource\Pages;
 use App\Models\Testimonial;
 use Filament\Forms;
@@ -13,6 +15,13 @@ use Filament\Tables\Table;
 
 class TestimonialResource extends Resource
 {
+    use GloballySearchable;
+
+    protected static array $globalSearch = ['name', 'role', 'quote'];
+
+    protected static array $globalSearchDetails = ['Role' => 'role', 'Rating' => 'rating'];
+
+
     protected static ?string $model = Testimonial::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';

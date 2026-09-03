@@ -1,7 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { getFreeTrialPage } from "../api/endpoints";
 import { useAsync } from "../hooks/useAsync";
-import { Loader, ErrorState } from "../components/ui/Loader";
+import { ErrorState } from "../components/ui/Loader";
+import { PageSkeleton } from "../components/ui/Skeleton";
 import { Reveal } from "../components/ui/Reveal";
 import { Section } from "../components/ui/Section";
 import { Icon } from "../lib/Icon";
@@ -17,7 +18,7 @@ function UploadBlock({ servers = [] }) {
   return (
     <Section id="upload" settings={{ bg: "bg-alt" }} containerClassName="text-center">
       <Reveal>
-        <h2 className="mx-auto max-w-3xl text-2xl font-extrabold text-heading sm:text-3xl md:text-4xl">
+        <h2 className="mx-auto max-w-3xl text-[1.7rem] font-extrabold text-heading sm:text-[2rem] md:text-4xl">
           {parts.map((p, i) => (
             <span key={i} className={p.accent ? "text-secondary" : ""}>{p.text}</span>
           ))}
@@ -51,10 +52,9 @@ function UploadBlock({ servers = [] }) {
 }
 
 export function FreeTrial() {
-  const { data, loading, error, reload } = useAsync(getFreeTrialPage, []);
+  const { data, error, reload } = useAsync(getFreeTrialPage, [], "free-trial");
 
-  if (loading) return <Loader label="Loading free trial" />;
-  if (error) return <ErrorState onRetry={reload} />;
+  if (!data) return error ? <ErrorState onRetry={reload} /> : <PageSkeleton />;
 
   return (
     <>

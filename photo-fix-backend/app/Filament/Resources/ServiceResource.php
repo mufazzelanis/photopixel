@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\ServiceResource\Pages;
 use App\Filament\Resources\ServiceResource\RelationManagers\PointsRelationManager;
 use App\Filament\Resources\ServiceResource\RelationManagers\PriceItemsRelationManager;
@@ -16,6 +18,12 @@ use Filament\Tables\Table;
 
 class ServiceResource extends Resource
 {
+    use GloballySearchable;
+
+    protected static array $globalSearch = ['title', 'slug', 'short_desc'];
+
+    protected static array $globalSearchDetails = ['Slug' => 'slug', 'Starts at' => 'starting_price'];
+
     protected static ?string $model = Service::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

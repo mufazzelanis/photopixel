@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\AboutFeatureResource\Pages;
 use App\Models\AboutFeature;
 use Filament\Forms;
@@ -12,6 +14,8 @@ use Filament\Tables\Table;
 
 class AboutFeatureResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = AboutFeature::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-plus';

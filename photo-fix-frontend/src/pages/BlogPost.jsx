@@ -2,16 +2,16 @@ import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { getPost } from "../api/endpoints";
 import { useAsync } from "../hooks/useAsync";
-import { Loader, ErrorState } from "../components/ui/Loader";
+import { ErrorState } from "../components/ui/Loader";
+import { PageSkeleton } from "../components/ui/Skeleton";
 import { SmartImage } from "../components/ui/SmartImage";
 import { formatDate } from "../lib/utils";
 
 export function BlogPost() {
   const { slug } = useParams();
-  const { data, loading, error, reload } = useAsync(() => getPost(slug), [slug]);
+  const { data, error, reload } = useAsync(() => getPost(slug), [slug], `post:${slug}`);
 
-  if (loading) return <Loader label="Loading article" />;
-  if (error) return <ErrorState onRetry={reload} />;
+  if (!data) return error ? <ErrorState onRetry={reload} /> : <PageSkeleton />;
 
   return (
     <>
@@ -23,7 +23,7 @@ export function BlogPost() {
       <article className="pfz-section">
         <div className="pfz-container max-w-3xl">
           <Link to="/blog" className="text-sm font-semibold text-primary">← All articles</Link>
-          <h1 className="mt-4 text-2xl font-extrabold text-heading sm:text-3xl md:text-4xl">{data.title}</h1>
+          <h1 className="mt-4 text-[1.7rem] font-extrabold text-heading sm:text-[2rem] md:text-4xl">{data.title}</h1>
           <p className="mt-2 text-sm text-muted">
             {data.author_name} · {formatDate(data.published_at)} · {data.read_time}
           </p>

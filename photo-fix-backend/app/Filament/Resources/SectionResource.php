@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\SectionResource\Pages;
 use App\Models\Section;
 use Filament\Actions\Action;
@@ -14,6 +16,13 @@ use Filament\Tables\Table;
 
 class SectionResource extends Resource
 {
+    use GloballySearchable;
+
+    protected static array $globalSearch = ['name', 'key', 'heading', 'sub_heading'];
+
+    protected static array $globalSearchDetails = ['Key' => 'key', 'Heading' => 'heading'];
+
+
     protected static ?string $model = Section::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-square-3-stack-3d';

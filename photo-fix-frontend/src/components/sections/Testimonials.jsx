@@ -9,12 +9,12 @@ function Card({ t }) {
   return (
     <div className="h-full w-[300px] shrink-0 rounded-[var(--pfz-radius-lg)] bg-white p-6 text-body shadow-[var(--pfz-shadow-card)] sm:w-[360px]">
       <Stars value={t.rating} />
-      <p className="mt-3 text-sm leading-relaxed text-muted">{t.quote}</p>
+      <p className="mt-3 text-base leading-relaxed text-muted">{t.quote}</p>
       <div className="mt-5 flex items-center gap-3">
         <SmartImage src={t.avatar} alt={t.name} wrapperClassName="h-11 w-11 shrink-0 rounded-full bg-alt" />
         <div className="min-w-0">
-          <p className="text-sm font-bold text-heading">{t.name}</p>
-          <p className="text-xs text-muted">{t.role}</p>
+          <p className="text-[0.95rem] font-bold text-heading">{t.name}</p>
+          <p className="text-sm text-muted">{t.role}</p>
         </div>
       </div>
     </div>
@@ -40,8 +40,8 @@ export function Testimonials({ meta, content }) {
           {meta.eyebrow ? (
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-white/70">{meta.eyebrow}</p>
           ) : null}
-          <h2 className="mt-2 text-2xl font-extrabold text-white sm:text-3xl md:text-4xl">{meta.heading}</h2>
-          {meta.body ? <p className="mt-4 text-sm leading-relaxed text-white/80">{meta.body}</p> : null}
+          <h2 className="mt-2 text-[1.7rem] font-extrabold text-white sm:text-[2rem] md:text-[2.4rem]">{meta.heading}</h2>
+          {meta.body ? <p className="mt-4 text-base leading-relaxed text-white/80">{meta.body}</p> : null}
         </Reveal>
 
         <Reveal index={1}>

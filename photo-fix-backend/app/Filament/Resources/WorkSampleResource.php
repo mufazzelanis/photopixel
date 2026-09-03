@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\WorkSampleResource\Pages;
 use App\Models\WorkSample;
 use App\Models\WorkSampleCategory;
@@ -14,6 +16,8 @@ use Filament\Tables\Table;
 
 class WorkSampleResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = WorkSample::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';

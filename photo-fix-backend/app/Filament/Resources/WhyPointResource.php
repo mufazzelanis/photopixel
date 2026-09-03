@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\WhyPointResource\Pages;
 use App\Models\WhyPoint;
 use Filament\Forms;
@@ -12,6 +14,8 @@ use Filament\Tables\Table;
 
 class WhyPointResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = WhyPoint::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-check-circle';

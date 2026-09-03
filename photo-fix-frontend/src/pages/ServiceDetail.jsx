@@ -7,7 +7,8 @@ import { useSite } from "../theme/context";
 import { PageHero } from "../components/ui/PageHero";
 import { Section } from "../components/ui/Section";
 import { SectionHeading } from "../components/ui/SectionHeading";
-import { Loader, ErrorState } from "../components/ui/Loader";
+import { ErrorState } from "../components/ui/Loader";
+import { PageSkeleton } from "../components/ui/Skeleton";
 import { BeforeAfter } from "../components/ui/BeforeAfter";
 import { CmsButton } from "../components/ui/CmsButton";
 import { Reveal } from "../components/ui/Reveal";
@@ -18,12 +19,11 @@ import { prefersReducedMotion } from "../lib/utils";
 
 export function ServiceDetail() {
   const { slug } = useParams();
-  const { data, loading, error, reload } = useAsync(() => getService(slug), [slug]);
+  const { data, error, reload } = useAsync(() => getService(slug), [slug], `service:${slug}`);
   const { data: site, animation } = useSite();
   const motionOn = animation.enabled && !(animation.respect_reduced_motion && prefersReducedMotion());
 
-  if (loading) return <Loader label="Loading service" />;
-  if (error) return <ErrorState onRetry={reload} />;
+  if (!data) return error ? <ErrorState onRetry={reload} /> : <PageSkeleton />;
 
   const samples = data.work_samples;
 

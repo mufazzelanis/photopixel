@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\CtaBandResource\Pages;
 use App\Models\CtaBand;
 use Filament\Forms;
@@ -13,6 +15,8 @@ use Filament\Tables\Table;
 
 class CtaBandResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = CtaBand::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-megaphone';

@@ -13,7 +13,7 @@ export function ValueCards({ meta, content }) {
     <Section id="value" settings={meta.settings}>
       <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
         <Reveal>
-          <h2 className="text-2xl font-extrabold leading-tight sm:text-3xl md:text-[2.4rem]">
+          <h2 className="text-[1.7rem] font-extrabold leading-tight sm:text-[2rem] md:text-[2.55rem]">
             {parts.map((p, i) => (
               <span key={i} className={p.accent ? "pfz-text-gradient" : ""}>{p.text}</span>
             ))}
@@ -44,7 +44,7 @@ export function ValueCards({ meta, content }) {
               </div>
               <div className="p-6 text-center">
                 <h3 className="text-lg font-bold text-heading">{card.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{card.body}</p>
+                <p className="mt-2 text-base leading-relaxed text-muted">{card.body}</p>
               </div>
             </Reveal>
           ))}

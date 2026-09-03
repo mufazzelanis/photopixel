@@ -59,7 +59,7 @@ export function Hero({ content }) {
             )}
           </h1>
           {hero.sub_text ? (
-            <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-muted sm:text-base md:text-lg lg:mx-0">{hero.sub_text}</p>
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-base md:text-lg lg:mx-0">{hero.sub_text}</p>
           ) : null}
           <div className="mt-7 flex flex-wrap justify-center gap-3 sm:gap-4 lg:justify-start">
             {renderBtn(hero.primary_btn, "primary")}
@@ -69,7 +69,7 @@ export function Hero({ content }) {
 
         <div className="relative">
           <motion.div
-            className="relative mx-auto grid max-w-[17rem] grid-cols-2 gap-3 sm:max-w-md sm:gap-4"
+            className="relative mx-auto grid max-w-xs grid-cols-2 gap-3 sm:max-w-lg sm:gap-5"
             initial={reduce ? false : { opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}

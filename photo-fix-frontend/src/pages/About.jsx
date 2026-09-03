@@ -1,17 +1,17 @@
 import { Helmet } from "react-helmet-async";
 import { getAbout } from "../api/endpoints";
 import { useAsync } from "../hooks/useAsync";
-import { Loader, ErrorState } from "../components/ui/Loader";
+import { ErrorState } from "../components/ui/Loader";
+import { PageSkeleton } from "../components/ui/Skeleton";
 import { AboutHero } from "../components/about/AboutHero";
 import { AboutBoost } from "../components/about/AboutBoost";
 import { AboutTextMedia } from "../components/about/AboutTextMedia";
 import { AboutPartnership } from "../components/about/AboutPartnership";
 
 export function About() {
-  const { data, loading, error, reload } = useAsync(getAbout, []);
+  const { data, error, reload } = useAsync(getAbout, [], "about");
 
-  if (loading) return <Loader label="Loading" />;
-  if (error) return <ErrorState onRetry={reload} />;
+  if (!data) return error ? <ErrorState onRetry={reload} /> : <PageSkeleton />;
 
   const { seo, hero, boost, post_production: pp, society, partnership } = data;
 

@@ -15,12 +15,12 @@ export function AboutTextMedia({ id, bg, heading, highlight, paragraphs = [], bt
     <Section id={id} settings={{ bg }}>
       <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
         <Reveal className={flip ? "lg:order-2" : ""}>
-          <h2 className="text-2xl font-extrabold leading-tight sm:text-3xl md:text-[2.3rem]">
+          <h2 className="text-[1.7rem] font-extrabold leading-tight sm:text-[2rem] md:text-[2.55rem]">
             {parts.map((p, i) => (
               <span key={i} className={p.accent ? "pfz-text-gradient" : ""}>{p.text}</span>
             ))}
           </h2>
-          <div className="mt-5 space-y-4 text-sm leading-relaxed text-muted sm:text-[15px]">
+          <div className="mt-5 space-y-4 text-base leading-relaxed text-muted sm:text-lg">
             {paragraphs.filter(Boolean).map((p, i) => (
               <p key={i}>{p}</p>
             ))}

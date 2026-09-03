@@ -34,7 +34,7 @@ export function AboutHero({ data }) {
             ))}
           </h1>
           {data.sub_text ? (
-            <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-muted sm:text-base lg:mx-0">{data.sub_text}</p>
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-base lg:mx-0">{data.sub_text}</p>
           ) : null}
           <div className="mt-7 flex flex-wrap justify-center gap-3 sm:gap-4 lg:justify-start">
             {renderBtn(data.primary_btn, "primary")}
@@ -52,10 +52,10 @@ export function AboutHero({ data }) {
             src={data.image}
             alt={data.heading || "About"}
             wrapperClassName={
-              "mx-auto max-w-md rounded-[var(--pfz-radius-lg)] " +
+              "mx-auto max-w-lg rounded-[var(--pfz-radius-lg)] " +
               (animation.hero?.float && !reduce ? "pfz-float" : "")
             }
-            className="aspect-[5/4]"
+            className="aspect-[5/4] w-full"
           />
         </motion.div>
       </div>

@@ -55,7 +55,7 @@ export function Contact() {
       <Section settings={{ bg: "bg-alt" }}>
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <h2 className="text-2xl font-extrabold text-heading sm:text-3xl">
+            <h2 className="text-[1.7rem] font-extrabold text-heading sm:text-[2rem]">
               Office <span className="pfz-text-gradient">Address</span>
             </h2>
             <p className="mt-5 font-semibold text-heading">Head Office &amp; Production House:</p>
@@ -80,7 +80,7 @@ export function Contact() {
       {socials.length ? (
         <Section>
           <Reveal className="text-center">
-            <h2 className="text-2xl font-extrabold text-heading sm:text-3xl">
+            <h2 className="text-[1.7rem] font-extrabold text-heading sm:text-[2rem]">
               Follow Us On <span className="pfz-text-gradient">Socials</span>
             </h2>
             <p className="mt-2 text-sm text-muted">Let&rsquo;s connect with us, to get our all updates</p>

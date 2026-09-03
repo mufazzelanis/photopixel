@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\QuoteRequestResource\Pages;
 use App\Models\QuoteRequest;
 use App\Models\Service;
@@ -15,6 +17,15 @@ use Filament\Tables\Table;
 
 class QuoteRequestResource extends Resource
 {
+    use GloballySearchable;
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    protected static array $globalSearch = ['name', 'email', 'phone', 'company', 'message'];
+
+    protected static array $globalSearchDetails = ['Email' => 'email', 'Phone' => 'phone', 'Status' => 'status'];
+
+
     protected static ?string $model = QuoteRequest::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-inbox-arrow-down';

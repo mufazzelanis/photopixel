@@ -32,6 +32,9 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::hex('#6C4CF1'),
             ])
+            ->globalSearch()
+            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
+            ->globalSearchFieldSuffix('Ctrl + K')
             ->navigationGroups([
                 // Ordered to match how a non-technical admin thinks about the
                 // site: look and feel first, then each page top to bottom in
@@ -42,6 +45,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('Design'),
                 NavigationGroup::make('Homepage'),
                 NavigationGroup::make('Portfolio'),
+                NavigationGroup::make('Pricing'),
                 NavigationGroup::make('About Page'),
                 NavigationGroup::make('Free Trial'),
                 NavigationGroup::make('Blog'),

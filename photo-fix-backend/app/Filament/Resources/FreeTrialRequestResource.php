@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\FreeTrialRequestResource\Pages;
 use App\Models\FreeTrialRequest;
 use Filament\Forms;
@@ -14,6 +16,15 @@ use Filament\Tables\Table;
 
 class FreeTrialRequestResource extends Resource
 {
+    use GloballySearchable;
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    protected static array $globalSearch = ['name', 'email', 'phone', 'country', 'requirements'];
+
+    protected static array $globalSearchDetails = ['Email' => 'email', 'Country' => 'country', 'Status' => 'status'];
+
+
     protected static ?string $model = FreeTrialRequest::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-gift';

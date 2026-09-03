@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\FaqResource\Pages;
 use App\Models\Faq;
 use Filament\Forms;
@@ -12,6 +14,13 @@ use Filament\Tables\Table;
 
 class FaqResource extends Resource
 {
+    use GloballySearchable;
+
+    protected static array $globalSearch = ['question', 'answer', 'group'];
+
+    protected static array $globalSearchDetails = ['Page' => 'group'];
+
+
     protected static ?string $model = Faq::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
@@ -29,7 +38,12 @@ class FaqResource extends Resource
         return $form->schema([
             Forms\Components\TextInput::make('question')->required()->columnSpanFull(),
             Forms\Components\RichEditor::make('answer')->required()->columnSpanFull(),
-            Forms\Components\TextInput::make('group')->default('home')->helperText('Page this FAQ belongs to: home, pricing, ...'),
+            Forms\Components\Select::make('group')
+                ->options(['home' => 'Home page', 'pricing' => 'Pricing page'])
+                ->default('home')
+                ->required()
+                ->native(false)
+                ->helperText('Which page’s FAQ accordion this question appears in.'),
             Forms\Components\Toggle::make('is_active')->default(true),
             Forms\Components\TextInput::make('sort_order')->numeric()->default(0),
         ]);

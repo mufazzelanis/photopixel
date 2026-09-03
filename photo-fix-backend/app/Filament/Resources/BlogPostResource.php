@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\BlogPostResource\Pages;
 use App\Models\BlogPost;
 use Filament\Forms;
@@ -13,6 +15,13 @@ use Filament\Tables\Table;
 
 class BlogPostResource extends Resource
 {
+    use GloballySearchable;
+
+    protected static array $globalSearch = ['title', 'slug', 'excerpt', 'author_name'];
+
+    protected static array $globalSearchDetails = ['Category' => 'category.name', 'Author' => 'author_name'];
+
+
     protected static ?string $model = BlogPost::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';

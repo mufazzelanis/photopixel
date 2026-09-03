@@ -17,11 +17,11 @@ export function ClientTypes({ meta, content }) {
             <SmartImage
               src={c.image}
               alt={c.title}
-              wrapperClassName="h-24 w-24 shrink-0 sm:h-28 sm:w-28 rounded-[var(--pfz-radius-md)] bg-alt"
+              wrapperClassName="h-28 w-28 shrink-0 sm:h-32 sm:w-32 rounded-[var(--pfz-radius-md)] bg-alt"
             />
             <div>
               <h3 className="text-lg font-bold text-heading">{c.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{c.body}</p>
+              <p className="mt-2 text-base leading-relaxed text-muted">{c.body}</p>
               {c.link?.url ? (
                 <a href={c.link.url} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-secondary">
                   {c.link.label}

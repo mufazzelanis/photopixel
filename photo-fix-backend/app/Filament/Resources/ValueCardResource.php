@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\ValueCardResource\Pages;
 use App\Models\ValueCard;
 use Filament\Forms;
@@ -12,6 +14,8 @@ use Filament\Tables\Table;
 
 class ValueCardResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = ValueCard::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';

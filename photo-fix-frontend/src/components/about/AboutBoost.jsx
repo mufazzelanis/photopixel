@@ -27,7 +27,7 @@ export function AboutBoost({ data }) {
             >
               {f.title}
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted">{f.body}</p>
+            <p className="mt-3 text-base leading-relaxed text-muted">{f.body}</p>
           </Reveal>
         ))}
       </div>

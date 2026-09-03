@@ -20,9 +20,9 @@ class ThemeSeeder extends Seeder
                 'bg-alt' => '#F4F5F7',
                 'bg-soft' => '#F7F1FB',
                 'bg-dark' => '#1F2430',
-                'text' => '#1F2937',
-                'text-muted' => '#6B7280',
-                'heading' => '#141821',
+                'text' => '#1B2431',
+                'text-muted' => '#4B5563',
+                'heading' => '#0F1420',
                 'border' => '#E5E7EB',
                 'star' => '#F5A623',
                 'success' => '#16A34A',
@@ -37,7 +37,7 @@ class ThemeSeeder extends Seeder
             'font' => [
                 'body' => "'Poppins', ui-sans-serif, system-ui, sans-serif",
                 'heading' => "'Poppins', ui-sans-serif, system-ui, sans-serif",
-                'base-size' => '16px',
+                'base-size' => '17px',
                 'google' => 'Poppins:wght@300;400;500;600;700;800',
             ],
             'radius' => [

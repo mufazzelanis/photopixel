@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\ProcessStepResource\Pages;
 use App\Models\ProcessStep;
 use Filament\Forms;
@@ -12,6 +14,8 @@ use Filament\Tables\Table;
 
 class ProcessStepResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = ProcessStep::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-flag';

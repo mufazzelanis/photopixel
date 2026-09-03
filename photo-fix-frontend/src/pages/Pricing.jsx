@@ -5,7 +5,8 @@ import { useAsync } from "../hooks/useAsync";
 import { useSite } from "../theme/context";
 import { Section } from "../components/ui/Section";
 import { SectionHeading } from "../components/ui/SectionHeading";
-import { Loader, ErrorState } from "../components/ui/Loader";
+import { ErrorState } from "../components/ui/Loader";
+import { PageSkeleton } from "../components/ui/Skeleton";
 import { BeforeAfter } from "../components/ui/BeforeAfter";
 import { Reveal } from "../components/ui/Reveal";
 import { Button } from "../components/ui/Button";
@@ -69,11 +70,10 @@ function PricingTable({ service, index }) {
 }
 
 export function Pricing() {
-  const { data, loading, error, reload } = useAsync(getPricing, []);
+  const { data, error, reload } = useAsync(getPricing, [], "pricing");
   const { data: site } = useSite();
 
-  if (loading) return <Loader label="Loading pricing" />;
-  if (error) return <ErrorState onRetry={reload} />;
+  if (!data) return error ? <ErrorState onRetry={reload} /> : <PageSkeleton />;
 
   const faqMeta = site?.sections.find((s) => s.key === "faq") ?? {};
 

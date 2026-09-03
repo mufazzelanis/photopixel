@@ -29,7 +29,7 @@ function TopLink({ item, isMegaOpen, onMegaEnter }) {
         href={isRoute ? undefined : item.url}
         className={({ isActive } = {}) =>
           cn(
-            "px-3 py-2 text-sm font-medium text-heading/80 transition hover:text-primary",
+            "px-3 py-2 text-[0.95rem] font-medium text-heading/85 transition hover:text-primary",
             isActive && "text-primary",
           )
         }
@@ -44,7 +44,7 @@ function TopLink({ item, isMegaOpen, onMegaEnter }) {
       <button
         onMouseEnter={onMegaEnter}
         className={cn(
-          "flex items-center gap-1 px-3 py-2 text-sm font-medium transition",
+          "flex items-center gap-1 px-3 py-2 text-[0.95rem] font-medium transition",
           isMegaOpen ? "text-primary" : "text-heading/80 hover:text-primary",
         )}
       >
@@ -65,7 +65,7 @@ function TopLink({ item, isMegaOpen, onMegaEnter }) {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-heading/80 transition hover:text-primary">
+      <button className="flex items-center gap-1 px-3 py-2 text-[0.95rem] font-medium text-heading/85 transition hover:text-primary">
         {item.label}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M6 9l6 6 6-6" /></svg>
       </button>

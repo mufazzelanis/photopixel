@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\FooterColumnResource\Pages;
 use App\Filament\Resources\FooterColumnResource\RelationManagers\LinksRelationManager;
 use App\Models\FooterColumn;
@@ -13,6 +15,8 @@ use Filament\Tables\Table;
 
 class FooterColumnResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = FooterColumn::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-view-columns';

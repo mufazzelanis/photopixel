@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\ClientTypeResource\Pages;
 use App\Models\ClientType;
 use Filament\Forms;
@@ -13,6 +15,8 @@ use Filament\Tables\Table;
 
 class ClientTypeResource extends Resource
 {
+    use GloballySearchable;
+
     protected static ?string $model = ClientType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';

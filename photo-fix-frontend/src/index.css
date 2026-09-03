@@ -17,9 +17,9 @@
   --pfz-color-bg-alt: #f4f5f7;
   --pfz-color-bg-soft: #f7f1fb;
   --pfz-color-bg-dark: #1f2430;
-  --pfz-color-text: #1f2937;
-  --pfz-color-text-muted: #6b7280;
-  --pfz-color-heading: #141821;
+  --pfz-color-text: #1b2431;
+  --pfz-color-text-muted: #4b5563;
+  --pfz-color-heading: #0f1420;
   --pfz-color-border: #e5e7eb;
   --pfz-color-star: #f5a623;
   --pfz-color-success: #16a34a;
@@ -78,46 +78,65 @@
   --font-heading: var(--pfz-font-heading);
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/*
+  Element defaults live in `@layer base` so any Tailwind utility (which sits in
+  the later `utilities` layer) reliably overrides them. Unlayered rules would
+  otherwise beat every utility regardless of specificity — that used to make
+  `text-white` on a heading and `h-full` on an <img> silently do nothing.
+*/
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
 
-body {
-  margin: 0;
-  overflow-x: hidden; /* kill any accidental horizontal scroll on small screens */
-  background-color: var(--pfz-color-bg);
-  color: var(--pfz-color-text);
-  font-family: var(--pfz-font-body);
-  font-size: 15px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
+  body {
+    margin: 0;
+    overflow-x: hidden; /* kill any accidental horizontal scroll on small screens */
+    background-color: var(--pfz-color-bg);
+    color: var(--pfz-color-text);
+    font-family: var(--pfz-font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
 
-@media (min-width: 768px) {
-  body { font-size: 16px; }
-}
+  @media (min-width: 768px) {
+    body { font-size: 17px; }
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--pfz-font-heading);
-  color: var(--pfz-color-heading);
-  text-wrap: balance;
-}
+  @media (min-width: 1280px) {
+    body { font-size: 18px; }
+  }
 
-img,
-video {
-  max-width: 100%;
-  height: auto;
-}
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--pfz-font-heading);
+    color: var(--pfz-color-heading);
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
 
-iframe {
-  max-width: 100%;
+  /* Body copy inside rich-text / section blocks reads a touch larger. */
+  p {
+    line-height: 1.75;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  iframe {
+    max-width: 100%;
+  }
 }
 
 /* Utility helpers bound to tokens */

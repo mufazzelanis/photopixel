@@ -8,7 +8,7 @@ export function UploadServers({ meta, content }) {
   return (
     <Section id="upload" settings={meta.settings} containerClassName="text-center text-white">
       <Reveal>
-        <h2 className="mx-auto max-w-3xl text-2xl font-extrabold text-white sm:text-3xl md:text-4xl">
+        <h2 className="mx-auto max-w-3xl text-[1.7rem] font-extrabold text-white sm:text-[2rem] md:text-[2.4rem]">
           {parts.map((p, i) => (
             <span key={i} className={p.accent ? "text-secondary" : ""}>{p.text}</span>
           ))}

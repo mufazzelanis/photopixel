@@ -34,7 +34,7 @@ export function Button({
 
   const base = cn(
     "inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200 whitespace-nowrap",
-    size === "lg" ? "px-7 py-3.5 text-base" : size === "sm" ? "px-4 py-2 text-sm" : "px-6 py-3 text-sm",
+    size === "lg" ? "px-8 py-4 text-base" : size === "sm" ? "px-4 py-2 text-sm" : "px-6 py-3 text-[0.95rem]",
     radius,
   );
 

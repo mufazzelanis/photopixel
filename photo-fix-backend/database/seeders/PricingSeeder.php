@@ -16,6 +16,7 @@ class PricingSeeder extends Seeder
             'name' => 'Pricing',
             'heading' => 'Simply Continue With Our Affordable And Flexible Plans',
             'highlight_text' => 'Affordable And Flexible Plans',
+            'sub_heading' => 'Transparent, per-image pricing for every service. Volume discounts apply — send us your batch for an exact quote.',
             'is_active' => true,
         ]);
 

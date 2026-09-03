@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\GloballySearchable;
+
 use App\Filament\Resources\MenuItemResource\Pages;
 use App\Models\MenuItem;
 use Filament\Forms;
@@ -12,6 +14,13 @@ use Filament\Tables\Table;
 
 class MenuItemResource extends Resource
 {
+    use GloballySearchable;
+
+    protected static array $globalSearch = ['label', 'url'];
+
+    protected static array $globalSearchDetails = ['URL' => 'url'];
+
+
     protected static ?string $model = MenuItem::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-bars-3';
