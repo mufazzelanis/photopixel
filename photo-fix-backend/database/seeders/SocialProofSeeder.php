@@ -23,9 +23,9 @@ class SocialProofSeeder extends Seeder
 
         // ---- Testimonials -------------------------------------------------
         $testimonials = [
-            ['name' => 'Mark', 'role' => 'Business Owner', 'rating' => 5, 'quote' => "I was amazed at how perfectly Photo Fix Zone handled my images. They removed the background with such precision, and the retouching looked so natural. I've tried many services before, but this is by far the best."],
-            ['name' => 'Sarah', 'role' => 'Creative Director', 'rating' => 5, 'quote' => 'I sent in some complex images that needed detailed editing, and the results were flawless. The team at Photo Fix Zone is highly skilled, and their customer service is excellent. They truly understand what clients need.'],
-            ['name' => 'David H', 'role' => 'Photographer', 'rating' => 5, 'quote' => "As a photographer, I'm very particular about my images. I needed some advanced retouching, and Photo Fix Zone did a fantastic job. They enhanced my photos while keeping them natural and realistic."],
+            ['name' => 'Mark', 'role' => 'Business Owner', 'rating' => 5, 'quote' => "I was amazed at how perfectly Pixel Graphic Studio handled my images. They removed the background with such precision, and the retouching looked so natural. I've tried many services before, but this is by far the best."],
+            ['name' => 'Sarah', 'role' => 'Creative Director', 'rating' => 5, 'quote' => 'I sent in some complex images that needed detailed editing, and the results were flawless. The team at Pixel Graphic Studio is highly skilled, and their customer service is excellent. They truly understand what clients need.'],
+            ['name' => 'David H', 'role' => 'Photographer', 'rating' => 5, 'quote' => "As a photographer, I'm very particular about my images. I needed some advanced retouching, and Pixel Graphic Studio did a fantastic job. They enhanced my photos while keeping them natural and realistic."],
         ];
         foreach ($testimonials as $i => $t) {
             Testimonial::updateOrCreate(['name' => $t['name'], 'role' => $t['role']], $t + ['sort_order' => $i + 1]);

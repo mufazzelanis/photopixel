@@ -64,6 +64,28 @@ function applyTokens(tokens) {
   }
 }
 
+/** Swap the browser-tab icon (and iOS touch icon) to the admin-uploaded favicon. */
+function applyFavicon(url) {
+  if (!url) return;
+  const type = url.endsWith(".svg")
+    ? "image/svg+xml"
+    : url.endsWith(".png")
+      ? "image/png"
+      : url.endsWith(".ico")
+        ? "image/x-icon"
+        : "";
+  for (const rel of ["icon", "apple-touch-icon"]) {
+    let link = document.head.querySelector(`link[rel="${rel}"]`);
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = rel;
+      document.head.appendChild(link);
+    }
+    if (type) link.type = type;
+    link.href = url;
+  }
+}
+
 function readSession() {
   try {
     const raw = sessionStorage.getItem(SS_KEY);
@@ -97,7 +119,10 @@ export function ThemeProvider({ children }) {
   const [seed] = useState(readSession);
 
   const [state, setState] = useState(() => {
-    if (seed) applyTokens(seed.theme);
+    if (seed) {
+      applyTokens(seed.theme);
+      applyFavicon(seed.navigation?.favicon);
+    }
     return { loading: !seed, error: null, data: seed ?? null };
   });
 
@@ -109,6 +134,7 @@ export function ThemeProvider({ children }) {
       .then((data) => {
         if (!alive) return;
         applyTokens(data.theme);
+        applyFavicon(data.navigation?.favicon);
         setCached("home", data);
         writeSession(data);
         setState({ loading: false, error: null, data });

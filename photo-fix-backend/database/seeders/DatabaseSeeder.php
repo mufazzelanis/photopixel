@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'admin@photofixzone.com'],
             [
-                'name' => 'Photo Fix Zone Admin',
+                'name' => 'Pixel Graphic Studio Admin',
                 'password' => Hash::make('password'),
                 'role' => 'admin',
             ],

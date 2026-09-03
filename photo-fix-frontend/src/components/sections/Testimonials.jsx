@@ -7,7 +7,7 @@ import { prefersReducedMotion } from "../../lib/utils";
 
 function Card({ t }) {
   return (
-    <div className="h-full w-[300px] shrink-0 rounded-[var(--pfz-radius-lg)] bg-white p-6 text-body shadow-[var(--pfz-shadow-card)] sm:w-[360px]">
+    <div className="h-full w-[82vw] max-w-[320px] shrink-0 rounded-[var(--pfz-radius-lg)] bg-white p-6 text-body shadow-[var(--pfz-shadow-card)] sm:w-[340px]">
       <Stars value={t.rating} />
       <p className="mt-3 text-base leading-relaxed text-muted">{t.quote}</p>
       <div className="mt-5 flex items-center gap-3">
@@ -35,8 +35,8 @@ export function Testimonials({ meta, content }) {
 
   return (
     <Section id="testimonials" settings={meta.settings} containerClassName="text-white">
-      <div className="grid gap-8 lg:grid-cols-[0.85fr_2fr] lg:gap-10">
-        <Reveal>
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,2fr)] lg:gap-10">
+        <Reveal className="min-w-0">
           {meta.eyebrow ? (
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-white/70">{meta.eyebrow}</p>
           ) : null}
@@ -44,10 +44,10 @@ export function Testimonials({ meta, content }) {
           {meta.body ? <p className="mt-4 text-base leading-relaxed text-white/80">{meta.body}</p> : null}
         </Reveal>
 
-        <Reveal index={1}>
+        <Reveal index={1} className="min-w-0">
           {list.length ? (
             motionOn ? (
-              <div className="pfz-marquee-pause-on-hover overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_5%,black_95%,transparent)]">
+              <div className="pfz-marquee-pause-on-hover w-full overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_4%,black_96%,transparent)] sm:[mask-image:linear-gradient(90deg,transparent,black_5%,black_95%,transparent)]">
                 <div
                   className="pfz-marquee-track flex w-max gap-6"
                   style={{ "--pfz-marquee-duration": `${duration}s` }}

@@ -213,8 +213,14 @@ class SitePayload
 
     public function navigation(): array
     {
-        return Cache::rememberForever('api.navigation', fn () => $this->plain([
-            'brand' => SiteSetting::value('general', 'logo_text', 'Photo Fix Zone'),
+        return Cache::rememberForever('api.navigation', function () {
+            $branding = \App\Models\Branding::current();
+
+            return $this->plain([
+            'brand' => SiteSetting::value('general', 'logo_text', 'Pixel Graphic Studio'),
+            'logo' => Media::url($branding, 'logo', 'web') ?: Media::url($branding, 'logo'),
+            'logo_dark' => Media::url($branding, 'logo_dark', 'web') ?: Media::url($branding, 'logo_dark'),
+            'favicon' => Media::url($branding, 'favicon'),
             'cta' => [
                 'label' => SiteSetting::value('cta', 'header_button_label', 'GET A QUOTE'),
                 'url' => SiteSetting::value('cta', 'header_button_url', '#quote'),
@@ -232,7 +238,8 @@ class SitePayload
                         'icon' => $c->icon,
                     ])->values(),
                 ])->values(),
-        ]));
+            ]);
+        });
     }
 
     public function footer(): array

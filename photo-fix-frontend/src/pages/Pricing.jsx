@@ -80,7 +80,7 @@ export function Pricing() {
   return (
     <>
       <Helmet>
-        <title>{data.seo?.title ?? "Pricing — Photo Fix Zone"}</title>
+        <title>{data.seo?.title ?? "Pricing — Pixel Graphic Studio"}</title>
         <meta name="description" content={data.seo?.description ?? ""} />
       </Helmet>
 

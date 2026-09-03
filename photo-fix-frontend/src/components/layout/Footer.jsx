@@ -131,10 +131,17 @@ function FooterLink({ url, target, children }) {
 export function Footer() {
   const { data } = useSite();
   const f = data?.footer ?? {};
-  const brand = data?.navigation?.brand ?? "Photo Fix Zone";
+  const brand = data?.navigation?.brand ?? "Pixel Graphic Studio";
+  const logo = data?.navigation?.logo_dark || data?.navigation?.logo || null;
   const columns = Array.isArray(f.columns) ? f.columns : [];
   const socials = Array.isArray(f.socials) ? f.socials : [];
   const payments = Array.isArray(f.payment_methods) ? f.payment_methods : [];
+
+  // The admin copyright line may contain a {year} token — resolve it at render
+  // time so it's always the current year without touching the CMS.
+  const year = new Date().getFullYear();
+  const copyright = (f.copyright || `Copyright © {year} | ${brand} | All Rights Reserved`)
+    .replace(/\{\{?\s*year\s*\}?\}/gi, year);
 
   return (
     <footer className="relative">
@@ -148,16 +155,26 @@ export function Footer() {
         <div className="pfz-container grid grid-cols-1 gap-8 pt-14 pb-12 sm:grid-cols-2 sm:gap-10 lg:grid-cols-[1.7fr_1fr_1fr_1.6fr]">
           {/* Brand */}
           <Reveal className="sm:col-span-2 lg:col-span-1">
-            <div className="mb-5 flex items-center gap-2.5">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-[var(--pfz-radius-sm)] bg-accent text-white">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="3" y="5" width="18" height="14" rx="3" />
-                  <circle cx="12" cy="12" r="3.2" />
-                </svg>
-              </span>
-              <span className="pfz-text-gradient text-xl font-extrabold sm:text-2xl">
-                {brand}
-              </span>
+            <div className="mb-5">
+              {logo ? (
+                <img
+                  src={logo}
+                  alt={brand}
+                  className="h-10 w-auto max-w-[210px] object-contain"
+                />
+              ) : (
+                <div className="flex items-center gap-2.5">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-[var(--pfz-radius-sm)] bg-accent text-white">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="3" y="5" width="18" height="14" rx="3" />
+                      <circle cx="12" cy="12" r="3.2" />
+                    </svg>
+                  </span>
+                  <span className="pfz-text-gradient text-xl font-extrabold sm:text-2xl">
+                    {brand}
+                  </span>
+                </div>
+              )}
             </div>
             <p className="max-w-sm text-[0.95rem] leading-relaxed text-white/55">
               {f.about}
@@ -244,9 +261,8 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/10">
-          <div className="pfz-container py-5 text-center text-xs text-white/45">
-            {f.copyright ||
-              `© ${new Date().getFullYear()} ${brand}. All rights reserved.`}
+          <div className="pfz-container pt-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] text-center text-xs text-white/45">
+            {copyright}
           </div>
         </div>
       </div>

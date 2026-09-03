@@ -13,8 +13,8 @@ class SectionSeeder extends Seeder
             [
                 'key' => 'hero',
                 'name' => 'Hero',
-                'heading' => 'Get Stunning & Flawless Photo Editing Services At Photo Fix Zone!',
-                'highlight_text' => 'Photo Fix Zone',
+                'heading' => 'Get Stunning & Flawless Photo Editing Services At Pixel Graphic Studio!',
+                'highlight_text' => 'Pixel Graphic Studio',
                 'sub_heading' => 'We are the leading photo editing service provider working with result-oriented professionals who can lead with flawless images. Get in touch with us.',
                 'settings' => ['bg' => 'gradient-hero', 'padding_y' => '72px'],
             ],
@@ -57,8 +57,8 @@ class SectionSeeder extends Seeder
             [
                 'key' => 'client_types',
                 'name' => 'Top-Tier Clients',
-                'heading' => 'Top-Tier Client Of Photo Fix Zone',
-                'highlight_text' => 'Photo Fix Zone',
+                'heading' => 'Top-Tier Client Of Pixel Graphic Studio',
+                'highlight_text' => 'Pixel Graphic Studio',
                 'sub_heading' => 'We try to help certain businesses who need huge amounts of image editing services. These clients include-',
             ],
             [

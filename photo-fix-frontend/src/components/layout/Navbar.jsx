@@ -169,7 +169,8 @@ export function Navbar() {
   const { data } = useSite();
   const raw = data?.navigation ?? {};
   const nav = {
-    brand: raw.brand ?? "Photo Fix Zone",
+    brand: raw.brand ?? "Pixel Graphic Studio",
+    logo: raw.logo ?? null,
     cta: raw.cta ?? {},
     items: Array.isArray(raw.items) ? raw.items : [],
   };
@@ -190,22 +191,44 @@ export function Navbar() {
     setMobileOpen(false);
   }, [location.pathname]);
 
+  // Lock background scroll while the mobile menu is open.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mobileOpen]);
+
   const cta = resolve(nav.cta?.url ?? "#quote");
 
   return (
     <header
       onMouseLeave={() => setMegaItem(null)}
       className={cn(
-        "sticky top-0 z-50 transition-all duration-300",
-        scrolled ? "bg-canvas/90 py-2 shadow-[var(--pfz-shadow-soft)] backdrop-blur" : "bg-transparent py-4",
+        "pfz-appbar sticky top-0 z-50 transition-all duration-300",
+        scrolled || mobileOpen
+          ? "bg-canvas/95 py-2 shadow-[var(--pfz-shadow-soft)] backdrop-blur"
+          : "bg-transparent py-4",
       )}
     >
-      <div className="pfz-container flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2 text-lg font-extrabold text-heading">
-          <span className="grid h-9 w-9 place-items-center rounded-[var(--pfz-radius-sm)] pfz-gradient-brand text-white">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="5" width="18" height="14" rx="3" /><circle cx="12" cy="12" r="3.2" /></svg>
-          </span>
-          <span className="pfz-text-gradient">{nav.brand}</span>
+      <div className="pfz-container flex items-center justify-between gap-3">
+        <Link to="/" className="flex min-w-0 items-center gap-2 text-base font-extrabold text-heading sm:text-lg">
+          {nav.logo ? (
+            <img
+              src={nav.logo}
+              alt={nav.brand}
+              className="h-9 w-auto max-w-[170px] object-contain sm:h-10 sm:max-w-[220px]"
+            />
+          ) : (
+            <>
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-[var(--pfz-radius-sm)] pfz-gradient-brand text-white">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="5" width="18" height="14" rx="3" /><circle cx="12" cy="12" r="3.2" /></svg>
+              </span>
+              <span className="pfz-text-gradient truncate">{nav.brand}</span>
+            </>
+          )}
         </Link>
 
         <nav className="hidden items-center lg:flex">
@@ -236,9 +259,10 @@ export function Navbar() {
         </div>
 
         <button
-          className="lg:hidden rounded-md p-2 text-heading"
+          className="-mr-1 grid h-11 w-11 shrink-0 place-items-center rounded-md text-heading lg:hidden"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
         >
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
             {mobileOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
@@ -295,7 +319,7 @@ export function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden overflow-hidden border-t border-line bg-canvas"
           >
-            <div className="pfz-container flex max-h-[70vh] flex-col overflow-y-auto py-4">
+            <div className="pfz-container flex max-h-[calc(100dvh-4.5rem)] flex-col gap-0.5 overflow-y-auto overscroll-contain py-4">
               {nav.items.filter((i) => !i.is_button).map((item) => (
                 <MobileTopLink key={item.label} item={item} onNavigate={() => setMobileOpen(false)} />
               ))}

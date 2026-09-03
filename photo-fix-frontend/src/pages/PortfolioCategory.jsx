@@ -25,7 +25,7 @@ export function PortfolioCategory() {
   return (
     <>
       <Helmet>
-        <title>{category.name} Work Samples — Photo Fix Zone</title>
+        <title>{category.name} Work Samples — Pixel Graphic Studio</title>
         <meta name="description" content={category.description ?? ""} />
       </Helmet>
       <PageHero

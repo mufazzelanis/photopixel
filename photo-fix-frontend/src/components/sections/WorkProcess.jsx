@@ -43,8 +43,8 @@ export function WorkProcess({ meta, content }) {
         />
 
         <div
-          className="relative grid gap-10 md:gap-4"
-          style={{ gridTemplateColumns: `repeat(${Math.max(steps.length, 1)}, minmax(0, 1fr))` }}
+          className="relative grid grid-cols-1 gap-10 md:gap-6 md:grid-cols-[repeat(var(--steps),minmax(0,1fr))]"
+          style={{ "--steps": Math.max(steps.length, 1) }}
         >
           {steps.map((step, i) => (
             <Reveal

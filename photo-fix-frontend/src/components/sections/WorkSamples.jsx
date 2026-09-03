@@ -17,7 +17,7 @@ export function WorkSamples({ meta, content }) {
             breakpoints={{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
           >
             {samples.map((s, i) => (
-              <div key={i} className="pb-10">
+              <div key={i} className="pb-2">
                 <Link
                   to={s.category_slug ? `/portfolio/${s.category_slug}` : "/portfolio"}
                   className="group block overflow-hidden rounded-[var(--pfz-radius-lg)] border border-primary/30 shadow-[var(--pfz-shadow-card)] transition duration-300 hover:-translate-y-1 hover:shadow-[var(--pfz-shadow-glow)]"

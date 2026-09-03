@@ -40,7 +40,7 @@ class BlogSeeder extends Seeder
         foreach ($posts as $p) {
             BlogPost::updateOrCreate(['slug' => $p['slug']], array_merge($p, [
                 'blog_category_id' => $general->id,
-                'author_name' => 'Photo Fix Zone',
+                'author_name' => 'Pixel Graphic Studio',
                 'is_published' => true,
                 'body' => '<p>'.$p['excerpt'].'</p><p>Full article content is editable from the admin panel.</p>',
                 'seo_title' => $p['title'],

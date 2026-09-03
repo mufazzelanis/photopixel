@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // "Top-Tier Client Of Photo Fix Zone" – Photographers, Photo Studio & Agency, etc.
+        // "Top-Tier Client Of Pixel Graphic Studio" – Photographers, Photo Studio & Agency, etc.
         // image handled by Spatie MediaLibrary.
         Schema::create('client_types', function (Blueprint $table) {
             $table->id();

@@ -36,7 +36,7 @@ class ManageSettings extends Page implements HasForms
         'general.logo_text' => ['Logo text', 'text'],
         'general.tagline' => ['Tagline', 'text'],
         'general.footer_about' => ['Footer about text', 'textarea'],
-        'general.copyright' => ['Copyright line', 'text'],
+        'general.copyright' => ['Copyright line', 'text', 'Use {year} where the current year should appear — it updates automatically every year.'],
         'contact.address' => ['Address', 'textarea'],
         'contact.email' => ['Public email', 'text'],
         'contact.phone' => ['Phone', 'text'],

@@ -24,7 +24,7 @@ export function Blog() {
 
   return (
     <>
-      <Helmet><title>{meta.heading} — Photo Fix Zone</title></Helmet>
+      <Helmet><title>{meta.heading} — Pixel Graphic Studio</title></Helmet>
 
       <Section settings={meta.settings}>
         <SectionHeading heading={meta.heading} highlight={meta.highlight_text} sub={meta.sub_heading} />

@@ -32,7 +32,7 @@ class ServiceSeeder extends Seeder
                 'title' => 'Image Masking',
                 'icon' => 'layers',
                 'btn_label' => 'More About Image Masking',
-                'short_desc' => "Outsource Photo Fix Zone's photo masking with advance level of masking, get it quickly done through great manipulation technique of our special team.",
+                'short_desc' => "Outsource Pixel Graphic Studio's photo masking with advance level of masking, get it quickly done through great manipulation technique of our special team.",
                 'points' => ['Smooth and Flawless Results', 'Free Trial Opportunity', 'Excellent Prices with Quick Turnaround', '100% Satisfaction Guaranteed'],
             ],
             [
@@ -174,7 +174,7 @@ class ServiceSeeder extends Seeder
                     'is_active' => true,
                     'is_featured' => $featured,
                     'long_desc' => '<p>'.$data['short_desc'].'</p>',
-                    'seo_title' => $data['title'].' Service | Photo Fix Zone',
+                    'seo_title' => $data['title'].' Service | Pixel Graphic Studio',
                     'seo_description' => $data['short_desc'],
                 ],
             );

@@ -88,7 +88,7 @@ class ThemeSeeder extends Seeder
         Theme::updateOrCreate(
             ['slug' => 'photo-fix-zone-default'],
             [
-                'name' => 'Photo Fix Zone — Default',
+                'name' => 'Pixel Graphic Studio — Default',
                 'is_active' => true,
                 'is_default' => true,
                 'tokens' => $tokens,
@@ -109,7 +109,7 @@ class ThemeSeeder extends Seeder
         Theme::updateOrCreate(
             ['slug' => 'photo-fix-zone-dark'],
             [
-                'name' => 'Photo Fix Zone — Dark',
+                'name' => 'Pixel Graphic Studio — Dark',
                 'is_active' => false,
                 'is_default' => false,
                 'tokens' => $dark,

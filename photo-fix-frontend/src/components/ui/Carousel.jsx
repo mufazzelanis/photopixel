@@ -17,7 +17,11 @@ export function Carousel({ children, slidesPerView = 1, breakpoints, className =
       spaceBetween={24}
       slidesPerView={slidesPerView}
       breakpoints={breakpoints}
-      pagination={{ clickable: true }}
+      pagination={{
+        clickable: true,
+        dynamicBullets: true,
+        dynamicMainBullets: 3,
+      }}
       autoplay={autoplay ? { delay: animation.autoplay_delay ?? 4000, disableOnInteraction: false } : false}
       loop
       className={"pfz-carousel " + className}

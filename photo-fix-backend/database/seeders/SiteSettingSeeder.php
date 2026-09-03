@@ -11,11 +11,11 @@ class SiteSettingSeeder extends Seeder
     {
         $rows = [
             // group, key, value, type
-            ['general', 'site_name', 'Photo Fix Zone', 'text'],
-            ['general', 'logo_text', 'Photo Fix Zone', 'text'],
+            ['general', 'site_name', 'Pixel Graphic Studio', 'text'],
+            ['general', 'logo_text', 'Pixel Graphic Studio', 'text'],
             ['general', 'tagline', 'All-In-One Image Editing Service', 'text'],
-            ['general', 'footer_about', 'Photo Fix Zone is your All-In-One Image Editing Service Stoppage. Whatever the image editing services you need, we ensure high-quality results with expert professionals.', 'textarea'],
-            ['general', 'copyright', 'Copyright © 2026 | Photo Fix Zone | All Rights Reserved', 'text'],
+            ['general', 'footer_about', 'Pixel Graphic Studio is your All-In-One Image Editing Service Stoppage. Whatever the image editing services you need, we ensure high-quality results with expert professionals.', 'textarea'],
+            ['general', 'copyright', 'Copyright © {year} | Pixel Graphic Studio | All Rights Reserved', 'text'],
 
             ['contact', 'address', '348/P, 60 Feet Road, Middle Pirerbag, Mirpur, Dhaka – 1216', 'textarea'],
             ['contact', 'email', 'office@photofixzone.com', 'text'],
@@ -34,8 +34,8 @@ class SiteSettingSeeder extends Seeder
             ['scripts', 'body_scripts', '', 'textarea'],
             ['scripts', 'google_analytics_id', '', 'text'],
 
-            ['seo', 'default_title', 'Photo Fix Zone — Professional Photo & Video Editing Services', 'text'],
-            ['seo', 'default_description', 'Get stunning & flawless photo editing services at Photo Fix Zone. Clipping path, retouching, masking, ghost mannequin, background removal and more.', 'textarea'],
+            ['seo', 'default_title', 'Pixel Graphic Studio — Professional Photo & Video Editing Services', 'text'],
+            ['seo', 'default_description', 'Get stunning & flawless photo editing services at Pixel Graphic Studio. Clipping path, retouching, masking, ghost mannequin, background removal and more.', 'textarea'],
 
             ['recaptcha', 'enabled', '0', 'boolean'],
             ['recaptcha', 'site_key', '', 'text'],

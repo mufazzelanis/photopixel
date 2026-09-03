@@ -44,7 +44,7 @@ class WorkSampleCategorySeeder extends Seeder
             [
                 'name' => 'Photo Retouching Services',
                 'icon' => 'sparkles',
-                'description' => "Don't have time or expertise to edit photos for personal or business purposes? Are you a professional photographer or a freelancer agency with tons of due edits to be done, or are you an eCommerce retailer who prefers to invest your time in business? If you are anyone of them, then Photo Fix Zone can leverage your valuable time & help expand your business.",
+                'description' => "Don't have time or expertise to edit photos for personal or business purposes? Are you a professional photographer or a freelancer agency with tons of due edits to be done, or are you an eCommerce retailer who prefers to invest your time in business? If you are anyone of them, then Pixel Graphic Studio can leverage your valuable time & help expand your business.",
                 'samples' => ['Swimwear — Retouch', 'Pants — Retouch', 'Camera Clamp — Retouch', 'Soda Can — Retouch'],
             ],
             [

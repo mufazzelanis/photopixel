@@ -12,7 +12,7 @@ export function Portfolio() {
 
   return (
     <>
-      <Helmet><title>Portfolio — Photo Fix Zone</title></Helmet>
+      <Helmet><title>Portfolio — Pixel Graphic Studio</title></Helmet>
       <PageHero
         title="Image Editing Portfolio"
         subtitle="Before / after from our satisfied clients — pick a category to see the full gallery."

@@ -40,7 +40,7 @@ class BlogPostResource extends Resource
                     ->afterStateUpdated(fn ($state, Forms\Set $set, string $operation) => $operation === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null),
                 Forms\Components\TextInput::make('slug')->required()->unique(ignoreRecord: true),
                 Forms\Components\Select::make('blog_category_id')->relationship('category', 'name')->searchable()->preload()->label('Category'),
-                Forms\Components\TextInput::make('author_name')->default('Photo Fix Zone'),
+                Forms\Components\TextInput::make('author_name')->default('Pixel Graphic Studio'),
                 Forms\Components\TextInput::make('read_time')->placeholder('5 min read'),
                 Forms\Components\DateTimePicker::make('published_at'),
                 Forms\Components\Textarea::make('excerpt')->rows(2)->columnSpanFull(),

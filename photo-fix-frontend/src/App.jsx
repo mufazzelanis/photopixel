@@ -8,6 +8,7 @@ import { SiteLayout } from "./components/layout/SiteLayout";
 import { ErrorState } from "./components/ui/Loader";
 import { ErrorBoundary } from "./components/ui/ErrorBoundary";
 import { TopProgress } from "./components/ui/TopProgress";
+import { InstallPrompt } from "./components/pwa/InstallPrompt";
 import { Home } from "./pages/Home";
 import { Services } from "./pages/Services";
 import { ServiceDetail } from "./pages/ServiceDetail";
@@ -60,6 +61,7 @@ export default function App() {
                 </Routes>
               </Gate>
             </ErrorBoundary>
+            <InstallPrompt />
             <Toaster position="top-center" toastOptions={{ duration: 4000 }} />
           </ModalProvider>
         </ThemeProvider>

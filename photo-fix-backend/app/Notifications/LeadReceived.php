@@ -24,7 +24,7 @@ class LeadReceived extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $mail = (new MailMessage)
-            ->subject("New {$this->label} — Photo Fix Zone")
+            ->subject("New {$this->label} — Pixel Graphic Studio")
             ->greeting("New {$this->label}");
 
         foreach ($this->lead->getAttributes() as $key => $value) {

@@ -36,6 +36,7 @@ class AdminSmokeTest extends TestCase
         return array_map(fn ($u) => [$u], [
             '/admin',
             '/admin/appearance',
+            '/admin/manage-branding',
             '/admin/manage-hero',
             '/admin/manage-about',
             '/admin/manage-why-choose',

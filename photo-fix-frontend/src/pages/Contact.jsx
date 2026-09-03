@@ -27,7 +27,7 @@ export function Contact() {
 
   return (
     <>
-      <Helmet><title>{meta.heading ?? "Contact Us"} — Photo Fix Zone</title></Helmet>
+      <Helmet><title>{meta.heading ?? "Contact Us"} — Pixel Graphic Studio</title></Helmet>
 
       <Section settings={meta.settings}>
         <SectionHeading heading={meta.heading} highlight={meta.highlight_text} sub={meta.sub_heading} />

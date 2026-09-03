@@ -22,8 +22,8 @@ class ContentSeeder extends Seeder
         // ---- Hero (singleton) -------------------------------------------
         Hero::updateOrCreate(['id' => 1], [
             'eyebrow' => null,
-            'heading' => 'Get Stunning & Flawless Photo Editing Services At Photo Fix Zone!',
-            'highlight_text' => 'Photo Fix Zone',
+            'heading' => 'Get Stunning & Flawless Photo Editing Services At Pixel Graphic Studio!',
+            'highlight_text' => 'Pixel Graphic Studio',
             'sub_text' => 'We are the leading photo editing service provider working with result-oriented professionals who can lead with flawless images. Get in touch with us.',
             'primary_btn_label' => 'Try For Free',
             'primary_btn_url' => '/free-trial',
@@ -37,15 +37,15 @@ class ContentSeeder extends Seeder
             'heading' => 'Accelerate Your Journey With PhotoFixZone',
             'highlight_text' => 'With PhotoFixZone',
             'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-            'body_1' => 'Photo Fix Zone is an outstanding team with a pool of passionate experts who helps businesses and individuals internationally. With a team of expert professionals and providing on-demand photo editing & graphical support.',
-            'body_2' => 'We provide affordable photo editing services that express high-quality results. Our highly skilled editor, designer and graphic artists know where you need to improve! and according to the requirements, our professional editors will make the service more exclusive so which will make you satisfied with the best result. Photo Fix Zone is always ready to provide excellent image editing services such as complex clipping path, high-end retouching, complex masking, raster to vector, jewellry retouch and much more!',
+            'body_1' => 'Pixel Graphic Studio is an outstanding team with a pool of passionate experts who helps businesses and individuals internationally. With a team of expert professionals and providing on-demand photo editing & graphical support.',
+            'body_2' => 'We provide affordable photo editing services that express high-quality results. Our highly skilled editor, designer and graphic artists know where you need to improve! and according to the requirements, our professional editors will make the service more exclusive so which will make you satisfied with the best result. Pixel Graphic Studio is always ready to provide excellent image editing services such as complex clipping path, high-end retouching, complex masking, raster to vector, jewellry retouch and much more!',
             'btn_label' => 'Ask For a Quote',
             'btn_url' => '#quote',
         ]);
 
         // ---- Value cards --------------------------------------------------
         $cards = [
-            ['icon' => 'chart', 'header_color' => '#EC4899', 'title' => 'Daily Editing Capacity', 'body' => 'Photo Fix Zone will allow you to edit up to 5000 photos every day.'],
+            ['icon' => 'chart', 'header_color' => '#EC4899', 'title' => 'Daily Editing Capacity', 'body' => 'Pixel Graphic Studio will allow you to edit up to 5000 photos every day.'],
             ['icon' => 'truck', 'header_color' => '#2F6BFF', 'title' => 'Fastest Delivery', 'body' => "Wait too long to get the result? We won't take much longer than your expectation. We provide instant support that our client wants."],
             ['icon' => 'wallet', 'header_color' => '#14B8A6', 'title' => 'Budget Friendly Image Editing', 'body' => 'Once we know the necessities of your project, We make every effort to give you the most budget-friendly service you need. Also, we never compromise on quality!'],
             ['icon' => 'headset', 'header_color' => '#A855F7', 'title' => 'Unlimited Support And Modifications', 'body' => 'You will get unlimited support and guidance from us that can fulfil your needs. Our pricing will amaze you with quality in the competitive market.'],

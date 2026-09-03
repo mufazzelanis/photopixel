@@ -28,7 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName('Photo Fix Zone')
+            ->brandName('Pixel Graphic Studio')
             ->colors([
                 'primary' => Color::hex('#6C4CF1'),
             ])
