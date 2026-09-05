@@ -34,7 +34,7 @@ class ClientTypeResource extends Resource
         return $form->schema([
             Forms\Components\TextInput::make('title')->required(),
             Forms\Components\Textarea::make('body')->rows(4)->columnSpanFull(),
-            SpatieMediaLibraryFileUpload::make('image')->collection('image')->image()->imageEditor(),
+            SpatieMediaLibraryFileUpload::make('image')->collection('image')->image(),
             Forms\Components\TextInput::make('link_label')->default('Learn more'),
             Forms\Components\TextInput::make('link_url'),
             Forms\Components\Toggle::make('is_active')->default(true),

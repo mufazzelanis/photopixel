@@ -400,30 +400,36 @@ class SitePayload
         ])->all();
     }
 
-    /** Flat sample list (all categories mixed) for the homepage carousel. Each
-     *  one links straight to its /portfolio/{category_slug} page. */
+    /** Homepage "Satisfied Clients" spotlight — the admin's chosen 3 (or so)
+     *  most-popular categories, each represented by its own cover / a real
+     *  sample photo (never the seeder's placeholder graphic). Links straight
+     *  to /portfolio/{slug}; "See More Samples" always goes to /portfolio. */
     private function workSamples(): array
     {
-        return WorkSample::query()->visible()->with('category')->get()->map(fn ($w) => [
-            'title' => $w->title,
-            'before_image' => Media::url($w, 'before', 'web'),
-            'after_image' => Media::url($w, 'after', 'web'),
-            'category_slug' => $w->category?->slug,
-        ])->all();
+        return WorkSampleCategory::query()->visible()->featured()->ordered()
+            ->with(['samples' => fn ($q) => $q->visible()->withRealPhotos()])
+            ->get()
+            ->map(fn (WorkSampleCategory $cat) => [
+                'name' => $cat->name,
+                'slug' => $cat->slug,
+                'icon' => $cat->icon,
+                'cover' => $cat->realCoverUrl() ?? Media::url($cat->samples->first(), 'after', 'web'),
+                'samples_count' => $cat->samples->count(),
+            ])->all();
     }
 
     /** Grouped by category, each with its own copy/buttons — powers /portfolio and /portfolio/{slug}. */
     private function workSampleCategories(): array
     {
         return WorkSampleCategory::query()->visible()
-            ->with(['samples' => fn ($q) => $q->visible()])
+            ->with(['samples' => fn ($q) => $q->visible()->withRealPhotos()])
             ->get()
             ->map(fn (WorkSampleCategory $cat) => [
                 'name' => $cat->name,
                 'slug' => $cat->slug,
                 'icon' => $cat->icon,
                 'description' => $cat->description,
-                'cover' => Media::url($cat, 'cover', 'web'),
+                'cover' => $cat->realCoverUrl(),
                 'read_more' => ['label' => $cat->read_more_label, 'url' => $cat->read_more_url ?: '/services'],
                 'try_free' => ['label' => $cat->try_free_label, 'url' => $cat->try_free_url ?: '/free-trial'],
                 'samples' => $cat->samples->map(fn ($s) => [

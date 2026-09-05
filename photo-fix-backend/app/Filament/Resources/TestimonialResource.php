@@ -39,7 +39,7 @@ class TestimonialResource extends Resource
             Forms\Components\TextInput::make('role')->helperText('e.g. Business Owner, Photographer'),
             Forms\Components\Select::make('rating')->options(array_combine(range(1, 5), range(1, 5)))->default(5)->required(),
             Forms\Components\Textarea::make('quote')->rows(5)->required()->columnSpanFull(),
-            SpatieMediaLibraryFileUpload::make('avatar')->collection('avatar')->image()->avatar()->imageEditor(),
+            SpatieMediaLibraryFileUpload::make('avatar')->collection('avatar')->image()->avatar()->maxSize(5120)->helperText('Max 5MB.'),
             Forms\Components\Toggle::make('is_active')->default(true),
             Forms\Components\TextInput::make('sort_order')->numeric()->default(0),
         ]);

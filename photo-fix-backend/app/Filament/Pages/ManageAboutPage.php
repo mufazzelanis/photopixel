@@ -54,7 +54,7 @@ class ManageAboutPage extends Page implements HasForms
                             TextInput::make('hero_secondary_label'),
                             TextInput::make('hero_secondary_url'),
                         ]),
-                        SpatieMediaLibraryFileUpload::make('hero_image')->collection('hero_image')->image()->imageEditor(),
+                        SpatieMediaLibraryFileUpload::make('hero_image')->collection('hero_image')->image()->maxSize(20480)->helperText('Max 20MB.'),
                     ]),
 
                     Tabs\Tab::make('Boost Your Business')->icon('heroicon-o-squares-2x2')->schema([
@@ -74,7 +74,7 @@ class ManageAboutPage extends Page implements HasForms
                             TextInput::make('pp_btn_label'),
                             TextInput::make('pp_btn_url'),
                         ]),
-                        SpatieMediaLibraryFileUpload::make('post_production_image')->collection('post_production_image')->image()->imageEditor(),
+                        SpatieMediaLibraryFileUpload::make('post_production_image')->collection('post_production_image')->image()->maxSize(20480)->helperText('Max 20MB.'),
                     ]),
 
                     Tabs\Tab::make('Positive Impact')->icon('heroicon-o-heart')->schema([
@@ -83,7 +83,7 @@ class ManageAboutPage extends Page implements HasForms
                         Textarea::make('society_body_1')->rows(4)->columnSpanFull(),
                         Textarea::make('society_body_2')->rows(4)->columnSpanFull(),
                         Textarea::make('society_body_3')->rows(4)->columnSpanFull(),
-                        SpatieMediaLibraryFileUpload::make('society_image')->collection('society_image')->image()->imageEditor(),
+                        SpatieMediaLibraryFileUpload::make('society_image')->collection('society_image')->image()->maxSize(20480)->helperText('Max 20MB.'),
                     ]),
 
                     Tabs\Tab::make('Partnership + Video')->icon('heroicon-o-play-circle')->schema([

@@ -55,9 +55,9 @@ class ServiceResource extends Resource
                 Forms\Components\RichEditor::make('long_desc')->columnSpanFull(),
             ]),
             Forms\Components\Section::make('Before / After images')->columns(2)->schema([
-                SpatieMediaLibraryFileUpload::make('before')->collection('before')->image()->imageEditor(),
-                SpatieMediaLibraryFileUpload::make('after')->collection('after')->image()->imageEditor(),
-                SpatieMediaLibraryFileUpload::make('gallery')->collection('gallery')->image()->multiple()->reorderable()->columnSpanFull(),
+                SpatieMediaLibraryFileUpload::make('before')->collection('before')->image()->maxSize(20480)->helperText('Max 20MB.'),
+                SpatieMediaLibraryFileUpload::make('after')->collection('after')->image()->maxSize(20480)->helperText('Max 20MB.'),
+                SpatieMediaLibraryFileUpload::make('gallery')->collection('gallery')->image()->multiple()->reorderable()->maxSize(20480)->columnSpanFull(),
             ]),
             Forms\Components\Section::make('Visibility & SEO')->columns(2)->schema([
                 Forms\Components\Toggle::make('is_active')->default(true),

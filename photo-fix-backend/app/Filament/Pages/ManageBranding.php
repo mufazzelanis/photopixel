@@ -47,13 +47,13 @@ class ManageBranding extends Page implements HasForms
                             ->collection('logo')
                             ->label('Main logo')
                             ->image()
-                            ->imageEditor()
-                            ->helperText('Transparent PNG or SVG, roughly 200 × 48 px.'),
+                            ->maxSize(5120)
+                            ->helperText('Transparent PNG or SVG, roughly 200 × 48 px. Max 5MB.'),
                         SpatieMediaLibraryFileUpload::make('logo_dark')
                             ->collection('logo_dark')
                             ->label('Logo for dark background (optional)')
                             ->image()
-                            ->imageEditor()
+                            ->maxSize(5120)
                             ->helperText('A light / white version shown in the dark footer. Falls back to the main logo.'),
                     ]),
 

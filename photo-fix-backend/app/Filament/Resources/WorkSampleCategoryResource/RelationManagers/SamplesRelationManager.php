@@ -19,8 +19,8 @@ class SamplesRelationManager extends RelationManager
     {
         return $form->schema([
             Forms\Components\TextInput::make('title')->columnSpanFull(),
-            SpatieMediaLibraryFileUpload::make('before')->collection('before')->image()->imageEditor()->required(),
-            SpatieMediaLibraryFileUpload::make('after')->collection('after')->image()->imageEditor()->required(),
+            SpatieMediaLibraryFileUpload::make('before')->collection('before')->image()->maxSize(20480)->helperText('Max 20MB.')->required(),
+            SpatieMediaLibraryFileUpload::make('after')->collection('after')->image()->maxSize(20480)->helperText('Max 20MB.')->required(),
             Forms\Components\Toggle::make('is_active')->default(true),
             Forms\Components\TextInput::make('sort_order')->numeric()->default(0),
         ]);

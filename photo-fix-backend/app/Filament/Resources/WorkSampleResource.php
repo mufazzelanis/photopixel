@@ -45,8 +45,8 @@ class WorkSampleResource extends Resource
                     Forms\Components\TextInput::make('slug')->required(),
                 ])
                 ->createOptionUsing(fn (array $data) => WorkSampleCategory::create($data)->id),
-            SpatieMediaLibraryFileUpload::make('before')->collection('before')->image()->imageEditor(),
-            SpatieMediaLibraryFileUpload::make('after')->collection('after')->image()->imageEditor(),
+            SpatieMediaLibraryFileUpload::make('before')->collection('before')->image()->maxSize(20480)->helperText('Max 20MB.'),
+            SpatieMediaLibraryFileUpload::make('after')->collection('after')->image()->maxSize(20480)->helperText('Max 20MB.'),
             Forms\Components\Toggle::make('is_active')->default(true),
             Forms\Components\TextInput::make('sort_order')->numeric()->default(0),
         ]);

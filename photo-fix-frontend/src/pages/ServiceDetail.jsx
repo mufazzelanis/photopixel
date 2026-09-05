@@ -90,14 +90,18 @@ export function ServiceDetail() {
             sub={samples.description}
           />
 
-          <div className="grid gap-6 sm:grid-cols-2">
-            {samples.samples.map((s, i) => (
-              <Reveal key={s.title ?? i} index={i} className="transition duration-300 hover:-translate-y-1">
-                <BeforeAfter before={s.before_image} after={s.after_image} />
-                {s.title ? <p className="mt-2 text-center text-sm text-muted">{s.title}</p> : null}
-              </Reveal>
-            ))}
-          </div>
+          {samples.samples.length ? (
+            <div className="grid gap-6 sm:grid-cols-2">
+              {samples.samples.map((s, i) => (
+                <Reveal key={s.title ?? i} index={i} className="transition duration-300 hover:-translate-y-1">
+                  <BeforeAfter before={s.before_image} after={s.after_image} />
+                  {s.title ? <p className="mt-2 text-center text-sm text-muted">{s.title}</p> : null}
+                </Reveal>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-muted">Samples for this category are coming soon.</p>
+          )}
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <Button to={samples.read_more.url} variant="outline">{samples.read_more.label}</Button>

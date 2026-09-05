@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Concerns\ClearsSiteCache;
 use App\Models\Concerns\Sortable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
@@ -23,9 +24,29 @@ class WorkSampleCategory extends Model implements HasMedia
 
     protected $guarded = [];
 
+    /** File name the demo seeder always uses for its generated cover graphic. */
+    public const PLACEHOLDER_COVER = 'cover.png';
+
     protected function casts(): array
     {
-        return ['is_active' => 'boolean'];
+        return ['is_active' => 'boolean', 'is_featured' => 'boolean'];
+    }
+
+    /** The 3 (or so) categories spotlighted in the homepage "Satisfied Clients" section. */
+    public function scopeFeatured(Builder $query): Builder
+    {
+        return $query->where('is_featured', true);
+    }
+
+    /** Cover image, but never the seeder's placeholder graphic — null lets the frontend fall back gracefully. */
+    public function realCoverUrl(): ?string
+    {
+        $media = $this->getFirstMedia('cover');
+        if (! $media || $media->file_name === self::PLACEHOLDER_COVER) {
+            return null;
+        }
+
+        return $media->getUrl('web');
     }
 
     public function getRouteKeyName(): string

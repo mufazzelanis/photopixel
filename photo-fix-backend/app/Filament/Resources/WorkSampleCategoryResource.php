@@ -49,8 +49,8 @@ class WorkSampleCategoryResource extends Resource
                     ->helperText('Intro paragraph shown under the heading on this category\'s page.'),
             ]),
             Forms\Components\Section::make('Cover image')->schema([
-                SpatieMediaLibraryFileUpload::make('cover')->collection('cover')->image()->imageEditor()
-                    ->helperText('Used as the thumbnail on the Portfolio listing page. Falls back to the first sample\'s "after" image if left blank.'),
+                SpatieMediaLibraryFileUpload::make('cover')->collection('cover')->image()->maxSize(20480)
+                    ->helperText('Used as the thumbnail on the Portfolio listing page. Falls back to the first sample\'s "after" image if left blank. Max 20MB.'),
             ]),
             Forms\Components\Section::make('Buttons')->columns(2)->schema([
                 Forms\Components\TextInput::make('read_more_label')->required()->default('Read More'),
@@ -60,6 +60,9 @@ class WorkSampleCategoryResource extends Resource
             ]),
             Forms\Components\Section::make('Visibility')->columns(2)->schema([
                 Forms\Components\Toggle::make('is_active')->default(true),
+                Forms\Components\Toggle::make('is_featured')
+                    ->label('Show in homepage "Satisfied Clients" spotlight')
+                    ->helperText('Pick your best 3 categories — only these appear in that homepage section. "See More Samples" there always links to the full Portfolio page.'),
                 Forms\Components\TextInput::make('sort_order')->numeric()->default(0),
             ]),
         ]);
@@ -75,6 +78,7 @@ class WorkSampleCategoryResource extends Resource
                 Tables\Columns\TextColumn::make('slug')->badge()->color('gray'),
                 Tables\Columns\TextColumn::make('samples_count')->counts('samples')->label('Samples'),
                 Tables\Columns\ToggleColumn::make('is_active'),
+                Tables\Columns\ToggleColumn::make('is_featured')->label('Homepage spotlight'),
             ])
             ->actions([Tables\Actions\EditAction::make()])
             ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);

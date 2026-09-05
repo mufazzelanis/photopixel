@@ -53,10 +53,10 @@ class ManageHero extends Page implements HasForms
                     TextInput::make('secondary_btn_url'),
                 ]),
                 Section::make('Images')->schema([
-                    SpatieMediaLibraryFileUpload::make('collage')->collection('collage')->image()->multiple()->reorderable()
-                        ->helperText('Floating collage images on the right of the hero.'),
-                    SpatieMediaLibraryFileUpload::make('background')->collection('background')->image()
-                        ->helperText('Optional background image behind the hero.'),
+                    SpatieMediaLibraryFileUpload::make('collage')->collection('collage')->image()->multiple()->reorderable()->maxSize(20480)
+                        ->helperText('Floating collage images on the right of the hero. Max 20MB each.'),
+                    SpatieMediaLibraryFileUpload::make('background')->collection('background')->image()->maxSize(20480)
+                        ->helperText('Optional background image behind the hero. Max 20MB.'),
                 ]),
             ]);
     }

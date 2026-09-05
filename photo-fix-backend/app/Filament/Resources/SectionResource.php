@@ -58,8 +58,8 @@ class SectionResource extends Resource
                 ->rows(5)
                 ->columnSpanFull()
                 ->helperText('Used by a few sections (e.g. "The Range Of Value We Provide") as several paragraphs — leave one fully blank line between paragraphs to split them.'),
-            SpatieMediaLibraryFileUpload::make('image')->collection('image')->image()->imageEditor()
-                ->helperText('Optional — only a few pages use this (e.g. the person photo on Contact). Leave blank otherwise.'),
+            SpatieMediaLibraryFileUpload::make('image')->collection('image')->image()->maxSize(20480)
+                ->helperText('Optional — only a few pages use this (e.g. the person photo on Contact). Leave blank otherwise. Max 20MB.'),
             Forms\Components\KeyValue::make('settings')
                 ->keyLabel('Setting')
                 ->valueLabel('Value')

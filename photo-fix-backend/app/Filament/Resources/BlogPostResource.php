@@ -47,7 +47,7 @@ class BlogPostResource extends Resource
                 Forms\Components\RichEditor::make('body')->columnSpanFull(),
             ]),
             Forms\Components\Section::make('Media & SEO')->columns(2)->schema([
-                SpatieMediaLibraryFileUpload::make('cover')->collection('cover')->image()->imageEditor()->columnSpanFull(),
+                SpatieMediaLibraryFileUpload::make('cover')->collection('cover')->image()->maxSize(20480)->helperText('Max 20MB.')->columnSpanFull(),
                 Forms\Components\TextInput::make('seo_title'),
                 Forms\Components\Textarea::make('seo_description')->rows(2),
                 Forms\Components\Toggle::make('is_published')->default(true),

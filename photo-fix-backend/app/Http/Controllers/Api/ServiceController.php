@@ -30,7 +30,10 @@ class ServiceController extends Controller
     public function show(Service $service)
     {
         abort_unless($service->is_active, 404);
-        $service->load('points', 'workSampleCategory.samples');
+        $service->load([
+            'points',
+            'workSampleCategory.samples' => fn ($q) => $q->visible()->withRealPhotos(),
+        ]);
 
         $category = $service->workSampleCategory;
 
@@ -52,7 +55,7 @@ class ServiceController extends Controller
                     'description' => $category->description,
                     'read_more' => ['label' => 'View All Samples', 'url' => "/portfolio/{$category->slug}"],
                     'try_free' => ['label' => $category->try_free_label, 'url' => $category->try_free_url ?: '/free-trial'],
-                    'samples' => $category->samples->where('is_active', true)->values()->map(fn ($s) => [
+                    'samples' => $category->samples->values()->map(fn ($s) => [
                         'title' => $s->title,
                         'before_image' => Media::url($s, 'before', 'web'),
                         'after_image' => Media::url($s, 'after', 'web'),
