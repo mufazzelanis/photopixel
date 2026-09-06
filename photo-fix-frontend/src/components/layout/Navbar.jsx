@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useSite } from "../../theme/context";
 import { useCmsAction } from "../../forms/ModalProvider";
 import { Button } from "../ui/Button";
+import { BrandLogo } from "./BrandLogo";
 import { Icon } from "../../lib/Icon";
 import { cn } from "../../lib/utils";
 
@@ -168,7 +169,6 @@ export function Navbar() {
   const raw = data?.navigation ?? {};
   const nav = {
     brand: raw.brand ?? "Pixel Graphic Studio",
-    logo: raw.logo ?? null,
     cta: raw.cta ?? {},
     items: Array.isArray(raw.items) ? raw.items : [],
   };
@@ -212,21 +212,8 @@ export function Navbar() {
       )}
     >
       <div className="pfz-container flex items-center justify-between gap-3">
-        <Link to="/" className="flex min-w-0 items-center gap-2 text-base font-extrabold text-heading sm:text-lg">
-          {nav.logo ? (
-            <img
-              src={nav.logo}
-              alt={nav.brand}
-              className="h-9 w-auto max-w-[170px] object-contain sm:h-10 sm:max-w-[220px]"
-            />
-          ) : (
-            <>
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-[var(--pfz-radius-sm)] pfz-gradient-brand text-white">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="5" width="18" height="14" rx="3" /><circle cx="12" cy="12" r="3.2" /></svg>
-              </span>
-              <span className="pfz-text-gradient truncate">{nav.brand}</span>
-            </>
-          )}
+        <Link to="/" className="flex min-w-0 items-center" aria-label={nav.brand}>
+          <BrandLogo variant="header" />
         </Link>
 
         <nav className="hidden items-center lg:flex">

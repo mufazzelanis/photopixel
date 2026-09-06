@@ -220,6 +220,8 @@ class SitePayload
             'brand' => SiteSetting::value('general', 'logo_text', 'Pixel Graphic Studio'),
             'logo' => Media::url($branding, 'logo', 'web') ?: Media::url($branding, 'logo'),
             'logo_dark' => Media::url($branding, 'logo_dark', 'web') ?: Media::url($branding, 'logo_dark'),
+            'logo_bg' => $branding->logo_bg ?: 'none',
+            'logo_height' => (int) ($branding->logo_height ?: 36),
             'favicon' => Media::url($branding, 'favicon'),
             'cta' => [
                 'label' => SiteSetting::value('cta', 'header_button_label', 'GET A QUOTE'),

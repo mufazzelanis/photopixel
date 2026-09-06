@@ -3,6 +3,7 @@ import { useSite } from "../../theme/context";
 import { Icon } from "../../lib/Icon";
 import { NewsletterForm } from "../../forms/NewsletterForm";
 import { Reveal } from "../ui/Reveal";
+import { BrandLogo } from "./BrandLogo";
 
 /* ------------------------------------------------------------------ *
  * Contact strip — gradient card at the top of the footer.
@@ -132,7 +133,6 @@ export function Footer() {
   const { data } = useSite();
   const f = data?.footer ?? {};
   const brand = data?.navigation?.brand ?? "Pixel Graphic Studio";
-  const logo = data?.navigation?.logo_dark || data?.navigation?.logo || null;
   const columns = Array.isArray(f.columns) ? f.columns : [];
   const socials = Array.isArray(f.socials) ? f.socials : [];
   const payments = Array.isArray(f.payment_methods) ? f.payment_methods : [];
@@ -156,25 +156,7 @@ export function Footer() {
           {/* Brand */}
           <Reveal className="sm:col-span-2 lg:col-span-1">
             <div className="mb-5">
-              {logo ? (
-                <img
-                  src={logo}
-                  alt={brand}
-                  className="h-10 w-auto max-w-[210px] object-contain"
-                />
-              ) : (
-                <div className="flex items-center gap-2.5">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-[var(--pfz-radius-sm)] bg-accent text-white">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="3" y="5" width="18" height="14" rx="3" />
-                      <circle cx="12" cy="12" r="3.2" />
-                    </svg>
-                  </span>
-                  <span className="pfz-text-gradient text-xl font-extrabold sm:text-2xl">
-                    {brand}
-                  </span>
-                </div>
-              )}
+              <BrandLogo variant="footer" />
             </div>
             <p className="max-w-sm text-[0.95rem] leading-relaxed text-white/55">
               {f.about}

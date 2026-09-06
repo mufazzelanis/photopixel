@@ -18,6 +18,8 @@ class LeadsOverview extends BaseWidget
 {
     protected static ?int $sort = 1;
 
+    protected $listeners = ['lead-status-changed' => '$refresh'];
+
     protected function getStats(): array
     {
         $newQuotes = QuoteRequest::where('status', 'new')->count();

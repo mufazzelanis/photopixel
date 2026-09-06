@@ -98,6 +98,9 @@ class LeadAdminTest extends TestCase
             ->assertSee('Image Masking, Photo Retouch')
             ->assertSee('https://drive.example/abc')
             ->assertSee('clean up the edges please')
-            ->assertSee('Uploaded sample images');
+            ->assertSee('Uploaded sample images')
+            ->assertSee('ftz-gallery', false)  // blade gallery rendered
+            ->assertSee('download="', false)   // per-image download link
+            ->assertSee('ftz-btn', false);
     }
 }

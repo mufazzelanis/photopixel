@@ -54,4 +54,24 @@ class BrandingUploadTest extends TestCase
         $this->assertNotNull($nav['logo']);
         $this->assertArrayHasKey('favicon', $nav);
     }
+
+    public function test_logo_display_options_persist_and_reach_the_api(): void
+    {
+        Storage::fake('public');
+
+        Livewire::test(ManageBranding::class)
+            ->set('data.logo', [UploadedFile::fake()->image('logo.png', 240, 60)])
+            ->set('data.logo_bg', 'dark')
+            ->set('data.logo_height', 44)
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $b = Branding::current();
+        $this->assertSame('dark', $b->logo_bg);
+        $this->assertSame(44, $b->logo_height);
+
+        $nav = app(\App\Services\SitePayload::class)->navigation();
+        $this->assertSame('dark', $nav['logo_bg']);
+        $this->assertSame(44, $nav['logo_height']);
+    }
 }

@@ -17,6 +17,8 @@ class LeadsChart extends ChartWidget
 
     protected static ?string $maxHeight = '220px';
 
+    protected $listeners = ['lead-status-changed' => '$refresh'];
+
     protected function getType(): string
     {
         return 'line';

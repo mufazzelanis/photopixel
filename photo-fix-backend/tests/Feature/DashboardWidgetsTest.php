@@ -56,4 +56,28 @@ class DashboardWidgetsTest extends TestCase
         $times = collect($leads)->pluck('at');
         $this->assertTrue($times->first()->greaterThanOrEqualTo($times->last()));
     }
+
+    public function test_status_can_be_changed_inline_from_the_feed(): void
+    {
+        $trial = FreeTrialRequest::where('status', 'new')->firstOrFail();
+
+        Livewire::test(LatestLeads::class)
+            ->call('setStatus', 'trial', $trial->id, 'delivered')
+            ->assertOk()
+            ->assertNotified()
+            ->assertDispatched('lead-status-changed');
+
+        $this->assertSame('delivered', $trial->fresh()->status);
+    }
+
+    public function test_inline_status_change_rejects_bad_input(): void
+    {
+        $trial = FreeTrialRequest::where('status', 'new')->firstOrFail();
+
+        Livewire::test(LatestLeads::class)
+            ->call('setStatus', 'trial', $trial->id, 'not-a-status')
+            ->call('setStatus', 'bogus-kind', $trial->id, 'delivered');
+
+        $this->assertSame('new', $trial->fresh()->status);
+    }
 }

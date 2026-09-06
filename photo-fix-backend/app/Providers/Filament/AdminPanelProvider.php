@@ -28,6 +28,11 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('Pixel Graphic Studio')
+            ->brandLogo(fn () => \App\Models\Branding::resolved()->getFirstMediaUrl('logo') ?: null)
+            ->darkModeBrandLogo(fn () => \App\Models\Branding::resolved()->getFirstMediaUrl('logo_dark')
+                ?: (\App\Models\Branding::resolved()->getFirstMediaUrl('logo') ?: null))
+            ->brandLogoHeight(fn () => (\App\Models\Branding::resolved()->logo_height ?: 32).'px')
+            ->favicon(fn () => \App\Models\Branding::resolved()->getFirstMediaUrl('favicon') ?: null)
             ->colors([
                 'primary' => Color::hex('#6C4CF1'),
             ])

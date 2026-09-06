@@ -89,11 +89,11 @@ class FreeTrialRequestResource extends Resource
             ]),
 
             Infolists\Components\Section::make('Sample images')
+                ->description(fn (FreeTrialRequest $record) => $record->getMedia('samples')->count()
+                    .' file(s) — hover to download in the original format.')
                 ->schema([
-                    Infolists\Components\SpatieMediaLibraryImageEntry::make('samples')
-                        ->collection('samples')
-                        ->conversion('thumb')
-                        ->hiddenLabel()
+                    Infolists\Components\View::make('filament.resources.free-trial.samples-gallery')
+                        ->viewData(fn (FreeTrialRequest $record) => ['media' => $record->getMedia('samples')])
                         ->columnSpanFull(),
                 ])
                 ->visible(fn (FreeTrialRequest $record) => $record->getMedia('samples')->isNotEmpty()),
@@ -136,26 +136,11 @@ class FreeTrialRequestResource extends Resource
             ]),
 
             Forms\Components\Section::make('Uploaded sample images')
+                ->description(fn (FreeTrialRequest $r) => $r->getMedia('samples')->count()
+                    .' file(s) — hover an image to download it in the exact format the customer sent.')
                 ->schema([
-                    Forms\Components\Placeholder::make('samples')
-                        ->hiddenLabel()
-                        ->content(function (FreeTrialRequest $r) {
-                            $media = $r->getMedia('samples');
-                            if ($media->isEmpty()) {
-                                return '—';
-                            }
-                            $items = $media->map(function ($m) {
-                                $thumb = $m->hasGeneratedConversion('thumb') ? $m->getUrl('thumb') : $m->getUrl();
-
-                                return '<a href="'.e($m->getUrl()).'" target="_blank" title="'.e($m->file_name).'">'
-                                    .'<img src="'.e($thumb).'" class="h-28 w-28 rounded-lg object-cover ring-1 ring-gray-200 dark:ring-white/10" />'
-                                    .'</a>';
-                            })->implode('');
-
-                            return new \Illuminate\Support\HtmlString(
-                                '<div class="flex flex-wrap gap-3">'.$items.'</div>'
-                            );
-                        })
+                    Forms\Components\View::make('filament.resources.free-trial.samples-gallery')
+                        ->viewData(fn (FreeTrialRequest $r) => ['media' => $r->getMedia('samples')])
                         ->columnSpanFull(),
                 ])
                 ->visible(fn (FreeTrialRequest $r) => $r->getMedia('samples')->isNotEmpty()),

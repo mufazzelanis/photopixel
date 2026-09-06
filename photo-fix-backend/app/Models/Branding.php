@@ -22,6 +22,18 @@ class Branding extends Model implements HasMedia
 
     protected $guarded = [];
 
+    protected $casts = [
+        'logo_height' => 'integer',
+    ];
+
+    /** Per-request cached singleton — used by the Filament panel + SitePayload. */
+    protected static ?self $resolved = null;
+
+    public static function resolved(): self
+    {
+        return static::$resolved ??= static::current();
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('logo')->singleFile();
