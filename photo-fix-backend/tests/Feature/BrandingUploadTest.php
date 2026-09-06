@@ -20,7 +20,7 @@ class BrandingUploadTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->actingAs(User::where('email', 'admin@photofixzone.com')->firstOrFail());
+        $this->actingAs(User::where('email', 'admin@pixelgraphicstudio.com')->firstOrFail());
     }
 
     public function test_logo_and_favicon_upload_and_persist_to_media(): void

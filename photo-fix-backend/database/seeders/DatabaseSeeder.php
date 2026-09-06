@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +16,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Admin account for the Filament panel (/admin).
+        // NOTE: this only runs on a *fresh* install — on an already-seeded database
+        // updateOrCreate() matches by email and will not touch an existing password.
+        // See the production checklist for rotating the live admin password.
         User::updateOrCreate(
-            ['email' => 'admin@photofixzone.com'],
+            ['email' => 'admin@pixelgraphicstudio.com'],
             [
                 'name' => 'Pixel Graphic Studio Admin',
-                'password' => Hash::make('password'),
+                'password' => Hash::make(Str::random(24)),
                 'role' => 'admin',
             ],
         );

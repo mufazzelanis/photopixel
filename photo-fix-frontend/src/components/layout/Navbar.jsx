@@ -185,9 +185,14 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
+  // Close the mobile menu when the route changes. Adjusting state while
+  // rendering (React's documented pattern for this) avoids the extra
+  // render pass an effect-based reset would cost.
+  const [prevPath, setPrevPath] = useState(location.pathname);
+  if (location.pathname !== prevPath) {
+    setPrevPath(location.pathname);
     setMobileOpen(false);
-  }, [location.pathname]);
+  }
 
   // Lock background scroll while the mobile menu is open.
   useEffect(() => {

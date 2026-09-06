@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Singleton (row id = 1). "Accelerate Your Journey With PhotoFixZone"
+        // Singleton (row id = 1). "Accelerate Your Journey With Pixel Graphic Studio"
         Schema::create('about_sections', function (Blueprint $table) {
             $table->id();
             $table->string('eyebrow')->nullable();

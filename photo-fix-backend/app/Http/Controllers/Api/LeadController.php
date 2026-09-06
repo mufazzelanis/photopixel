@@ -15,6 +15,7 @@ use App\Models\SiteSetting;
 use App\Notifications\LeadReceived;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 
@@ -65,13 +66,27 @@ class LeadController extends Controller
         return response()->json(['message' => "You're subscribed. Watch your inbox for editing tips."], 201);
     }
 
+    /**
+     * Best-effort admin email. The lead row is already saved by this point, so a
+     * broken/unreachable mail server must never turn into a 500 for the visitor —
+     * they'd see "something went wrong" despite their submission having worked.
+     */
     private function notifyAdmin(object $lead, string $label): void
     {
         $to = SiteSetting::value('contact', 'quote_notify_email')
             ?: SiteSetting::value('contact', 'email');
 
-        if ($to) {
+        if (! $to) {
+            return;
+        }
+
+        try {
             Notification::route('mail', $to)->notify(new LeadReceived($lead, $label));
+        } catch (\Throwable $e) {
+            Log::error("Failed to send {$label} admin notification: {$e->getMessage()}", [
+                'lead_id' => $lead->getKey(),
+                'lead_type' => $lead::class,
+            ]);
         }
     }
 }

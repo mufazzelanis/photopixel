@@ -16,7 +16,7 @@ class AdminSmokeTest extends TestCase
     #[DataProvider('adminUrls')]
     public function test_admin_pages_render(string $url): void
     {
-        $admin = User::where('email', 'admin@photofixzone.com')->firstOrFail();
+        $admin = User::where('email', 'admin@pixelgraphicstudio.com')->firstOrFail();
 
         $this->actingAs($admin)->get($url)->assertSuccessful();
     }

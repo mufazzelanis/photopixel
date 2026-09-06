@@ -22,7 +22,7 @@ class LeadAdminTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->actingAs(User::where('email', 'admin@photofixzone.com')->firstOrFail());
+        $this->actingAs(User::where('email', 'admin@pixelgraphicstudio.com')->firstOrFail());
     }
 
     public function test_quote_view_and_edit_render_with_all_data(): void

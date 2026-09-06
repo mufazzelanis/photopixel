@@ -16,15 +16,11 @@ export function Counter({ value = 0, prefix = "", suffix = "", decimals }) {
     animation.counters &&
     !(animation.respect_reduced_motion && prefersReducedMotion());
 
-  const [display, setDisplay] = useState(animate ? 0 : value);
+  const [display, setDisplay] = useState(0);
   const rafRef = useRef(0);
 
   useEffect(() => {
-    if (!inView) return;
-    if (!animate) {
-      setDisplay(value);
-      return;
-    }
+    if (!inView || !animate) return;
     const duration = 2000;
     const start = performance.now();
     const tick = (now) => {
@@ -37,7 +33,9 @@ export function Counter({ value = 0, prefix = "", suffix = "", decimals }) {
     return () => cancelAnimationFrame(rafRef.current);
   }, [inView, animate, value]);
 
-  const shown = Number(display).toLocaleString("en-US", {
+  // Non-animated (or not-yet-in-view) counters show the final value directly —
+  // no need to route it through state+effect just to display a constant.
+  const shown = Number(animate && inView ? display : value).toLocaleString("en-US", {
     minimumFractionDigits: dec,
     maximumFractionDigits: dec,
   });

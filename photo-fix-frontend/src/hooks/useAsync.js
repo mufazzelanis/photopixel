@@ -26,6 +26,9 @@ export function useAsync(fn, deps = [], cacheKey = null) {
     const cached = cacheKey ? getCached(cacheKey) : undefined;
 
     if (cached !== undefined && nonce === 0) {
+      // Flash the cached value synchronously so the page paints instantly
+      // instead of a loading frame, then the fetch below revalidates it.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setState({ data: cached, loading: false, error: null });
     } else {
       setState((s) => ({ ...s, loading: s.data == null, error: null }));

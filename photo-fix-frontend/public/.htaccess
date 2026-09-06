@@ -1,0 +1,27 @@
+# Pixel Graphic Studio — SPA routing for Apache (cPanel shared hosting).
+# React Router handles routes like /about, /portfolio/:slug client-side, but a
+# direct visit or refresh on those URLs is a real request to Apache — without
+# this, Apache looks for a matching file/folder, finds none, and returns a
+# 404 instead of loading the app. This rewrites every non-file request back
+# to index.html so React Router can take over.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Let real files (js, css, images, manifest, etc.) and folders serve normally.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Everything else falls back to the app shell.
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Don't cache index.html itself — it must always be re-checked so visitors
+# get the latest deployed build instead of a stale cached shell.
+<IfModule mod_headers.c>
+  <FilesMatch "index\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </FilesMatch>
+</IfModule>

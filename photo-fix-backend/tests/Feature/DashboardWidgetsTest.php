@@ -22,7 +22,7 @@ class DashboardWidgetsTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->actingAs(User::where('email', 'admin@photofixzone.com')->firstOrFail());
+        $this->actingAs(User::where('email', 'admin@pixelgraphicstudio.com')->firstOrFail());
 
         QuoteRequest::create(['name' => 'Q', 'email' => 'q@x.com', 'phone' => '1', 'service_ids' => [1, 2], 'budget' => '$100', 'message' => 'hi', 'status' => 'new', 'ip' => '127.0.0.1']);
         ContactMessage::create(['name' => 'C', 'email' => 'c@x.com', 'subject' => 'Hey', 'message' => 'hello', 'status' => 'new', 'ip' => '127.0.0.1']);

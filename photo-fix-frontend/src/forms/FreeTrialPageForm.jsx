@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/refs -- captchaRef is read inside async submit handlers, not during render */
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

@@ -74,7 +74,7 @@ class SectionSeeder extends Seeder
                 'name' => 'Work Samples',
                 'heading' => 'Work Sample of Our Satisfied Clients',
                 'highlight_text' => 'Our Satisfied Clients',
-                'sub_heading' => 'Our potential clients are always glad to meet photo fix zone and the experts are responsible for making their images more special, help them to save time with extraordinary services.',
+                'sub_heading' => 'Our potential clients are always glad to meet Pixel Graphic Studio and the experts are responsible for making their images more special, help them to save time with extraordinary services.',
             ],
             [
                 'key' => 'why_choose',
