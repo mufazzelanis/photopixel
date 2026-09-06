@@ -108,18 +108,63 @@ class FreeTrialRequestResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $ph = fn (string $name, ?string $label, \Closure $content) => Forms\Components\Placeholder::make($name)
+            ->label($label ?? str($name)->headline())
+            ->content($content);
+
         return $form->schema([
-            Forms\Components\Placeholder::make('contact')
-                ->content(fn (FreeTrialRequest $r) => "{$r->name} · {$r->email}".($r->phone ? " · {$r->phone}" : '')),
-            Forms\Components\Placeholder::make('services')
-                ->content(fn (FreeTrialRequest $r) => implode(', ', (array) $r->services) ?: '—'),
-            Forms\Components\Placeholder::make('requirements')
-                ->label('Instructions')
-                ->content(fn (FreeTrialRequest $r) => $r->requirements ?: '—')
-                ->columnSpanFull(),
-            Forms\Components\Select::make('status')
-                ->options(array_combine(FreeTrialRequest::STATUSES, FreeTrialRequest::STATUSES))
-                ->required()->native(false),
+            Forms\Components\Section::make('Contact')->columns(2)->schema([
+                $ph('name', 'Name', fn (FreeTrialRequest $r) => $r->name),
+                $ph('email', 'Email', fn (FreeTrialRequest $r) => new \Illuminate\Support\HtmlString(
+                    '<a class="text-primary-600 underline" href="mailto:'.e($r->email).'">'.e($r->email).'</a>')),
+                $ph('phone', 'Phone', fn (FreeTrialRequest $r) => $r->phone ?: '—'),
+                $ph('country', 'Country', fn (FreeTrialRequest $r) => $r->country ?: '—'),
+            ]),
+
+            Forms\Components\Section::make('Request')->columns(2)->schema([
+                $ph('trial_type', 'Trial type', fn (FreeTrialRequest $r) => $r->trial_type ?: 'photo'),
+                $ph('delivery_timeline', 'Delivery timeline', fn (FreeTrialRequest $r) => $r->delivery_timeline ?: '—'),
+                $ph('file_format', 'Required file format', fn (FreeTrialRequest $r) => $r->file_format ?: '—'),
+                $ph('how_found', 'Found us via', fn (FreeTrialRequest $r) => $r->how_found ?: '—'),
+                $ph('services', 'Services requested', fn (FreeTrialRequest $r) => implode(', ', (array) $r->services) ?: '—')
+                    ->columnSpanFull(),
+                $ph('file_link', 'File link', fn (FreeTrialRequest $r) => $r->file_link
+                    ? new \Illuminate\Support\HtmlString('<a class="text-primary-600 underline" target="_blank" href="'.e($r->file_link).'">'.e($r->file_link).'</a>')
+                    : '—')->columnSpanFull(),
+                $ph('requirements', 'Editing instructions', fn (FreeTrialRequest $r) => $r->requirements ?: '—')
+                    ->columnSpanFull(),
+            ]),
+
+            Forms\Components\Section::make('Uploaded sample images')
+                ->schema([
+                    Forms\Components\Placeholder::make('samples')
+                        ->hiddenLabel()
+                        ->content(function (FreeTrialRequest $r) {
+                            $media = $r->getMedia('samples');
+                            if ($media->isEmpty()) {
+                                return '—';
+                            }
+                            $items = $media->map(function ($m) {
+                                $thumb = $m->hasGeneratedConversion('thumb') ? $m->getUrl('thumb') : $m->getUrl();
+
+                                return '<a href="'.e($m->getUrl()).'" target="_blank" title="'.e($m->file_name).'">'
+                                    .'<img src="'.e($thumb).'" class="h-28 w-28 rounded-lg object-cover ring-1 ring-gray-200 dark:ring-white/10" />'
+                                    .'</a>';
+                            })->implode('');
+
+                            return new \Illuminate\Support\HtmlString(
+                                '<div class="flex flex-wrap gap-3">'.$items.'</div>'
+                            );
+                        })
+                        ->columnSpanFull(),
+                ])
+                ->visible(fn (FreeTrialRequest $r) => $r->getMedia('samples')->isNotEmpty()),
+
+            Forms\Components\Section::make('Manage')->schema([
+                Forms\Components\Select::make('status')
+                    ->options(array_combine(FreeTrialRequest::STATUSES, FreeTrialRequest::STATUSES))
+                    ->required()->native(false),
+            ]),
         ]);
     }
 

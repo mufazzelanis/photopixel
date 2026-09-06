@@ -149,11 +149,9 @@ function MobileTopLink({ item, onNavigate }) {
                   onClick={onNavigate}
                   className="flex items-center gap-2 rounded-[var(--pfz-radius-sm)] px-2 py-2 text-sm text-muted transition hover:bg-alt hover:text-primary"
                 >
-                  {c.icon ? (
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-primary/10 text-primary">
-                      <Icon name={c.icon} size={13} />
-                    </span>
-                  ) : null}
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-primary/10 text-primary">
+                    <Icon name={c.icon || "sparkles"} size={13} />
+                  </span>
                   <span className="truncate">{c.label}</span>
                 </Link>
               ))}
@@ -296,11 +294,9 @@ export function Navbar() {
                       onClick={() => setMegaItem(null)}
                       className="flex items-center gap-3 rounded-[var(--pfz-radius-sm)] px-3 py-2.5 text-sm text-body transition hover:bg-alt hover:text-primary"
                     >
-                      {c.icon ? (
-                        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-[var(--pfz-radius-sm)] bg-primary/10 text-primary">
-                          <Icon name={c.icon} size={17} />
-                        </span>
-                      ) : null}
+                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-[var(--pfz-radius-sm)] bg-primary/10 text-primary">
+                        <Icon name={c.icon || "sparkles"} size={17} />
+                      </span>
                       <span className="truncate">{c.label}</span>
                     </Link>
                   ))}

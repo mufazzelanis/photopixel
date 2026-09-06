@@ -120,27 +120,42 @@ class QuoteRequestResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $ph = fn (string $name, ?string $label, \Closure $content) => Forms\Components\Placeholder::make($name)
+            ->label($label ?? str($name)->headline())
+            ->content($content);
+
         return $form->schema([
-            Forms\Components\Placeholder::make('summary')
-                ->label('Lead')
-                ->content(fn (QuoteRequest $r) => "{$r->name} · {$r->email}".($r->phone ? " · {$r->phone}" : '')),
-            Forms\Components\Placeholder::make('services')
-                ->label('Services requested')
-                ->content(fn (QuoteRequest $r) => implode(', ', static::serviceTitles($r)) ?: '—'),
-            Forms\Components\Placeholder::make('file_link')
-                ->label('File link')
-                ->content(fn (QuoteRequest $r) => $r->file_link
+            Forms\Components\Section::make('Contact')->columns(2)->schema([
+                $ph('name', 'Name', fn (QuoteRequest $r) => $r->name),
+                $ph('email', 'Email', fn (QuoteRequest $r) => new \Illuminate\Support\HtmlString(
+                    '<a class="text-primary-600 underline" href="mailto:'.e($r->email).'">'.e($r->email).'</a>')),
+                $ph('phone', 'Phone', fn (QuoteRequest $r) => $r->phone ?: '—'),
+                $ph('company', 'Company', fn (QuoteRequest $r) => $r->company ?: '—'),
+            ]),
+
+            Forms\Components\Section::make('Request')->columns(2)->schema([
+                $ph('services', 'Services requested', fn (QuoteRequest $r) => implode(', ', static::serviceTitles($r)) ?: '—')
+                    ->columnSpanFull(),
+                $ph('budget', 'Budget', fn (QuoteRequest $r) => $r->budget ?: '—'),
+                $ph('file_link', 'File link', fn (QuoteRequest $r) => $r->file_link
                     ? new \Illuminate\Support\HtmlString('<a class="text-primary-600 underline" target="_blank" href="'.e($r->file_link).'">'.e($r->file_link).'</a>')
                     : '—'),
-            Forms\Components\Placeholder::make('message')
-                ->label('Project details')
-                ->content(fn (QuoteRequest $r) => $r->message ?: '—')
-                ->columnSpanFull(),
-            Forms\Components\Select::make('status')
-                ->options(array_combine(QuoteRequest::STATUSES, QuoteRequest::STATUSES))
-                ->required()
-                ->native(false),
-            Forms\Components\Textarea::make('admin_note')->rows(4)->columnSpanFull(),
+                $ph('message', 'Project details', fn (QuoteRequest $r) => $r->message ?: '—')
+                    ->columnSpanFull(),
+            ]),
+
+            Forms\Components\Section::make('Meta')->columns(3)->collapsed()->schema([
+                $ph('created_at', 'Submitted', fn (QuoteRequest $r) => $r->created_at?->format('M j, Y g:i a')),
+                $ph('source', 'Came from', fn (QuoteRequest $r) => $r->source ?: '—'),
+                $ph('ip', 'IP address', fn (QuoteRequest $r) => $r->ip ?: '—'),
+            ]),
+
+            Forms\Components\Section::make('Manage')->schema([
+                Forms\Components\Select::make('status')
+                    ->options(array_combine(QuoteRequest::STATUSES, QuoteRequest::STATUSES))
+                    ->required()->native(false),
+                Forms\Components\Textarea::make('admin_note')->rows(4)->columnSpanFull(),
+            ]),
         ]);
     }
 

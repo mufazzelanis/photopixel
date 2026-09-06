@@ -33,6 +33,19 @@ class MenuItemResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'label';
 
+    /** Icon keys the React <Icon> component knows (src/lib/Icon.jsx). */
+    public const ICONS = [
+        'scissors' => 'Scissors', 'layers' => 'Layers', 'sparkles' => 'Sparkles',
+        'palette' => 'Palette / Colour', 'contrast' => 'Contrast / Shadow', 'eraser' => 'Eraser',
+        'camera' => 'Camera', 'car' => 'Car', 'shirt' => 'Shirt / Apparel', 'shoe' => 'Shoe',
+        'sofa' => 'Sofa / Furniture', 'baby' => 'Baby / Newborn', 'gem' => 'Gem / Jewellery',
+        'gift' => 'Gift / E-commerce', 'history' => 'History / Restore', 'calendar' => 'Calendar / Event',
+        'monitor' => 'Monitor', 'globe' => 'Globe', 'users' => 'Users', 'heart' => 'Heart',
+        'handshake' => 'Handshake', 'chart' => 'Chart', 'wallet' => 'Wallet', 'headset' => 'Headset',
+        'truck' => 'Truck', 'bolt' => 'Bolt', 'badge-check' => 'Badge check', 'file-check' => 'File check',
+        'folder-check' => 'Folder check', 'credit-card' => 'Credit card', 'upload' => 'Upload',
+    ];
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -42,6 +55,12 @@ class MenuItemResource extends Resource
                 ->label('Parent (for dropdown items)')
                 ->options(fn () => MenuItem::whereNull('parent_id')->pluck('label', 'id'))
                 ->searchable()->nullable(),
+            Forms\Components\Select::make('icon')
+                ->label('Icon')
+                ->options(self::ICONS)
+                ->searchable()
+                ->native(false)
+                ->helperText('Shown next to the item inside a header dropdown. Leave empty for a default sparkle.'),
             Forms\Components\Select::make('target')->options(['_self' => 'Same tab', '_blank' => 'New tab'])->default('_self'),
             Forms\Components\Toggle::make('is_button')->label('Render as button (e.g. GET A QUOTE)'),
             Forms\Components\Toggle::make('is_active')->default(true),
@@ -55,6 +74,10 @@ class MenuItemResource extends Resource
             ->reorderable('sort_order')->defaultSort('sort_order')
             ->columns([
                 Tables\Columns\TextColumn::make('label')->description(fn (MenuItem $r) => $r->parent?->label ? '↳ under '.$r->parent->label : null)->weight('bold'),
+                Tables\Columns\TextColumn::make('icon')
+                    ->placeholder('—')
+                    ->badge()
+                    ->color(fn (MenuItem $r) => $r->parent_id && ! $r->icon ? 'warning' : 'gray'),
                 Tables\Columns\TextColumn::make('url')->color('gray'),
                 Tables\Columns\IconColumn::make('is_button')->boolean(),
                 Tables\Columns\ToggleColumn::make('is_active'),

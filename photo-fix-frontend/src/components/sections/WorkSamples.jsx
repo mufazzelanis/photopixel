@@ -4,6 +4,7 @@ import { SectionHeading } from "../ui/SectionHeading";
 import { Reveal } from "../ui/Reveal";
 import { Button } from "../ui/Button";
 import { SmartImage } from "../ui/SmartImage";
+import { SamplePlaceholderGrid } from "../ui/SamplePlaceholderGrid";
 import { Icon } from "../../lib/Icon";
 
 /** Homepage "Satisfied Clients" spotlight — the admin's chosen most-popular
@@ -51,7 +52,7 @@ export function WorkSamples({ meta, content }) {
           ))}
         </div>
       ) : (
-        <p className="text-center text-muted">Samples coming soon.</p>
+        <SamplePlaceholderGrid count={3} />
       )}
       <div className="mt-8 text-center">
         <Button to="/portfolio">See More Samples</Button>

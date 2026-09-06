@@ -4,6 +4,7 @@ import { useSite } from "../theme/context";
 import { PageHero } from "../components/ui/PageHero";
 import { Section } from "../components/ui/Section";
 import { Reveal } from "../components/ui/Reveal";
+import { SamplePlaceholderGrid } from "../components/ui/SamplePlaceholderGrid";
 import { Icon } from "../lib/Icon";
 
 export function Portfolio() {
@@ -47,7 +48,9 @@ export function Portfolio() {
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-heading/70 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
                       <span className="absolute right-3 top-3 rounded-full bg-heading/80 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur">
-                        {cat.samples.length} sample{cat.samples.length === 1 ? "" : "s"}
+                        {cat.samples.length > 0
+                          ? `${cat.samples.length} sample${cat.samples.length === 1 ? "" : "s"}`
+                          : "View samples"}
                       </span>
                       <span className="absolute left-3 top-3 grid h-9 w-9 place-items-center rounded-full pfz-gradient-brand text-white shadow-[var(--pfz-shadow-soft)]">
                         <Icon name={cat.icon || "layers"} size={18} />
@@ -68,7 +71,7 @@ export function Portfolio() {
             })}
           </div>
         ) : (
-          <p className="text-center text-muted">Samples coming soon.</p>
+          <SamplePlaceholderGrid count={3} />
         )}
       </Section>
     </>

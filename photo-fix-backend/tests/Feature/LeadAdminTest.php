@@ -45,6 +45,15 @@ class LeadAdminTest extends TestCase
         Livewire::test(ListQuoteRequests::class)
             ->mountTableAction('edit', $lead)
             ->assertHasNoTableActionErrors();
+
+        Livewire::test(\App\Filament\Resources\QuoteRequestResource\Pages\EditQuoteRequest::class, ['record' => $lead->id])
+            ->assertOk()
+            ->assertSee('Ibos')            // company
+            ->assertSee('Clipping Path')   // resolved service title
+            ->assertSee('Photo Retouching')
+            ->assertSee('https://gitlab.ibos.io/x')
+            ->assertSee('Test project')
+            ->assertSee('Came from');
     }
 
     public function test_contact_and_free_trial_views_render(): void
@@ -67,5 +76,28 @@ class LeadAdminTest extends TestCase
             ->mountTableAction('view', $trial)
             ->assertHasNoTableActionErrors()
             ->assertSee('https://x.io/f');
+    }
+
+    public function test_free_trial_edit_page_shows_every_submitted_field(): void
+    {
+        $trial = FreeTrialRequest::create([
+            'name' => 'Azad', 'email' => 'azad@x.com', 'phone' => '01711', 'country' => 'Bangladesh',
+            'delivery_timeline' => '1-2 days', 'file_format' => 'PNG', 'how_found' => 'Google Search',
+            'services' => ['Image Masking', 'Photo Retouch'], 'file_link' => 'https://drive.example/abc',
+            'num_images' => '5', 'requirements' => 'clean up the edges please', 'trial_type' => 'photo',
+            'status' => 'new', 'ip' => '127.0.0.1',
+        ]);
+        $trial->addMedia(\Illuminate\Http\UploadedFile::fake()->image('s1.jpg'))->toMediaCollection('samples');
+
+        Livewire::test(\App\Filament\Resources\FreeTrialRequestResource\Pages\EditFreeTrialRequest::class, ['record' => $trial->id])
+            ->assertOk()
+            ->assertSee('Bangladesh')
+            ->assertSee('1-2 days')
+            ->assertSee('PNG')
+            ->assertSee('Google Search')
+            ->assertSee('Image Masking, Photo Retouch')
+            ->assertSee('https://drive.example/abc')
+            ->assertSee('clean up the edges please')
+            ->assertSee('Uploaded sample images');
     }
 }

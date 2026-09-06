@@ -6,6 +6,7 @@ import { PageHero } from "../components/ui/PageHero";
 import { Section } from "../components/ui/Section";
 import { SectionHeading } from "../components/ui/SectionHeading";
 import { BeforeAfter } from "../components/ui/BeforeAfter";
+import { ensureSamples } from "../lib/placeholderSamples";
 import { Reveal } from "../components/ui/Reveal";
 import { Button } from "../components/ui/Button";
 import { CtaBand } from "../components/sections/CtaBand";
@@ -54,22 +55,18 @@ export function PortfolioCategory() {
           sub={category.description}
         />
 
-        {category.samples.length ? (
-          <div className="grid gap-6 sm:grid-cols-2">
-            {category.samples.map((s, i) => (
-              <Reveal
-                key={s.title ?? i}
-                index={i}
-                className="transition duration-300 hover:-translate-y-1"
-              >
-                <BeforeAfter before={s.before_image} after={s.after_image} />
-                {s.title ? <p className="mt-2 text-center text-sm text-muted">{s.title}</p> : null}
-              </Reveal>
-            ))}
-          </div>
-        ) : (
-          <p className="text-center text-muted">Samples for this category are coming soon.</p>
-        )}
+        <div className="grid gap-6 sm:grid-cols-2">
+          {ensureSamples(category.samples, 3).map((s, i) => (
+            <Reveal
+              key={s.title ?? i}
+              index={i}
+              className="transition duration-300 hover:-translate-y-1"
+            >
+              <BeforeAfter before={s.before_image} after={s.after_image} />
+              {s.title ? <p className="mt-2 text-center text-sm text-muted">{s.title}</p> : null}
+            </Reveal>
+          ))}
+        </div>
 
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <Button to={category.read_more.url} variant="outline">{category.read_more.label}</Button>
