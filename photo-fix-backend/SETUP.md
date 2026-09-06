@@ -4,22 +4,26 @@ Run these from `photo-fix-backend/` after `git pull`. `.env`, the `vendor/`
 folder, the storage symlink and the temp-upload folder are **not** in git, so a
 new machine needs them created once.
 
+Quickest path — one command does the lot:
+
 ```bash
-composer install
+composer setup   # install + .env + key + migrate + storage:link + optimize:clear + npm build
+```
 
-# first time only — copies .env.example, then sets APP_KEY
-cp .env.example .env          # (skip if you already have a .env)
-php artisan key:generate      # (skip if APP_KEY is already set)
+Or step by step:
 
+```bash
+composer install              # its post-autoload-dump hook auto-runs config:clear + storage:link
+
+cp .env.example .env          # first time only
+php artisan key:generate      # first time only
 php artisan migrate --seed    # or: php artisan migrate:fresh --seed
-
-# REQUIRED for image uploads + serving uploaded files
-php artisan storage:link
-mkdir -p storage/app/private/livewire-tmp
-
-# always clear stale caches after a pull
 php artisan optimize:clear
 ```
+
+**After every `git pull`, just run `composer install`** — the hook clears the
+config cache, so the upload fix below can never be shadowed by a stale cache.
+(If you skip composer, run `php artisan config:clear` yourself.)
 
 Then start the API:
 
