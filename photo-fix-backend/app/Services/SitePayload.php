@@ -13,6 +13,7 @@ use App\Models\CtaBand;
 use App\Models\Faq;
 use App\Models\FooterColumn;
 use App\Models\Hero;
+use App\Models\LegalPage;
 use App\Models\MenuItem;
 use App\Models\PaymentMethod;
 use App\Models\ProcessStep;
@@ -151,6 +152,31 @@ class SitePayload
                     ])->values(),
                 'faqs' => Faq::query()->where('group', 'pricing')->visible()->get()
                     ->map(fn ($f) => ['question' => $f->question, 'answer' => $f->answer])->values(),
+            ]);
+        });
+    }
+
+    /** Privacy Policy / Terms of Service — full rich-text document + hero. */
+    public function legalPage(string $slug): array
+    {
+        return Cache::rememberForever("api.legal_page.{$slug}", function () use ($slug) {
+            $p = LegalPage::forSlug($slug);
+
+            abort_unless($p, 404);
+
+            return $this->plain([
+                'seo' => [
+                    'title' => $p->seo_title ?: $p->title,
+                    'description' => $p->seo_description,
+                ],
+                'title' => $p->title,
+                'hero' => [
+                    'heading' => $p->hero_heading,
+                    'sub_text' => $p->hero_sub,
+                    'btn' => $p->hero_btn_label ? ['label' => $p->hero_btn_label, 'url' => $p->hero_btn_url ?: '#quote'] : null,
+                    'image' => Media::url($p, 'hero_image', 'web'),
+                ],
+                'body' => $p->body,
             ]);
         });
     }

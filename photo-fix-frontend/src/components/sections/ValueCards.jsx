@@ -1,7 +1,7 @@
 import { Section } from "../ui/Section";
 import { Reveal } from "../ui/Reveal";
 import { Icon } from "../../lib/Icon";
-import { Button } from "../ui/Button";
+import { CmsButton } from "../ui/CmsButton";
 import { parseLinkString, splitHighlight } from "../../lib/utils";
 
 export function ValueCards({ meta, content }) {
@@ -22,7 +22,7 @@ export function ValueCards({ meta, content }) {
             {paras.map((p, i) => <p key={i}>{p}</p>)}
           </div>
           {cta ? (
-            <Button href={cta.url} className="mt-6">{cta.label}</Button>
+            <CmsButton link={cta} className="mt-6" />
           ) : null}
         </Reveal>
 

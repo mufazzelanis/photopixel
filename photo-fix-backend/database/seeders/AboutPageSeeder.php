@@ -12,7 +12,7 @@ class AboutPageSeeder extends Seeder
     public function run(): void
     {
         AboutPage::updateOrCreate(['id' => 1], [
-            'hero_heading' => 'PhotoFixZone, Your Smart One-Stop Photo Editing Solution',
+            'hero_heading' => 'Pixel Graphic Studio, Your Smart One-Stop Photo Editing Solution',
             'hero_highlight' => 'One-Stop Photo Editing Solution',
             'hero_sub_text' => 'We have our most experienced photo editing experts to make your ordinary photo looks professional. Our editors will do any editing, retouching, or restoration work in your required time. Click the Try For Free button, and we will be there for you anytime.',
             'hero_primary_label' => 'Try For Free',
@@ -20,13 +20,13 @@ class AboutPageSeeder extends Seeder
             'hero_secondary_label' => 'SEE SAMPLES',
             'hero_secondary_url' => '/portfolio',
 
-            'boost_heading' => 'Boost Your Business By Partnering With PhotoFixZone',
-            'boost_highlight' => 'Partnering With PhotoFixZone',
+            'boost_heading' => 'Boost Your Business By Partnering With Pixel Graphic Studio',
+            'boost_highlight' => 'Partnering With Pixel Graphic Studio',
             'boost_sub_text' => 'By partnering with us, you will associate with a team of our creative people as your extension. Just upload raw pictures with your requirement. Our visionary professionals will handle the rest.',
 
             'pp_heading' => 'We Deliver Premium Quality Photo Post-Production Service',
             'pp_highlight' => 'Post-Production Service',
-            'pp_body_1' => 'Our journey as PhotoFixZone began in 2019 with only four designers. The following year, a pandemic struck humanity all over the planet, affecting everything. Our growth is also affected by this incident. Even so, we decided to expand and include more photo editors in our family. This decision benefits us in two ways. First, we became more capable of assisting our clients in scaling up their businesses during this pandemic. Second, we were able to provide a payable job to our community to support their family in this challenging situation. Consequently, we grow as a big family of 45 designers and 15 other employees.',
+            'pp_body_1' => 'Our journey as Pixel Graphic Studio began in 2019 with only four designers. The following year, a pandemic struck humanity all over the planet, affecting everything. Our growth is also affected by this incident. Even so, we decided to expand and include more photo editors in our family. This decision benefits us in two ways. First, we became more capable of assisting our clients in scaling up their businesses during this pandemic. Second, we were able to provide a payable job to our community to support their family in this challenging situation. Consequently, we grow as a big family of 45 designers and 15 other employees.',
             'pp_body_2' => 'Our designers are continually learning new design techniques and technologies. As a result, they can handle your wide range of design requirements, including Portrait Retouching, Wedding Photo Editing, Background Removal, Body Retouching, Photo Restoration, Jewelry Photo Retouching, Graphic Designing, Real Estate Photo Editing, Infographic, Social Media Banner design, and lot more. We are generating impressive results for our existing customers, including professional photographers, e-commerce brands, real estate developers, agencies, web design firms, a few clothing companies, and many others. Our team can deliver 2500 edited photos daily and provide 24/7 customer support.',
             'pp_btn_label' => 'Get Started',
             'pp_btn_url' => '#quote',
@@ -37,9 +37,9 @@ class AboutPageSeeder extends Seeder
             'society_body_2' => 'Our dedicated volunteers train rural women to care for their children properly. Our activities essentially intend to teach them the fundamentals of hygiene and nutrition. Aside from this training, we also provide sanitizer, surgical masks, and dry foods to those in need throughout the pandemic.',
             'society_body_3' => 'Our education programs are designed to teach rural children engagingly. We also closely monitor them to identify the root of their early dropout and take the necessary precautions to avoid it. Besides that, we have a photo editing training program for those who want to learn this skill. Following the program, we also provide them with the opportunity for a paid internship to help them pay for their education.',
 
-            'partnership_heading' => 'Why Should You Work In Partnership With PhotoFixZone?',
-            'partnership_highlight' => 'Partnership With PhotoFixZone?',
-            'partnership_sub_text' => 'PhotoFixZone offers every benefit a client should expect from an outsourcing company. Let us have a look at why we stand out.',
+            'partnership_heading' => 'Why Should You Work In Partnership With Pixel Graphic Studio?',
+            'partnership_highlight' => 'Partnership With Pixel Graphic Studio?',
+            'partnership_sub_text' => 'Pixel Graphic Studio offers every benefit a client should expect from an outsourcing company. Let us have a look at why we stand out.',
             'partnership_video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         ]);
 

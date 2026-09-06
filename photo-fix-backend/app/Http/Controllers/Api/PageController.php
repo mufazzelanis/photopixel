@@ -30,4 +30,10 @@ class PageController extends Controller
     {
         return response()->json($payload->pricingPage());
     }
+
+    /** Privacy Policy / Terms of Service. */
+    public function legal(string $slug, SitePayload $payload)
+    {
+        return response()->json($payload->legalPage($slug));
+    }
 }

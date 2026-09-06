@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             SeoMetaSeeder::class,
             AboutPageSeeder::class,
             FreeTrialPageSeeder::class,
+            LegalPageSeeder::class,
             MediaSeeder::class,
         ]);
 

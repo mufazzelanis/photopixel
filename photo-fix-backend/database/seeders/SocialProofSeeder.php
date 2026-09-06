@@ -12,10 +12,10 @@ class SocialProofSeeder extends Seeder
     {
         // ---- Top-Tier client types -----------------------------------
         $clients = [
-            ['title' => 'Photographers', 'body' => 'All photographers who have just begun or are highly professional should retouch their photos skilfully to attach maximum clients. On PhotoFixZone you will get everything that makes your image perfect and smooth!'],
+            ['title' => 'Photographers', 'body' => 'All photographers who have just begun or are highly professional should retouch their photos skilfully to attach maximum clients. On Pixel Graphic Studio you will get everything that makes your image perfect and smooth!'],
             ['title' => 'Photo Studio & Agency', 'body' => 'Increasing your photo studio production with quality images! make your image more live and enhance your images to make them more powerful.'],
             ['title' => 'Ecommerce Business', 'body' => 'Need Photo Editing Services for Your E-commerce Business? You can get more value for just a small cost when you choose our team!'],
-            ['title' => 'Digital Agency', 'body' => "A high-quality image is sometimes enough to increase sales! for social media to web feature images you need a unique image that photofixzone can assure you're essentials."],
+            ['title' => 'Digital Agency', 'body' => "A high-quality image is sometimes enough to increase sales! For social media to web feature images you need a unique image that Pixel Graphic Studio can assure for your essentials."],
         ];
         foreach ($clients as $i => $c) {
             ClientType::updateOrCreate(['title' => $c['title']], $c + ['link_label' => 'Learn more', 'link_url' => '/about', 'sort_order' => $i + 1]);

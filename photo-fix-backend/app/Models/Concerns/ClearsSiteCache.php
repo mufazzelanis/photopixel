@@ -20,6 +20,8 @@ trait ClearsSiteCache
         'api.about_page',
         'api.free_trial_page',
         'api.pricing_page',
+        'api.legal_page.privacy-policy',
+        'api.legal_page.terms-of-service',
         'site_settings.all',
     ];
 

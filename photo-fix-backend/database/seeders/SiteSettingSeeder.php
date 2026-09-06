@@ -18,9 +18,9 @@ class SiteSettingSeeder extends Seeder
             ['general', 'copyright', 'Copyright © {year} | Pixel Graphic Studio | All Rights Reserved', 'text'],
 
             ['contact', 'address', '348/P, 60 Feet Road, Middle Pirerbag, Mirpur, Dhaka – 1216', 'textarea'],
-            ['contact', 'email', 'office@photofixzone.com', 'text'],
+            ['contact', 'email', 'office@pixelgraphicstudio.com', 'text'],
             ['contact', 'phone', '(+880) 1538210029', 'text'],
-            ['contact', 'quote_notify_email', 'office@photofixzone.com', 'text'],
+            ['contact', 'quote_notify_email', 'office@pixelgraphicstudio.com', 'text'],
             ['contact', 'map_embed_url', 'https://www.google.com/maps?q=348%2FP%2C+60+Feet+Road%2C+Middle+Pirerbag%2C+Mirpur%2C+Dhaka-1216%2C+Bangladesh&output=embed', 'text'],
 
             ['newsletter', 'heading', 'Subscribe Now', 'text'],

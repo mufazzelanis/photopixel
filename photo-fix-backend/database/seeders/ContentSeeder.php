@@ -34,8 +34,8 @@ class ContentSeeder extends Seeder
         // ---- About (singleton) ----------------------------------------
         AboutSection::updateOrCreate(['id' => 1], [
             'eyebrow' => null,
-            'heading' => 'Accelerate Your Journey With PhotoFixZone',
-            'highlight_text' => 'With PhotoFixZone',
+            'heading' => 'Accelerate Your Journey With Pixel Graphic Studio',
+            'highlight_text' => 'With Pixel Graphic Studio',
             'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
             'body_1' => 'Pixel Graphic Studio is an outstanding team with a pool of passionate experts who helps businesses and individuals internationally. With a team of expert professionals and providing on-demand photo editing & graphical support.',
             'body_2' => 'We provide affordable photo editing services that express high-quality results. Our highly skilled editor, designer and graphic artists know where you need to improve! and according to the requirements, our professional editors will make the service more exclusive so which will make you satisfied with the best result. Pixel Graphic Studio is always ready to provide excellent image editing services such as complex clipping path, high-end retouching, complex masking, raster to vector, jewellry retouch and much more!',

@@ -53,6 +53,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('About Page'),
                 NavigationGroup::make('Free Trial'),
                 NavigationGroup::make('Blog'),
+                NavigationGroup::make('Legal Pages'),
                 NavigationGroup::make('Leads'),
                 NavigationGroup::make('Settings'),
             ])

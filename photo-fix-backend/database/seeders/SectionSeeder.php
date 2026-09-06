@@ -24,14 +24,14 @@ class SectionSeeder extends Seeder
                 'heading' => 'The Range Of Value We Provide',
                 'highlight_text' => 'Value We Provide',
                 'body' => "We stand out to provide the best quality video and image editing out of the box!\n\nWe deliver affordable and high-quality photo edits on time. We take the best photo editing process for any business, including photographers, marketing agencies, e-commerce businesses, photo studios, etc. For quality images, get in touch with our industry-standard service that helps you extend more professionally.\n\nWe believe in professionalism, talent, and cutting out excessive marketing costs for the image!",
-                'sub_heading' => 'Learn More About Us|#about',
+                'sub_heading' => 'Learn More About Us|/about',
                 'settings' => ['bg' => 'bg-alt'],
             ],
             [
                 'key' => 'about',
                 'name' => 'Accelerate Your Journey',
-                'heading' => 'Accelerate Your Journey With PhotoFixZone',
-                'highlight_text' => 'With PhotoFixZone',
+                'heading' => 'Accelerate Your Journey With Pixel Graphic Studio',
+                'highlight_text' => 'With Pixel Graphic Studio',
                 'settings' => ['bg' => 'bg-soft'],
             ],
             [
@@ -66,7 +66,7 @@ class SectionSeeder extends Seeder
                 'name' => 'Easiest Work Process',
                 'heading' => 'Check Out Our Easiest Work Process',
                 'highlight_text' => 'Our Easiest Work Process',
-                'sub_heading' => "PhotoFixZone provides excellent eCommerce image editing services such as clipping, retouching, masking, and many more. We're here to help you save time and money in any way we can.",
+                'sub_heading' => "Pixel Graphic Studio provides excellent eCommerce image editing services such as clipping, retouching, masking, and many more. We're here to help you save time and money in any way we can.",
                 'settings' => ['bg' => 'bg-soft'],
             ],
             [
@@ -112,7 +112,7 @@ class SectionSeeder extends Seeder
                 'name' => 'FAQ',
                 'heading' => 'Questions Our Clients Ask Frequently',
                 'highlight_text' => 'Ask Frequently',
-                'sub_heading' => "We provide the best possible service that fulfill your necessities and our specialist team works with full focus to make things easier for our potential clients. Here are our clients' most frequently asked questions that help you before starting with PhotoFixZone!",
+                'sub_heading' => "We provide the best possible service that fulfill your necessities and our specialist team works with full focus to make things easier for our potential clients. Here are our clients' most frequently asked questions that help you before starting with Pixel Graphic Studio!",
                 'settings' => ['bg' => 'bg-alt'],
             ],
             [

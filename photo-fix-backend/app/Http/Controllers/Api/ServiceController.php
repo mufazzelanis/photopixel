@@ -11,6 +11,10 @@ class ServiceController extends Controller
 {
     public function index()
     {
+        // Cache a plain array, not a Collection — the database cache driver
+        // serializes whatever it's given, and an object graph doesn't always
+        // round-trip cleanly (can come back as __PHP_Incomplete_Class_Name
+        // under certain conditions). Plain arrays/scalars always round-trip.
         $services = Cache::rememberForever('api.services', fn () => Service::query()
             ->active()->ordered()->with('points')->get()
             ->map(fn (Service $s) => [
@@ -19,10 +23,10 @@ class ServiceController extends Controller
                 'icon' => $s->icon,
                 'short_desc' => $s->short_desc,
                 'btn_label' => $s->btn_label,
-                'points' => $s->points->pluck('text'),
+                'points' => $s->points->pluck('text')->all(),
                 'before_image' => Media::url($s, 'before', 'web'),
                 'after_image' => Media::url($s, 'after', 'web'),
-            ]));
+            ])->values()->all());
 
         return response()->json(['data' => $services]);
     }
