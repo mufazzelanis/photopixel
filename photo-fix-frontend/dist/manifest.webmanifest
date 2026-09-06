@@ -1,0 +1,28 @@
+{
+  "name": "Pixel Graphic Studio",
+  "short_name": "Pixel Studio",
+  "description": "Professional photo editing services — clipping path, retouching, masking, ghost mannequin, background removal and more.",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#6c4cf1",
+  "categories": ["business", "photo", "productivity"],
+  "icons": [
+    {
+      "src": "/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
