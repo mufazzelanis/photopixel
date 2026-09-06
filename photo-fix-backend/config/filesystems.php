@@ -33,7 +33,12 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
-            'serve' => true,
+            // serve => false so Livewire/Filament uploads use the plain,
+            // same-origin POST /livewire/upload-file endpoint instead of a
+            // signed cross-origin PUT /storage/... URL (which the browser
+            // blocks with no CORS headers when the admin host differs from
+            // APP_URL — the cause of the "upload spinner never finishes" bug).
+            'serve' => false,
             'throw' => false,
             'report' => false,
         ],

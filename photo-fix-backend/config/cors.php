@@ -7,7 +7,13 @@ return [
      * running on a separate origin (Vite dev server / production host).
      */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    /*
+     * `livewire/*` and `storage/*` are included so the Filament admin panel's
+     * file uploads keep working when the panel is opened on a host that differs
+     * from APP_URL (e.g. 127.0.0.1 vs localhost) — otherwise the browser blocks
+     * the upload / preview requests and the uploader spins forever.
+     */
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'livewire/*', 'storage/*'],
 
     'allowed_methods' => ['*'],
 
