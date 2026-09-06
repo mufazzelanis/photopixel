@@ -72,17 +72,27 @@ class NavigationSeeder extends Seeder
         }
 
         // ---- Social links --------------------------------------------------
+        // `widget` = also shown in the floating chat launcher (bottom-right).
         foreach ([
-            ['platform' => 'Facebook', 'icon' => 'facebook', 'url' => 'https://facebook.com/'],
-            ['platform' => 'LinkedIn', 'icon' => 'linkedin', 'url' => 'https://linkedin.com/'],
-            ['platform' => 'X', 'icon' => 'x', 'url' => 'https://x.com/'],
-            ['platform' => 'Instagram', 'icon' => 'instagram', 'url' => 'https://instagram.com/'],
-            ['platform' => 'YouTube', 'icon' => 'youtube', 'url' => 'https://youtube.com/'],
-            ['platform' => 'Trustpilot', 'icon' => 'star', 'url' => 'https://trustpilot.com/'],
+            ['platform' => 'WhatsApp', 'icon' => 'whatsapp', 'url' => 'https://wa.me/8801538210029', 'widget' => true],
+            ['platform' => 'Telegram', 'icon' => 'telegram', 'url' => 'https://t.me/', 'widget' => true],
+            ['platform' => 'Messenger', 'icon' => 'messenger', 'url' => 'https://m.me/', 'widget' => true],
+            ['platform' => 'WeChat', 'icon' => 'wechat', 'url' => 'https://weixin.qq.com/', 'widget' => true],
+            ['platform' => 'Facebook', 'icon' => 'facebook', 'url' => 'https://facebook.com/', 'widget' => true],
+            ['platform' => 'LinkedIn', 'icon' => 'linkedin', 'url' => 'https://linkedin.com/', 'widget' => true],
+            ['platform' => 'Instagram', 'icon' => 'instagram', 'url' => 'https://instagram.com/', 'widget' => true],
+            ['platform' => 'X', 'icon' => 'x', 'url' => 'https://x.com/', 'widget' => false],
+            ['platform' => 'YouTube', 'icon' => 'youtube', 'url' => 'https://youtube.com/', 'widget' => false],
+            ['platform' => 'Trustpilot', 'icon' => 'star', 'url' => 'https://trustpilot.com/', 'widget' => false],
         ] as $i => $row) {
             SocialLink::updateOrCreate(
                 ['platform' => $row['platform']],
-                $row + ['sort_order' => $i + 1],
+                [
+                    'icon' => $row['icon'],
+                    'url' => $row['url'],
+                    'show_in_widget' => $row['widget'],
+                    'sort_order' => $i + 1,
+                ],
             );
         }
 

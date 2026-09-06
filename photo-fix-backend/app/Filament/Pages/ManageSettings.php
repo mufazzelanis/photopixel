@@ -47,6 +47,9 @@ class ManageSettings extends Page implements HasForms
         'newsletter.button_label' => ['Newsletter button label', 'text'],
         'cta.header_button_label' => ['Header CTA label', 'text'],
         'cta.header_button_url' => ['Header CTA url', 'text'],
+        'contact_widget.enabled' => ['Enable the floating chat / social widget', 'toggle', 'The button in the bottom-right corner that pops open your messaging channels. Pick which channels appear under Settings → Social Links → "Widget".'],
+        'contact_widget.label' => ['Widget tooltip text', 'text', 'Shown on hover, e.g. "Chat with us".'],
+        'contact_widget.show_free_trial' => ['Include a "Free Trial" shortcut in the widget', 'toggle'],
         'seo.default_title' => ['Default SEO title', 'text'],
         'seo.default_description' => ['Default SEO description', 'textarea'],
         'scripts.google_analytics_id' => ['Google Analytics ID', 'text'],
@@ -73,7 +76,7 @@ class ManageSettings extends Page implements HasForms
 
     public function form(Form $form): Form
     {
-        $labels = ['recaptcha' => 'Security'];
+        $labels = ['recaptcha' => 'Security', 'contact_widget' => 'Chat Widget'];
         $tabs = [];
 
         foreach ($this->fields as $path => $meta) {

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSite } from "../../theme/context";
+import { FloatingSocial } from "./FloatingSocial";
 
 export function FloatingButtons() {
+  const { data } = useSite();
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -11,11 +14,15 @@ export function FloatingButtons() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const w = data?.contact_widget;
+  const widgetActive =
+    !!w?.enabled && ((Array.isArray(w.channels) && w.channels.length > 0) || w.show_free_trial);
+
   return (
     <>
       {/* Back-to-top: chat-bubble shaped (rounded, one tighter corner for a
-          "pointer"), bottom-left — kept apart from the quote button so the
-          two don't compete for the same corner. */}
+          "pointer"), bottom-left — kept apart from the FAB so the two don't
+          compete for the same corner. */}
       <AnimatePresence>
         {show && (
           <motion.button
@@ -31,15 +38,21 @@ export function FloatingButtons() {
         )}
       </AnimatePresence>
 
-      <Link
-        to="/free-trial"
-        aria-label="Get a quote"
-        className="pfz-safe-bottom group fixed right-4 z-40 grid h-14 w-14 place-items-center rounded-full pfz-gradient-cta text-white shadow-[var(--pfz-shadow-glow)] transition hover:scale-105 sm:right-5"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-        </svg>
-      </Link>
+      {/* Bottom-right: the chat / social launcher when it's configured,
+          otherwise a plain "get a quote" shortcut. */}
+      {widgetActive ? (
+        <FloatingSocial />
+      ) : (
+        <Link
+          to="/free-trial"
+          aria-label="Get a quote"
+          className="pfz-safe-bottom group fixed right-4 z-40 grid h-14 w-14 place-items-center rounded-full pfz-gradient-cta text-white shadow-[var(--pfz-shadow-glow)] transition hover:scale-105 sm:right-5"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+        </Link>
+      )}
     </>
   );
 }

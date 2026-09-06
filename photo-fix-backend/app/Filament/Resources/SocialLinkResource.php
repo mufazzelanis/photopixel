@@ -32,9 +32,23 @@ class SocialLinkResource extends Resource
     {
         return $form->schema([
             Forms\Components\TextInput::make('platform')->required(),
-            Forms\Components\TextInput::make('url')->url()->default('#'),
-            Forms\Components\TextInput::make('icon')->helperText('e.g. facebook, linkedin, x, instagram, youtube, star'),
-            Forms\Components\Toggle::make('is_active')->default(true),
+            Forms\Components\TextInput::make('url')->url()->default('#')
+                ->helperText('WhatsApp: https://wa.me/8801XXXXXXXXX · Telegram: https://t.me/username · Messenger: https://m.me/page'),
+            Forms\Components\Select::make('icon')
+                ->options([
+                    'whatsapp' => 'WhatsApp', 'telegram' => 'Telegram', 'messenger' => 'Messenger',
+                    'wechat' => 'WeChat', 'viber' => 'Viber', 'facebook' => 'Facebook',
+                    'linkedin' => 'LinkedIn', 'instagram' => 'Instagram', 'x' => 'X (Twitter)',
+                    'youtube' => 'YouTube', 'tiktok' => 'TikTok', 'pinterest' => 'Pinterest',
+                    'discord' => 'Discord', 'phone' => 'Phone', 'mail' => 'Email', 'star' => 'Trustpilot / review',
+                ])
+                ->native(false)->searchable()
+                ->helperText('Controls the icon and brand colour shown in the footer and the floating chat widget.'),
+            Forms\Components\Toggle::make('is_active')->default(true)
+                ->helperText('Show this link anywhere on the site.'),
+            Forms\Components\Toggle::make('show_in_widget')->default(true)
+                ->label('Show in the floating chat widget')
+                ->helperText('The button that pops open in the bottom-right corner of the site.'),
             Forms\Components\TextInput::make('sort_order')->numeric()->default(0),
         ]);
     }
@@ -47,7 +61,8 @@ class SocialLinkResource extends Resource
                 Tables\Columns\TextColumn::make('platform')->weight('bold'),
                 Tables\Columns\TextColumn::make('url')->limit(40),
                 Tables\Columns\TextColumn::make('icon')->badge(),
-                Tables\Columns\ToggleColumn::make('is_active'),
+                Tables\Columns\ToggleColumn::make('is_active')->label('Active'),
+                Tables\Columns\ToggleColumn::make('show_in_widget')->label('Widget'),
             ])
             ->actions([Tables\Actions\EditAction::make()])
             ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);

@@ -30,6 +30,10 @@ class SiteSettingSeeder extends Seeder
             ['cta', 'header_button_label', 'GET A QUOTE', 'text'],
             ['cta', 'header_button_url', '#quote', 'text'],
 
+            ['contact_widget', 'enabled', '1', 'boolean'],
+            ['contact_widget', 'label', 'Chat with us', 'text'],
+            ['contact_widget', 'show_free_trial', '1', 'boolean'],
+
             ['scripts', 'head_scripts', '', 'textarea'],
             ['scripts', 'body_scripts', '', 'textarea'],
             ['scripts', 'google_analytics_id', '', 'text'],

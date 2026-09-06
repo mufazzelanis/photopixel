@@ -42,6 +42,7 @@ class SitePayload
             'captcha' => $this->captcha(),
             'navigation' => $this->navigation(),
             'footer' => $this->footer(),
+            'contact_widget' => $this->contactWidget(),
             'seo' => $this->seo('home'),
             'sections' => $this->sections(),
             'content' => [
@@ -242,6 +243,19 @@ class SitePayload
                 ])->values(),
             ]);
         });
+    }
+
+    /** Floating chat / social launcher shown in the bottom-right corner. */
+    public function contactWidget(): array
+    {
+        return [
+            'enabled' => (bool) SiteSetting::value('contact_widget', 'enabled', '1'),
+            'label' => SiteSetting::value('contact_widget', 'label', 'Chat with us'),
+            'show_free_trial' => (bool) SiteSetting::value('contact_widget', 'show_free_trial', '1'),
+            'channels' => SocialLink::query()->visible()->where('show_in_widget', true)->ordered()->get()
+                ->map(fn ($s) => ['platform' => $s->platform, 'url' => $s->url, 'icon' => $s->icon])
+                ->values(),
+        ];
     }
 
     public function footer(): array
