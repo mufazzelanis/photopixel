@@ -109,15 +109,6 @@ class PricingSeeder extends Seeder
                     ['Shadow Removal', '$2.00'],
                 ],
             ],
-            'photo-restoration' => [
-                'starting_price' => '$9.50',
-                'items' => [
-                    ['Black & White Photo Restoration', '$9.50'],
-                    ['Damaged Photo Restoration', '$12.00'],
-                    ['Image Color Restore', '$15.50'],
-                    ['Blurred Photo Restoration', '$12.00'],
-                ],
-            ],
             'car-photo-editing' => [
                 'starting_price' => '$1.50',
                 'items' => [

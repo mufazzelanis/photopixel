@@ -19,7 +19,6 @@ class FooterSeeder extends Seeder
                 ['Shadow Creation', '/services/shadow-reflection'],
                 ['Image Masking', '/services/image-masking'],
                 ['Car Photo Editing', '/services/car-photo-editing'],
-                ['Photo Restorations', '/services/photo-restorations'],
             ],
             'Company' => [
                 ['About Us', '/about'],
@@ -41,6 +40,12 @@ class FooterSeeder extends Seeder
                     ['url' => $url, 'sort_order' => $li + 1],
                 );
             }
+
+            // Drop any link left over from an earlier seed run that's no
+            // longer in the list above (e.g. a discontinued service) —
+            // updateOrCreate() only adds/updates, it never removes stale rows.
+            $currentLabels = array_column($links, 0);
+            $column->links()->whereNotIn('label', $currentLabels)->delete();
         }
     }
 }

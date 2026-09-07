@@ -23,7 +23,7 @@ class FreeTrialPageSeeder extends Seeder
         $groups = [
             'service' => [
                 'Clipping Path', 'Image Masking', 'Photo Retouch', 'Color Correction',
-                'Multi Clipping Path', 'Photo Restoration', 'Car Photo Editing', 'Shadow Creation',
+                'Multi Clipping Path', 'Car Photo Editing', 'Shadow Creation',
                 'Ghost Mannequin', 'Footwear Photo Editing', 'Furniture Photo Editing', 'Background Removal',
                 'Fashion Photo Editing', 'Newborn Photo Edit', 'Jewelry Photo Retouch', 'Event Photo Editing',
                 'Apparel Photo Editing',
@@ -46,6 +46,10 @@ class FreeTrialPageSeeder extends Seeder
                     ['sort_order' => $i + 1, 'is_active' => true],
                 );
             }
+
+            // Drop any option left over from an earlier seed run that's no
+            // longer in the list above (e.g. a discontinued service).
+            TrialOption::where('group', $group)->whereNotIn('label', $labels)->delete();
         }
     }
 }

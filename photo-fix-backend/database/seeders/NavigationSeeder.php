@@ -26,7 +26,6 @@ class NavigationSeeder extends Seeder
                 ['label' => 'Fashion Photo Editing', 'url' => '/services/fashion-photo-editing', 'icon' => 'shirt'],
                 ['label' => 'Event Photo Editing', 'url' => '/services/event-photo-editing', 'icon' => 'calendar'],
                 ['label' => 'Photo Retouching', 'url' => '/services/photo-retouching', 'icon' => 'sparkles'],
-                ['label' => 'Photo Restoration', 'url' => '/services/photo-restoration', 'icon' => 'history'],
                 ['label' => 'Shadow Creation', 'url' => '/services/shadow-reflection', 'icon' => 'contrast'],
                 ['label' => 'Furniture Photo Editing', 'url' => '/services/furniture-photo-editing', 'icon' => 'sofa'],
                 ['label' => 'Newborn Photo Edit', 'url' => '/services/newborn-photo-edit', 'icon' => 'baby'],
@@ -69,6 +68,13 @@ class NavigationSeeder extends Seeder
                     $child + ['sort_order' => $i + 1],
                 );
             }
+
+            // Drop any child left over from an earlier seed run that's no
+            // longer in the list above (e.g. a discontinued service) —
+            // updateOrCreate() only adds/updates, it never removes stale rows.
+            MenuItem::where('parent_id', $parent->id)
+                ->whereNotIn('label', array_column($children, 'label'))
+                ->delete();
         }
 
         // ---- Social links --------------------------------------------------

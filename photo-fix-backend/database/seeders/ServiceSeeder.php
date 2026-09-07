@@ -107,15 +107,6 @@ class ServiceSeeder extends Seeder
                 'is_featured' => false,
             ],
             [
-                'slug' => 'photo-restoration',
-                'title' => 'Photo Restoration',
-                'icon' => 'history',
-                'btn_label' => 'More About Photo Restoration',
-                'short_desc' => "Torn, faded or damaged photos brought back to life — pixel by pixel — so your family's memories are never lost.",
-                'points' => ['Scratch & Tear Repair', 'Color & Fade Correction', 'Missing Detail Reconstruction', 'Archival-Quality Output'],
-                'is_featured' => false,
-            ],
-            [
                 'slug' => 'furniture-photo-editing',
                 'title' => 'Furniture Photo Editing',
                 'icon' => 'sofa',
@@ -184,5 +175,10 @@ class ServiceSeeder extends Seeder
                 $service->points()->create(['text' => $text, 'sort_order' => $pi + 1]);
             }
         }
+
+        // Discontinued service — removed from the array above, but a row from
+        // an earlier seed run can still exist, and re-seeding must remove it
+        // every time, not just the first time.
+        Service::where('slug', 'photo-restoration')->delete();
     }
 }

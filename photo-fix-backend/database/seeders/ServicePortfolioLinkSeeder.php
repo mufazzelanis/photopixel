@@ -24,7 +24,6 @@ class ServicePortfolioLinkSeeder extends Seeder
             'color-correction' => 'color-correction-service',
             'background-removal' => 'background-remove-and-image-masking',
             'car-photo-editing' => 'high-quality-car-photo-editing',
-            'photo-restoration' => 'image-restoration-services',
             'multi-clipping-path' => 'multi-clipping-path-service',
         ];
 
