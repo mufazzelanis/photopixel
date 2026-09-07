@@ -15,11 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Admin account for the Filament panel (/admin).
-        // NOTE: this only runs on a *fresh* install — on an already-seeded database
-        // updateOrCreate() matches by email and will not touch an existing password.
-        // See the production checklist for rotating the live admin password.
-        User::updateOrCreate(
+        // Admin account for the Filament panel (/admin). firstOrCreate() — unlike
+        // updateOrCreate() — leaves an already-existing row completely untouched,
+        // so re-running `db:seed` later can never silently reset the live admin
+        // password out from under you.
+        User::firstOrCreate(
             ['email' => 'admin@pixelgraphicstudio.com'],
             [
                 'name' => 'Pixel Graphic Studio Admin',
@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
             FreeTrialPageSeeder::class,
             LegalPageSeeder::class,
             MediaSeeder::class,
+            RoleSeeder::class,
         ]);
 
         // Media attachments don't trip the content-model cache observers.

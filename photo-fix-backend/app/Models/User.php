@@ -11,13 +11,14 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 #[Fillable(['name', 'email', 'password', 'role'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * Get the attributes that should be cast.
@@ -32,8 +33,19 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
+    /**
+     * Legacy 'role' column is gone from the access-control decision below —
+     * kept as a plain data column for now (harmless) so nothing else that
+     * still reads it breaks, but who can actually sign in is decided purely
+     * by Spatie roles/permissions (see Filament Shield's "Super Admin" role
+     * and per-resource permissions in the admin panel's Roles page).
+     */
     public function canAccessPanel(Panel $panel): bool
     {
-        return in_array($this->role, ['admin', 'editor'], true);
+        // Any user with at least one role assigned can sign in — what they can
+        // actually see/do once inside is then decided per-resource by that
+        // role's permissions (Admin panel → Roles). Zero roles = no access.
+        return $this->hasRole(config('filament-shield.super_admin.name', 'super_admin'))
+            || $this->roles()->exists();
     }
 }
