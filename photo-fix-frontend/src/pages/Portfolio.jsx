@@ -28,7 +28,6 @@ function CategorySection({ category, index }) {
             className="transition duration-300 hover:-translate-y-1"
           >
             <StaticCompare before={s.before_image} after={s.after_image} />
-            {s.title ? <p className="mt-2 text-center text-sm text-muted">{s.title}</p> : null}
           </Reveal>
         ))}
       </div>
