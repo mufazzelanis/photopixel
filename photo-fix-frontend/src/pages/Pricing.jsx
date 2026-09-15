@@ -34,24 +34,25 @@ function PricingTable({ service, index }) {
       >
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_1.4fr] lg:gap-10">
           {/* CSS grid already stretches both columns to equal height (the
-              taller price list sets it); each column is a flex column so its
-              own button pins to that same shared bottom edge instead of
-              trailing right after its own (shorter) content. */}
-          <div className="flex h-full flex-col">
-            <div className="min-h-[220px] flex-1">
-              <BeforeAfter before={service.before_image} after={service.after_image} fillHeight />
-            </div>
+              taller price list sets it); each column is a flex column with
+              mt-auto on its button, so both buttons land on the same shared
+              bottom edge — WITHOUT stretching/cropping the photo itself to
+              force it. A service with no real photo yet falls back to the
+              placeholder square, which needs its own real proportions to
+              still look like a photo instead of a broken flat color block. */}
+          <div className="flex h-full flex-col gap-4">
+            <BeforeAfter before={service.before_image} after={service.after_image} />
             <Button
               to={service.samples_url}
               variant="outline"
               size="sm"
-              className="mt-4 self-start uppercase tracking-wide !border-secondary !text-secondary hover:!bg-secondary hover:!text-white"
+              className="mt-auto self-start uppercase tracking-wide !border-secondary !text-secondary hover:!bg-secondary hover:!text-white"
             >
               See Samples
             </Button>
           </div>
 
-          <div className="flex h-full flex-col">
+          <div className="flex h-full flex-col gap-6">
             <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-2.5 sm:gap-x-8">
               {service.items.map((item, i) => (
                 <Fragment key={i}>
