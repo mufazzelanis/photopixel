@@ -18,12 +18,16 @@ const PLACEHOLDER_AFTER =
  * `BeforeAfter`, the interactive slider used elsewhere on the site).
  *
  * The box's aspect-ratio is taken from the real "after" photo the moment it
- * loads (default 4:3 until then) and both images render with object-fit:
- * contain, so — same as `BeforeAfter` — whatever size an admin uploads shows
- * completely, never cropped.
+ * loads and both images render with object-fit: contain, so — same as
+ * `BeforeAfter` — whatever size an admin uploads shows completely, never
+ * cropped. Since the box holds the image TWICE side by side (before + after,
+ * sharing the same height), its ratio is double a single photo's own ratio —
+ * get this wrong and each half ends up letterboxed with dead space top and
+ * bottom, which is exactly what happens if you naively use the photo's own
+ * w/h ratio for the whole box.
  */
 export function StaticCompare({ before, after, className = "" }) {
-  const [ratio, setRatio] = useState(4 / 3);
+  const [ratio, setRatio] = useState((4 / 3) * 2);
 
   return (
     <div
@@ -58,7 +62,7 @@ export function StaticCompare({ before, after, className = "" }) {
           loading="lazy"
           onLoad={(e) => {
             const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
-            if (w && h) setRatio(w / h);
+            if (w && h) setRatio((w / h) * 2);
           }}
         />
       </div>
