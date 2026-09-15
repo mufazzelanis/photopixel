@@ -56,24 +56,23 @@ function PricingTable({ service, index }) {
         index={1}
         className="mx-auto max-w-5xl rounded-[var(--pfz-radius-lg)] border-2 border-primary/15 bg-canvas p-5 shadow-[var(--pfz-shadow-card)] sm:p-8"
       >
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_1.5fr] lg:gap-12">
-          <div className="flex flex-col">
-            <BeforeAfter before={service.before_image} after={service.after_image} />
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Button to={service.samples_url} variant="outline" size="sm">
-                See Samples
-              </Button>
-              <Button to="/free-trial" size="sm">
-                Try For Free
-              </Button>
-            </div>
+        {/* Big, unmissable before/after — its own full-width row instead of
+            squeezed into a side column, so it never looks small next to a
+            tall price list. */}
+        <div className="mx-auto mb-8 max-w-xl sm:mb-10">
+          <BeforeAfter before={service.before_image} after={service.after_image} />
+          <div className="mt-5 flex flex-wrap justify-center gap-3">
+            <Button to={service.samples_url} variant="outline">
+              See Samples
+            </Button>
+            <Button to="/free-trial">Try For Free</Button>
           </div>
+        </div>
 
-          <div className="flex flex-col gap-3 sm:gap-3.5">
-            {service.items.map((item, i) => (
-              <PriceRow key={i} item={item} index={i} />
-            ))}
-          </div>
+        <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
+          {service.items.map((item, i) => (
+            <PriceRow key={i} item={item} index={i} />
+          ))}
         </div>
       </Reveal>
     </Section>

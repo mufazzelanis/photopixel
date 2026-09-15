@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ReactCompareSlider,
   ReactCompareSliderImage,
@@ -15,14 +16,33 @@ const PLACEHOLDER_AFTER =
   );
 
 export function BeforeAfter({ before, after, className = "" }) {
+  // react-compare-slider has no height logic of its own — every layer is
+  // `height: 100%`, all the way down to the images, so it only ever renders
+  // at a real size when SOMETHING in the surrounding layout happens to
+  // already have a height (e.g. a CSS grid row stretched by a taller
+  // sibling). Drop it into any other layout and it silently collapses to
+  // ~0px. Fixing that here, once, for every page that uses this component:
+  // give the wrapper an explicit aspect-ratio, taken from the real "after"
+  // photo the moment it loads (default 1:1 — matches the placeholder square
+  // — until then). Because the box then always matches the photo's own
+  // proportions, "cover" never has anything to crop — any size the admin
+  // uploads fits perfectly, full image always visible.
+  const [ratio, setRatio] = useState(1);
+
   return (
     <div
       className={
         "overflow-hidden rounded-[var(--pfz-radius-lg)] border border-primary/30 shadow-[var(--pfz-shadow-card)] " +
         className
       }
+      style={{ aspectRatio: ratio }}
     >
       <ReactCompareSlider
+        // The library's own root only ever sets `max-height: 100%` — that
+        // caps a height, it doesn't establish one, so without this explicit
+        // `height: 100%` it still collapses to 0 even inside a box that
+        // itself has a perfectly real (aspect-ratio-derived) height.
+        style={{ height: "100%", width: "100%" }}
         itemOne={
           <ReactCompareSliderImage
             src={before || PLACEHOLDER_BEFORE}
@@ -33,6 +53,10 @@ export function BeforeAfter({ before, after, className = "" }) {
           <ReactCompareSliderImage
             src={after || PLACEHOLDER_AFTER}
             alt="After editing"
+            onLoad={(e) => {
+              const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
+              if (w && h) setRatio(w / h);
+            }}
           />
         }
       />
