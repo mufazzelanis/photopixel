@@ -15,7 +15,7 @@ const PLACEHOLDER_AFTER =
     `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='800'><rect width='100%' height='100%' fill='%23ffffff'/><rect width='100%' height='100%' fill='url(%23g)'/><defs><pattern id='g' width='24' height='24' patternUnits='userSpaceOnUse'><rect width='12' height='12' fill='%23f0f0f0'/><rect x='12' y='12' width='12' height='12' fill='%23f0f0f0'/></pattern></defs><text x='50%' y='50%' font-family='sans-serif' font-size='34' fill='%237a8199' text-anchor='middle'>AFTER</text></svg>`,
   );
 
-export function BeforeAfter({ before, after, className = "" }) {
+export function BeforeAfter({ before, after, className = "", hoverToReveal = false }) {
   // react-compare-slider has no height logic of its own — every layer is
   // `height: 100%`, all the way down to the images, so it only ever renders
   // at a real size when SOMETHING in the surrounding layout happens to
@@ -43,6 +43,10 @@ export function BeforeAfter({ before, after, className = "" }) {
         // `height: 100%` it still collapses to 0 even inside a box that
         // itself has a perfectly real (aspect-ratio-derived) height.
         style={{ height: "100%", width: "100%" }}
+        // When set, moving the mouse across the image scrubs the position —
+        // no click/drag needed. Dragging the handle still works too; this
+        // only adds the hover behavior on top of it.
+        changePositionOnHover={hoverToReveal}
         itemOne={
           <ReactCompareSliderImage
             src={before || PLACEHOLDER_BEFORE}

@@ -13,7 +13,11 @@ export function Services() {
     <>
       <Helmet><title>Photo Editing Services — Pixel Graphic Studio</title></Helmet>
       <PageHero title="Our Photo Editing Services" subtitle={meta.sub_heading} crumbs={[{ label: "Services" }]} />
-      <ServicesSection meta={{ ...meta, heading: null, sub_heading: null }} content={data.content.services} />
+      <ServicesSection
+        meta={{ ...meta, heading: null, sub_heading: null }}
+        content={data.content.services}
+        hoverToReveal={false}
+      />
       <CtaBand content={data.content.cta_perfection} />
     </>
   );

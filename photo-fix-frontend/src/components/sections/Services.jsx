@@ -6,7 +6,10 @@ import { BeforeAfter } from "../ui/BeforeAfter";
 import { Icon } from "../../lib/Icon";
 import { prefetchService, hoverPrefetch } from "../../lib/prefetch";
 
-export function Services({ meta, content }) {
+// Used on both the homepage's "Our Most Popular Services" section and the
+// standalone /services page. The homepage wants hover-to-scrub (default
+// here); /services opts back out to keep its original click/drag slider.
+export function Services({ meta, content, hoverToReveal = true }) {
   return (
     <Section id="services" settings={meta.settings}>
       <SectionHeading
@@ -24,7 +27,7 @@ export function Services({ meta, content }) {
               className={"grid items-center gap-8 lg:grid-cols-2 lg:gap-10 " + (flip ? "" : "")}
             >
               <Reveal className={flip ? "lg:order-2" : ""}>
-                <BeforeAfter before={s.before_image} after={s.after_image} />
+                <BeforeAfter before={s.before_image} after={s.after_image} hoverToReveal={hoverToReveal} />
               </Reveal>
               <Reveal index={1} className={flip ? "lg:order-1" : ""}>
                 <h3 className="flex flex-wrap items-center gap-3 text-xl font-extrabold text-heading sm:text-2xl md:text-3xl">
