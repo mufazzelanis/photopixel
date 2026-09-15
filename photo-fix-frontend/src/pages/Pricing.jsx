@@ -30,7 +30,7 @@ function PricingTable({ service, index }) {
 
       <Reveal
         index={1}
-        className="mx-auto max-w-4xl rounded-[var(--pfz-radius-lg)] border-2 border-secondary p-5 sm:p-7"
+        className="mx-auto max-w-4xl overflow-hidden rounded-[var(--pfz-radius-lg)] border-2 border-secondary p-5 sm:p-7"
       >
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_1.4fr]">
           {/* Three visually distinct panels (image | checklist | price),
@@ -44,7 +44,7 @@ function PricingTable({ service, index }) {
               which needs its own real proportions to still look like a
               photo instead of a broken flat color block. */}
           <div className="flex h-full flex-col gap-4 lg:border-r lg:border-secondary/25 lg:pr-6">
-            <BeforeAfter before={service.before_image} after={service.after_image} />
+            <BeforeAfter before={service.before_image} after={service.after_image} frameless />
             <Button
               to={service.samples_url}
               variant="outline"

@@ -15,7 +15,7 @@ const PLACEHOLDER_AFTER =
     `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='800'><rect width='100%' height='100%' fill='%23ffffff'/><rect width='100%' height='100%' fill='url(%23g)'/><defs><pattern id='g' width='24' height='24' patternUnits='userSpaceOnUse'><rect width='12' height='12' fill='%23f0f0f0'/><rect x='12' y='12' width='12' height='12' fill='%23f0f0f0'/></pattern></defs><text x='50%' y='50%' font-family='sans-serif' font-size='34' fill='%237a8199' text-anchor='middle'>AFTER</text></svg>`,
   );
 
-export function BeforeAfter({ before, after, className = "", hoverToReveal = false }) {
+export function BeforeAfter({ before, after, className = "", hoverToReveal = false, frameless = false }) {
   // react-compare-slider has no height logic of its own — every layer is
   // `height: 100%`, all the way down to the images, so it only ever renders
   // at a real size when SOMETHING in the surrounding layout happens to
@@ -35,12 +35,19 @@ export function BeforeAfter({ before, after, className = "", hoverToReveal = fal
   // leaving what looks like a flat, content-less color block). Callers that
   // want equal-height columns should pin buttons to the bottom with
   // mt-auto on a flex column instead of stretching the photo itself.
+  // `frameless` drops the card-within-a-card look (own border/shadow/rounded
+  // corners on all four sides) for layouts — like the Pricing cards — where
+  // the photo is meant to sit flush edge-to-edge against an outer container
+  // that already has its own border. The outer container's own
+  // `overflow-hidden` + rounding then clips the shared corner, instead of
+  // this component rounding its own — sizing logic (the aspect-ratio lock
+  // that prevents the zero-height collapse bug) stays identical either way.
   const [ratio, setRatio] = useState(1);
 
   return (
     <div
       className={
-        "overflow-hidden rounded-[var(--pfz-radius-lg)] border border-primary/30 shadow-[var(--pfz-shadow-card)] " +
+        (frameless ? "overflow-hidden " : "overflow-hidden rounded-[var(--pfz-radius-lg)] border border-primary/30 shadow-[var(--pfz-shadow-card)] ") +
         className
       }
       style={{ aspectRatio: ratio }}
