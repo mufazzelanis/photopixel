@@ -33,25 +33,32 @@ function PricingTable({ service, index }) {
         className="mx-auto max-w-4xl rounded-[var(--pfz-radius-lg)] border-2 border-secondary p-5 sm:p-7"
       >
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_1.4fr] lg:gap-10">
-          <div>
-            <BeforeAfter before={service.before_image} after={service.after_image} />
+          {/* CSS grid already stretches both columns to equal height (the
+              taller price list sets it); each column is a flex column so its
+              own button pins to that same shared bottom edge instead of
+              trailing right after its own (shorter) content. */}
+          <div className="flex h-full flex-col">
+            <div className="min-h-[220px] flex-1">
+              <BeforeAfter before={service.before_image} after={service.after_image} fillHeight />
+            </div>
             <Button
               to={service.samples_url}
               variant="outline"
               size="sm"
-              className="mt-4 uppercase tracking-wide !border-secondary !text-secondary hover:!bg-secondary hover:!text-white"
+              className="mt-4 self-start uppercase tracking-wide !border-secondary !text-secondary hover:!bg-secondary hover:!text-white"
             >
               See Samples
             </Button>
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex h-full flex-col">
             <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-2.5 sm:gap-x-8">
               {service.items.map((item, i) => (
                 <Fragment key={i}>
                   <div className="flex items-center gap-2 text-sm text-body">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-secondary">
-                      <path d="M20 6L9 17l-5-5" />
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-secondary">
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M8.5 12.3l2.2 2.2 4.8-5" />
                     </svg>
                     {item.label}
                   </div>
@@ -64,7 +71,7 @@ function PricingTable({ service, index }) {
                 </Fragment>
               ))}
             </div>
-            <Button to="/free-trial" size="sm" className="mt-6 self-start">
+            <Button to="/free-trial" size="sm" className="mt-auto self-start">
               Try For Free
             </Button>
           </div>
