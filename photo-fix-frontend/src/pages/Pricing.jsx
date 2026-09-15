@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { Helmet } from "react-helmet-async";
 import { getPricing } from "../api/endpoints";
 import { useAsync } from "../hooks/useAsync";
@@ -13,55 +12,67 @@ import { Button } from "../components/ui/Button";
 import { Faq } from "../components/sections/Faq";
 import { CtaBand } from "../components/sections/CtaBand";
 
+function PriceRow({ item, index }) {
+  return (
+    <Reveal
+      index={Math.min(index, 8)}
+      className="group flex items-center justify-between gap-3 rounded-[var(--pfz-radius-md)] border border-line bg-canvas px-4 py-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-[var(--pfz-shadow-soft)] sm:px-5 sm:py-4"
+    >
+      <div className="flex min-w-0 items-center gap-3">
+        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-primary/10 text-primary transition-colors duration-200 group-hover:bg-primary group-hover:text-white sm:h-9 sm:w-9">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
+        </span>
+        <span className="text-[0.95rem] font-semibold leading-snug text-heading sm:text-base">
+          {item.label}
+        </span>
+      </div>
+      <span className="pfz-gradient-brand shrink-0 whitespace-nowrap rounded-[var(--pfz-radius-pill)] px-3.5 py-1.5 text-sm font-extrabold text-white shadow-[var(--pfz-shadow-soft)] sm:px-4 sm:py-2 sm:text-base">
+        {item.price}
+      </span>
+    </Reveal>
+  );
+}
+
 function PricingTable({ service, index }) {
   return (
     <Section settings={{ bg: index % 2 ? "bg-alt" : undefined }}>
-      <Reveal className="mx-auto mb-8 max-w-2xl text-center">
-        <h3 className="text-xl font-extrabold text-heading sm:text-2xl">
-          {service.title} <span className="pfz-text-gradient">Starts at {service.starting_price}</span>
+      <Reveal className="mx-auto mb-8 flex max-w-2xl flex-col items-center gap-4 text-center sm:mb-10">
+        <h3 className="text-2xl font-extrabold leading-tight text-heading sm:text-3xl md:text-[2.4rem]">
+          {service.title}
         </h3>
-        <div className="mx-auto mt-3 flex items-center justify-center gap-1">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary/40" />
-          <span className="h-1.5 w-1.5 rounded-full bg-primary/40" />
-          <span className="h-1.5 w-1.5 rounded-full bg-primary/40" />
-          <span className="h-0.5 w-10 rounded-full bg-primary" />
+        <div className="pfz-gradient-brand inline-flex flex-col items-center gap-0.5 rounded-[var(--pfz-radius-lg)] px-7 py-3 text-white shadow-[var(--pfz-shadow-glow)] sm:px-9 sm:py-4">
+          <span className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-white/80 sm:text-xs">
+            Starting At
+          </span>
+          <span className="text-3xl font-extrabold leading-none sm:text-4xl">
+            {service.starting_price}
+          </span>
         </div>
       </Reveal>
 
       <Reveal
         index={1}
-        className="mx-auto max-w-4xl rounded-[var(--pfz-radius-lg)] border-2 border-primary/20 p-5 sm:p-7"
+        className="mx-auto max-w-5xl rounded-[var(--pfz-radius-lg)] border-2 border-primary/15 bg-canvas p-5 shadow-[var(--pfz-shadow-card)] sm:p-8"
       >
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_1.4fr] lg:gap-10">
-          <div>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_1.5fr] lg:gap-12">
+          <div className="flex flex-col">
             <BeforeAfter before={service.before_image} after={service.after_image} />
-            <Button to={service.samples_url} variant="outline" size="sm" className="mt-4">
-              See Samples
-            </Button>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Button to={service.samples_url} variant="outline" size="sm">
+                See Samples
+              </Button>
+              <Button to="/free-trial" size="sm">
+                Try For Free
+              </Button>
+            </div>
           </div>
 
-          <div className="flex flex-col">
-            <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-2.5 sm:gap-x-8">
-              {service.items.map((item, i) => (
-                <Fragment key={i}>
-                  <div className="flex items-center gap-2 text-sm text-body">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-secondary">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg>
-                    {item.label}
-                  </div>
-                  <div className="flex items-center gap-1 whitespace-nowrap text-sm font-bold text-heading">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-muted">
-                      <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                    {item.price}
-                  </div>
-                </Fragment>
-              ))}
-            </div>
-            <Button to="/free-trial" size="sm" className="mt-6 self-start">
-              Try For Free
-            </Button>
+          <div className="flex flex-col gap-3 sm:gap-3.5">
+            {service.items.map((item, i) => (
+              <PriceRow key={i} item={item} index={i} />
+            ))}
           </div>
         </div>
       </Reveal>
