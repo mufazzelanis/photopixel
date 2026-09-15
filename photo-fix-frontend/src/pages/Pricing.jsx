@@ -75,6 +75,13 @@ function PricingTable({ service, index }) {
                 </Fragment>
               ))}
             </div>
+            {/* Fewer items than the image is tall (short lists next to a
+                square placeholder, for instance) used to leave the divider
+                stopping dead partway down with a blank gap below it before
+                the button. This spacer absorbs that leftover space itself,
+                carrying the same border through it so the line always runs
+                the card's full height regardless of item count. */}
+            <div className="hidden flex-1 border-r border-secondary/25 lg:block" />
             <Button to="/free-trial" size="sm" className="mt-auto self-start">
               Try For Free
             </Button>
