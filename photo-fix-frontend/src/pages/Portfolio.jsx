@@ -59,11 +59,7 @@ export function Portfolio() {
           content="Before / after work samples from every image editing service — clipping path, ghost mannequin, retouching, color correction and more."
         />
       </Helmet>
-      <PageHero
-        title="Image Editing Portfolio"
-        subtitle="Before / after from our satisfied clients — real results across every service we offer."
-        crumbs={[{ label: "Portfolio" }]}
-      />
+      <PageHero title="Image Editing Portfolio" crumbs={[{ label: "Portfolio" }]} />
 
       {categories.length ? (
         categories.map((cat, i) => (
