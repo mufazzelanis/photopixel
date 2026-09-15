@@ -36,19 +36,11 @@ class NavigationSeeder extends Seeder
                 ['label' => 'Background Removal', 'url' => '/services/background-removal', 'icon' => 'eraser'],
                 ['label' => 'Jewelry Photo Retouch', 'url' => '/services/jewelry-photo-retouch', 'icon' => 'gem'],
             ]],
-            ['label' => 'Portfolio', 'url' => '/portfolio', 'sort_order' => 4, 'children' => [
-                ['label' => 'E-Commerce Product Photo Editing', 'url' => '/portfolio/e-commerce-product-photo-editing', 'icon' => 'gift'],
-                ['label' => 'Shadow Creation Service', 'url' => '/portfolio/shadow-creation-service', 'icon' => 'contrast'],
-                ['label' => 'Clipping Path Service', 'url' => '/portfolio/clipping-path-service', 'icon' => 'scissors'],
-                ['label' => 'Color Correction Service', 'url' => '/portfolio/color-correction-service', 'icon' => 'palette'],
-                ['label' => 'Ghost Mannequin Service', 'url' => '/portfolio/ghost-mannequin-service', 'icon' => 'shirt'],
-                ['label' => 'Photo Retouching Services', 'url' => '/portfolio/photo-retouching-services', 'icon' => 'sparkles'],
-                ['label' => 'Background Remove And Image Masking', 'url' => '/portfolio/background-remove-and-image-masking', 'icon' => 'eraser'],
-                ['label' => 'Photo Retouching For Photographer', 'url' => '/portfolio/photo-retouching-for-photographer', 'icon' => 'camera'],
-                ['label' => 'High-Quality Car Photo Editing', 'url' => '/portfolio/high-quality-car-photo-editing', 'icon' => 'car'],
-                ['label' => 'Image Restoration Services', 'url' => '/portfolio/image-restoration-services', 'icon' => 'history'],
-                ['label' => 'Multi Clipping Path Service', 'url' => '/portfolio/multi-clipping-path-service', 'icon' => 'layers'],
-            ]],
+            // No dropdown — Portfolio goes straight to the single page that
+            // lists every category's work samples inline (matches the
+            // reference design exactly, no separate per-category pages to
+            // hover/click through first).
+            ['label' => 'Portfolio', 'url' => '/portfolio', 'sort_order' => 4],
             ['label' => 'Pricing', 'url' => '/pricing', 'sort_order' => 5],
             ['label' => 'Contact', 'url' => '/contact', 'sort_order' => 6],
             ['label' => 'GET A QUOTE', 'url' => '#quote', 'sort_order' => 7, 'is_button' => true],
