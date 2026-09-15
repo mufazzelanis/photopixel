@@ -18,24 +18,29 @@ function PricingTable({ service, index }) {
     <Section settings={{ bg: index % 2 ? "bg-alt" : undefined }}>
       <Reveal className="mx-auto mb-8 max-w-2xl text-center">
         <h3 className="text-xl font-extrabold text-heading sm:text-2xl">
-          {service.title} <span className="pfz-text-gradient">Starts at {service.starting_price}</span>
+          {service.title} <span className="text-secondary">Starts at {service.starting_price}</span>
         </h3>
         <div className="mx-auto mt-3 flex items-center justify-center gap-1">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary/40" />
-          <span className="h-1.5 w-1.5 rounded-full bg-primary/40" />
-          <span className="h-1.5 w-1.5 rounded-full bg-primary/40" />
-          <span className="h-0.5 w-10 rounded-full bg-primary" />
+          <span className="h-1.5 w-1.5 rounded-full bg-secondary/40" />
+          <span className="h-1.5 w-1.5 rounded-full bg-secondary/40" />
+          <span className="h-1.5 w-1.5 rounded-full bg-secondary/40" />
+          <span className="h-0.5 w-10 rounded-full bg-secondary" />
         </div>
       </Reveal>
 
       <Reveal
         index={1}
-        className="mx-auto max-w-4xl rounded-[var(--pfz-radius-lg)] border-2 border-primary/20 p-5 sm:p-7"
+        className="mx-auto max-w-4xl rounded-[var(--pfz-radius-lg)] border-2 border-secondary p-5 sm:p-7"
       >
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_1.4fr] lg:gap-10">
           <div>
             <BeforeAfter before={service.before_image} after={service.after_image} />
-            <Button to={service.samples_url} variant="outline" size="sm" className="mt-4 uppercase tracking-wide">
+            <Button
+              to={service.samples_url}
+              variant="outline"
+              size="sm"
+              className="mt-4 uppercase tracking-wide !border-secondary !text-secondary hover:!bg-secondary hover:!text-white"
+            >
               See Samples
             </Button>
           </div>
