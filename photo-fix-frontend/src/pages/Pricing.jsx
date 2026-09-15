@@ -32,15 +32,18 @@ function PricingTable({ service, index }) {
         index={1}
         className="mx-auto max-w-4xl rounded-[var(--pfz-radius-lg)] border-2 border-secondary p-5 sm:p-7"
       >
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_1.4fr] lg:gap-10">
-          {/* CSS grid already stretches both columns to equal height (the
-              taller price list sets it); each column is a flex column with
-              mt-auto on its button, so both buttons land on the same shared
-              bottom edge — WITHOUT stretching/cropping the photo itself to
-              force it. A service with no real photo yet falls back to the
-              placeholder square, which needs its own real proportions to
-              still look like a photo instead of a broken flat color block. */}
-          <div className="flex h-full flex-col gap-4">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_1.4fr]">
+          {/* Three visually distinct panels (image | checklist | price),
+              each divided by a continuous vertical line, matching the
+              reference exactly — not just a gap. CSS grid already stretches
+              both outer columns to equal height (the taller price list sets
+              it); each is a flex column with mt-auto on its button, so both
+              buttons land on the same shared bottom edge — WITHOUT
+              stretching/cropping the photo itself to force it. A service
+              with no real photo yet falls back to the placeholder square,
+              which needs its own real proportions to still look like a
+              photo instead of a broken flat color block. */}
+          <div className="flex h-full flex-col gap-4 lg:border-r lg:border-secondary/25 lg:pr-6">
             <BeforeAfter before={service.before_image} after={service.after_image} />
             <Button
               to={service.samples_url}
@@ -52,18 +55,18 @@ function PricingTable({ service, index }) {
             </Button>
           </div>
 
-          <div className="flex h-full flex-col gap-6">
-            <div className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-2.5 sm:gap-x-8">
+          <div className="flex h-full flex-col gap-6 lg:pl-6">
+            <div className="grid grid-cols-[1fr_auto] gap-y-0">
               {service.items.map((item, i) => (
                 <Fragment key={i}>
-                  <div className="flex items-center gap-2 text-sm text-body">
+                  <div className="flex items-center gap-2 border-r border-secondary/25 py-1.5 pr-4 text-sm text-body sm:pr-6">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-secondary">
                       <circle cx="12" cy="12" r="9" />
                       <path d="M8.5 12.3l2.2 2.2 4.8-5" />
                     </svg>
                     {item.label}
                   </div>
-                  <div className="flex items-center gap-1 whitespace-nowrap text-sm font-bold text-heading">
+                  <div className="flex items-center gap-1 whitespace-nowrap py-1.5 pl-4 text-sm font-bold text-heading sm:pl-6">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-muted">
                       <path d="M5 12h14M13 6l6 6-6 6" />
                     </svg>
