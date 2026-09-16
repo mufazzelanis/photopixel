@@ -32,11 +32,14 @@ function PricingTable({ service, index }) {
         index={1}
         className="mx-auto max-w-4xl overflow-hidden rounded-[var(--pfz-radius-lg)] border-2 border-secondary p-5 sm:p-7"
       >
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_1.4fr] lg:items-start">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_1.4fr] lg:items-center">
           {/* Three visually distinct panels (image | checklist | price),
               each divided by a vertical line — natural height throughout, no
-              forced equal-height stretching. A short price list (and its
-              image) makes the *whole card* shorter, matching the reference:
+              forced equal-height stretching, just vertically centered when
+              one side is shorter than the other so a short price list sits
+              in the middle of the image's height instead of pinned to its
+              top. A short price list (and its image) makes the *whole card*
+              shorter, matching the reference:
               stretching columns to match a taller sibling, then padding out
               the leftover space so buttons land on a shared bottom edge,
               just produced an oversized card with an awkward dead gap above
