@@ -76,7 +76,7 @@ function PricingTable({ service, index }) {
               ))}
               <div className="pr-4 pt-4 sm:pr-6">
                 <Button
-                  to={service.samples_url}
+                  to="/portfolio"
                   variant="outline"
                   size="sm"
                   className="self-start uppercase tracking-wide !border-secondary !text-secondary hover:!bg-secondary hover:!text-white"
