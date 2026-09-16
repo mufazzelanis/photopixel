@@ -43,25 +43,16 @@ function PricingTable({ service, index }) {
               the button — worse than the two buttons sitting a few pixels
               off from each other, which is what naturally happens here and
               in the reference too. */}
-          <div className="flex flex-col gap-4 lg:border-r lg:border-secondary/25 lg:pr-6">
+          <div className="lg:border-r lg:border-secondary/25 lg:pr-6">
             <BeforeAfter before={service.before_image} after={service.after_image} frameless />
-            <Button
-              to={service.samples_url}
-              variant="outline"
-              size="sm"
-              className="self-start uppercase tracking-wide !border-secondary !text-secondary hover:!bg-secondary hover:!text-white"
-            >
-              See Samples
-            </Button>
           </div>
 
           <div className="lg:pl-6">
-            {/* Try For Free lives as the grid's own trailing row, in the
-                price sub-column — not below the whole block — so it lands
-                under the prices the way the reference shows, instead of
-                under the checklist labels. The empty cell beside it keeps
-                the checklist column's divider from being dragged down
-                through the button row. */}
+            {/* Both buttons live as the grid's own trailing row — See
+                Samples under the checklist column, Try For Free under the
+                price column — landing side by side on one row the way the
+                reference shows, instead of See Samples sitting under the
+                image on the left. */}
             <div className="grid grid-cols-[1fr_auto] gap-y-0">
               {service.items.map((item, i) => (
                 <Fragment key={i}>
@@ -80,7 +71,16 @@ function PricingTable({ service, index }) {
                   </div>
                 </Fragment>
               ))}
-              <div />
+              <div className="pr-4 pt-4 sm:pr-6">
+                <Button
+                  to={service.samples_url}
+                  variant="outline"
+                  size="sm"
+                  className="self-start uppercase tracking-wide !border-secondary !text-secondary hover:!bg-secondary hover:!text-white"
+                >
+                  See Samples
+                </Button>
+              </div>
               <div className="pl-4 pt-4 sm:pl-6">
                 <Button to="/free-trial" size="sm">
                   Try For Free
