@@ -57,7 +57,7 @@ class ServiceController extends Controller
                     'name' => $category->name,
                     'slug' => $category->slug,
                     'description' => $category->description,
-                    'read_more' => ['label' => 'View All Samples', 'url' => "/portfolio/{$category->slug}"],
+                    'read_more' => ['label' => 'View All Samples', 'url' => '/portfolio'],
                     'try_free' => ['label' => $category->try_free_label, 'url' => $category->try_free_url ?: '/free-trial'],
                     'samples' => $category->samples->values()->map(fn ($s) => [
                         'title' => $s->title,
