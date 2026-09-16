@@ -55,7 +55,13 @@ function PricingTable({ service, index }) {
             </Button>
           </div>
 
-          <div className="flex flex-col gap-6 lg:pl-6">
+          <div className="lg:pl-6">
+            {/* Try For Free lives as the grid's own trailing row, in the
+                price sub-column — not below the whole block — so it lands
+                under the prices the way the reference shows, instead of
+                under the checklist labels. The empty cell beside it keeps
+                the checklist column's divider from being dragged down
+                through the button row. */}
             <div className="grid grid-cols-[1fr_auto] gap-y-0">
               {service.items.map((item, i) => (
                 <Fragment key={i}>
@@ -74,10 +80,13 @@ function PricingTable({ service, index }) {
                   </div>
                 </Fragment>
               ))}
+              <div />
+              <div className="pl-4 pt-4 sm:pl-6">
+                <Button to="/free-trial" size="sm">
+                  Try For Free
+                </Button>
+              </div>
             </div>
-            <Button to="/free-trial" size="sm" className="self-start">
-              Try For Free
-            </Button>
           </div>
         </div>
       </Reveal>
