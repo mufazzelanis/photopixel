@@ -59,15 +59,15 @@ function PricingTable({ service, index }) {
             <div className="grid grid-cols-[1fr_auto] gap-y-0">
               {service.items.map((item, i) => (
                 <Fragment key={i}>
-                  <div className="flex items-center gap-2 border-r border-secondary/25 py-1.5 pr-4 text-sm text-body sm:pr-6">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-secondary">
+                  <div className="flex items-center gap-2 border-r border-secondary/25 py-2 pr-4 text-base font-semibold text-body sm:pr-6">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-secondary">
                       <circle cx="12" cy="12" r="9" />
                       <path d="M8.5 12.3l2.2 2.2 4.8-5" />
                     </svg>
                     {item.label}
                   </div>
-                  <div className="flex items-center gap-1 whitespace-nowrap py-1.5 pl-4 text-sm font-bold text-heading sm:pl-6">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-muted">
+                  <div className="flex items-center gap-1 whitespace-nowrap py-2 pl-4 text-base font-bold text-heading sm:pl-6">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="text-muted">
                       <path d="M5 12h14M13 6l6 6-6 6" />
                     </svg>
                     {item.price}
