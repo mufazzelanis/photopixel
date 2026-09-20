@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const PLACEHOLDER_BEFORE =
   "data:image/svg+xml;utf8," +
   encodeURIComponent(
@@ -17,25 +15,22 @@ const PLACEHOLDER_AFTER =
  * interaction. Matches the reference portfolio design exactly (as opposed to
  * `BeforeAfter`, the interactive slider used elsewhere on the site).
  *
- * The box's aspect-ratio is taken from the real "after" photo the moment it
- * loads and both images render with object-fit: contain, so — same as
- * `BeforeAfter` — whatever size an admin uploads shows completely, never
- * cropped. Since the box holds the image TWICE side by side (before + after,
- * sharing the same height), its ratio is double a single photo's own ratio —
- * get this wrong and each half ends up letterboxed with dead space top and
- * bottom, which is exactly what happens if you naively use the photo's own
- * w/h ratio for the whole box.
+ * The box's aspect-ratio is a fixed constant, not derived from whichever
+ * photo happens to load — a portfolio grid mixes portrait dance shots,
+ * square product bottles, and landscape apparel flat-lays, and sizing each
+ * card to its own source photo made the grid look ragged (one card twice as
+ * tall as its neighbor). Every card is the same box; object-fit: cover crops
+ * each photo to fill it instead of letterboxing, so the grid reads as one
+ * consistent set.
  */
 export function StaticCompare({ before, after, className = "" }) {
-  const [ratio, setRatio] = useState((4 / 3) * 2);
-
   return (
     <div
       className={
         "flex overflow-hidden rounded-[var(--pfz-radius-md)] border-2 border-primary/25 bg-canvas shadow-[var(--pfz-shadow-soft)] " +
         className
       }
-      style={{ aspectRatio: ratio }}
+      style={{ aspectRatio: (4 / 3) * 2 }}
     >
       <div className="relative min-w-0 flex-1 bg-alt">
         <span className="absolute left-2 top-2 z-10 text-[10px] font-bold uppercase tracking-[0.12em] text-secondary sm:text-xs">
@@ -44,7 +39,7 @@ export function StaticCompare({ before, after, className = "" }) {
         <img
           src={before || PLACEHOLDER_BEFORE}
           alt="Before editing"
-          className="h-full w-full object-contain"
+          className="h-full w-full object-cover"
           loading="lazy"
         />
       </div>
@@ -58,12 +53,8 @@ export function StaticCompare({ before, after, className = "" }) {
         <img
           src={after || PLACEHOLDER_AFTER}
           alt="After editing"
-          className="h-full w-full object-contain"
+          className="h-full w-full object-cover"
           loading="lazy"
-          onLoad={(e) => {
-            const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
-            if (w && h) setRatio((w / h) * 2);
-          }}
         />
       </div>
     </div>
