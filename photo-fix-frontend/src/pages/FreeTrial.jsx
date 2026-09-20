@@ -78,9 +78,6 @@ export function FreeTrial() {
           </Reveal>
 
           <Reveal index={1}>
-            <h1 className="mb-6 text-xl font-extrabold text-heading sm:text-2xl">
-              {data.form_title || "Photo Editing Free Trial"}
-            </h1>
             <FreeTrialPageForm page={data} />
           </Reveal>
         </div>
