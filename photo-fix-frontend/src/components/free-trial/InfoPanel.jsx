@@ -24,22 +24,22 @@ export function InfoPanel({ heading, highlight, subText, contact = {}, socials =
       ) : null}
       {subText ? <p className="mt-3 text-sm text-muted">{subText}</p> : null}
 
-      <div className="mt-6 space-y-3">
+      <div className="mt-6 space-y-4">
         {ROWS.map((r) => (
           <div
             key={r.key}
-            className="flex items-start gap-3 rounded-[var(--pfz-radius-md)] border border-line bg-canvas p-4 shadow-[var(--pfz-shadow-soft)]"
+            className="flex items-center gap-4 rounded-[var(--pfz-radius-md)] border border-line bg-canvas p-5 shadow-[var(--pfz-shadow-soft)] transition duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[var(--pfz-shadow-card)]"
           >
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full pfz-gradient-brand text-white shadow-[var(--pfz-shadow-glow)]">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 {r.d.split(" M").map((seg, i) => (
                   <path key={i} d={i === 0 ? seg : "M" + seg} />
                 ))}
               </svg>
             </span>
             <div className="min-w-0">
-              <p className="text-sm font-bold text-heading">{r.label}</p>
-              <p className="break-words text-xs text-muted">{contact[r.key] || "—"}</p>
+              <p className="text-base font-bold text-heading">{r.label}</p>
+              <p className="break-words text-sm text-muted">{contact[r.key] || "—"}</p>
             </div>
           </div>
         ))}
