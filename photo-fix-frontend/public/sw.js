@@ -6,7 +6,7 @@
  *  - the API (/api/…) and anything cross-origin: always straight to network, never cached
  * Bump CACHE_VERSION to force every client onto a fresh cache.
  */
-const CACHE_VERSION = "pgs-1789909852579";
+const CACHE_VERSION = "pgs-1789911297380";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const PAGE_CACHE = `${CACHE_VERSION}-pages`;
 const PRECACHE = ["/", "/offline.html", "/app-icon.svg", "/manifest.webmanifest"];

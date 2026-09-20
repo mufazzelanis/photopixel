@@ -30,7 +30,7 @@ export function StaticCompare({ before, after, className = "" }) {
         "flex overflow-hidden rounded-[var(--pfz-radius-md)] border-2 border-primary/25 bg-canvas shadow-[var(--pfz-shadow-soft)] " +
         className
       }
-      style={{ aspectRatio: (4 / 3) * 2 }}
+      style={{ aspectRatio: 1 }}
     >
       <div className="relative min-w-0 flex-1 bg-alt">
         <span className="absolute left-2 top-2 z-10 text-[10px] font-bold uppercase tracking-[0.12em] text-secondary sm:text-xs">
