@@ -27,7 +27,7 @@ const schema = z.object({
   message: z.string().optional(),
   // react-hook-form gives checkbox values as strings — coerce to numbers.
   service_ids: z.array(z.coerce.number()).optional(),
-  website: z.string().optional(),
+  hp_confirm: z.string().optional(),
 });
 
 export function QuoteForm({ onDone }) {

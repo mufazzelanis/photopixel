@@ -11,7 +11,7 @@ class ContactFormRequest extends FormRequest
 
     public function authorize(): bool
     {
-        return blank($this->input('website'));
+        return blank($this->input('hp_confirm'));
     }
 
     public function rules(): array
@@ -23,7 +23,7 @@ class ContactFormRequest extends FormRequest
             'subject' => ['nullable', 'string', 'max:150'],
             'message' => ['required', 'string', 'max:5000'],
             'recaptcha_token' => ['nullable', 'string'],
-            'website' => ['nullable', 'size:0'],
+            'hp_confirm' => ['nullable', 'size:0'],
         ];
     }
 }

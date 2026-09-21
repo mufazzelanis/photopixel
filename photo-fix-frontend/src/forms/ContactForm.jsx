@@ -17,7 +17,7 @@ const schema = z.object({
   phone: z.string().optional(),
   subject: z.string().optional(),
   message: z.string().trim().min(5, "Tell us a little more"),
-  website: z.string().optional(),
+  hp_confirm: z.string().optional(),
 });
 
 export function ContactForm() {

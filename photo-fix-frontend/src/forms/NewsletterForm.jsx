@@ -7,7 +7,7 @@ import { parseApiError } from "../api/client";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email"),
-  website: z.string().optional(),
+  hp_confirm: z.string().optional(),
 });
 
 export function NewsletterForm({
@@ -42,8 +42,8 @@ export function NewsletterForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="relative">
-      <div className="absolute left-[-9999px]" aria-hidden="true">
-        <input tabIndex={-1} autoComplete="off" {...register("website")} />
+      <div className="absolute h-0 w-0 overflow-hidden opacity-0" aria-hidden="true">
+        <input tabIndex={-1} autoComplete="off" {...register("hp_confirm")} />
       </div>
       <input type="email" placeholder={placeholder} className={inputCls} {...register("email")} />
       {errors.email ? (

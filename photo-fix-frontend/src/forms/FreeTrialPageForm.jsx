@@ -24,7 +24,7 @@ const schema = z.object({
     .refine((v) => !v || /^https?:\/\/.+/i.test(v), "Enter a valid URL"),
   requirements: z.string().optional(),
   how_found: z.string().min(1, "Let us know how you found us"),
-  website: z.string().optional(),
+  hp_confirm: z.string().optional(),
 });
 
 export function FreeTrialPageForm({ page }) {

@@ -12,7 +12,7 @@ class QuoteFormRequest extends FormRequest
     public function authorize(): bool
     {
         // Honeypot: bots fill hidden fields, humans don't.
-        return blank($this->input('website'));
+        return blank($this->input('hp_confirm'));
     }
 
     public function rules(): array
@@ -28,7 +28,7 @@ class QuoteFormRequest extends FormRequest
             'budget' => ['nullable', 'string', 'max:60'],
             'message' => ['nullable', 'string', 'max:5000'],
             'recaptcha_token' => ['nullable', 'string'],
-            'website' => ['nullable', 'size:0'], // honeypot
+            'hp_confirm' => ['nullable', 'size:0'], // honeypot
         ];
     }
 }

@@ -11,7 +11,11 @@ class FreeTrialFormRequest extends FormRequest
 
     public function authorize(): bool
     {
-        return blank($this->input('website'));
+        // Honeypot: bots fill it, humans never see it. See Field.jsx's
+        // Honeypot component for why this isn't named "website" — that name
+        // got swept into real users' browser autofill on this address-like
+        // form and rejected genuine submissions as bots.
+        return blank($this->input('hp_confirm'));
     }
 
     public function rules(): array
@@ -32,7 +36,7 @@ class FreeTrialFormRequest extends FormRequest
             'samples' => ['nullable', 'array', 'max:10'],
             'samples.*' => ['file', 'image', 'max:10240'], // 10 MB each
             'recaptcha_token' => ['nullable', 'string'],
-            'website' => ['nullable', 'size:0'],
+            'hp_confirm' => ['nullable', 'size:0'],
         ];
     }
 }

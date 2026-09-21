@@ -23,7 +23,7 @@ class LeadController extends Controller
 {
     public function quote(QuoteFormRequest $request): JsonResponse
     {
-        $lead = QuoteRequest::create($request->safe()->except(['website', 'recaptcha_token']) + [
+        $lead = QuoteRequest::create($request->safe()->except(['hp_confirm', 'recaptcha_token']) + [
             'source' => $request->headers->get('referer'),
             'ip' => $request->ip(),
         ]);
@@ -35,7 +35,7 @@ class LeadController extends Controller
 
     public function contact(ContactFormRequest $request): JsonResponse
     {
-        $lead = ContactMessage::create($request->safe()->except(['website', 'recaptcha_token']) + ['ip' => $request->ip()]);
+        $lead = ContactMessage::create($request->safe()->except(['hp_confirm', 'recaptcha_token']) + ['ip' => $request->ip()]);
         $this->notifyAdmin($lead, 'Contact Message');
 
         return response()->json(['message' => "Thanks for reaching out — we'll be in touch soon."], 201);
@@ -43,7 +43,7 @@ class LeadController extends Controller
 
     public function freeTrial(FreeTrialFormRequest $request): JsonResponse
     {
-        $data = $request->safe()->except(['website', 'samples', 'recaptcha_token']);
+        $data = $request->safe()->except(['hp_confirm', 'samples', 'recaptcha_token']);
 
         $lead = FreeTrialRequest::create($data + ['ip' => $request->ip()]);
 
