@@ -21,7 +21,12 @@ class SamplesRelationManager extends RelationManager
             Forms\Components\TextInput::make('title')->columnSpanFull(),
             SpatieMediaLibraryFileUpload::make('combined')->collection('combined')->image()->maxSize(20480)
                 ->label('Single Before/After Image')
-                ->helperText('One already-edited photo with the before/after split built in. Upload this OR the two separate photos below — not both needed.'),
+                ->helperText(
+                    'Upload ONE square image with Before on the left half and After on the right half, split exactly down the middle. '
+                    . 'Recommended size: 1600×1600px (minimum 1200×1200px). A square image fills the card perfectly on both desktop and '
+                    . 'mobile — the card is always a perfect square, so this one size works everywhere, no separate mobile version needed. '
+                    . 'Upload this OR the two separate photos below — not both. JPG or PNG, max 20MB.'
+                ),
             SpatieMediaLibraryFileUpload::make('before')->collection('before')->image()->maxSize(20480)->helperText('Max 20MB.'),
             SpatieMediaLibraryFileUpload::make('after')->collection('after')->image()->maxSize(20480)->helperText('Max 20MB.'),
             Forms\Components\Toggle::make('is_active')->default(true),
