@@ -46,6 +46,11 @@ class WorkSample extends Model implements HasMedia
     {
         $this->addMediaCollection('before')->singleFile();
         $this->addMediaCollection('after')->singleFile();
+        // One already-edited image with the before/after split baked in by
+        // whoever designed it, for samples where uploading two raw photos
+        // doesn't apply. When present, the frontend shows this instead of
+        // building a before/after view out of the `before`/`after` pair.
+        $this->addMediaCollection('combined')->singleFile();
     }
 
     public function registerMediaConversions(?Media $media = null): void

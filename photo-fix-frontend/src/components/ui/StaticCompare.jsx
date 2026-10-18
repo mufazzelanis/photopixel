@@ -22,16 +22,28 @@ const PLACEHOLDER_AFTER =
  * tall as its neighbor). Every card is the same box; object-fit: cover crops
  * each photo to fill it instead of letterboxing, so the grid reads as one
  * consistent set.
+ *
+ * When `image` is given, it's shown as a single photo filling the whole box
+ * with no divider or BEFORE/AFTER labels added — those samples are already
+ * one photo the admin edited into a before/after layout themselves, so
+ * stamping our own labels/split on top of it would double up. `before`/
+ * `after` are ignored in that case.
  */
-export function StaticCompare({ before, after, className = "" }) {
+export function StaticCompare({ image, before, after, className = "" }) {
+  const boxClassName =
+    "flex overflow-hidden rounded-[var(--pfz-radius-md)] border-2 border-primary/25 bg-canvas shadow-[var(--pfz-shadow-soft)] " +
+    className;
+
+  if (image) {
+    return (
+      <div className={boxClassName} style={{ aspectRatio: 1 }}>
+        <img src={image} alt="Before and after editing" className="h-full w-full object-cover" loading="lazy" />
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={
-        "flex overflow-hidden rounded-[var(--pfz-radius-md)] border-2 border-primary/25 bg-canvas shadow-[var(--pfz-shadow-soft)] " +
-        className
-      }
-      style={{ aspectRatio: 1 }}
-    >
+    <div className={boxClassName} style={{ aspectRatio: 1 }}>
       <div className="relative min-w-0 flex-1 bg-alt">
         <span className="absolute left-2 top-2 z-10 text-[10px] font-bold uppercase tracking-[0.12em] text-secondary sm:text-xs">
           Before

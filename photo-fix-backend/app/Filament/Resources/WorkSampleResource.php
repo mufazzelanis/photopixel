@@ -45,6 +45,9 @@ class WorkSampleResource extends Resource
                     Forms\Components\TextInput::make('slug')->required(),
                 ])
                 ->createOptionUsing(fn (array $data) => WorkSampleCategory::create($data)->id),
+            SpatieMediaLibraryFileUpload::make('combined')->collection('combined')->image()->maxSize(20480)
+                ->label('Single Before/After Image')
+                ->helperText('One already-edited photo with the before/after split built in. Upload this OR the two separate photos below — not both needed.'),
             SpatieMediaLibraryFileUpload::make('before')->collection('before')->image()->maxSize(20480)->helperText('Max 20MB.'),
             SpatieMediaLibraryFileUpload::make('after')->collection('after')->image()->maxSize(20480)->helperText('Max 20MB.'),
             Forms\Components\Toggle::make('is_active')->default(true),
@@ -57,6 +60,7 @@ class WorkSampleResource extends Resource
         return $table
             ->reorderable('sort_order')->defaultSort('sort_order')
             ->columns([
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('combined')->collection('combined')->square()->label('Combined'),
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('before')->collection('before')->square()->label('Before'),
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('after')->collection('after')->square()->label('After'),
                 Tables\Columns\TextColumn::make('title')->searchable(),

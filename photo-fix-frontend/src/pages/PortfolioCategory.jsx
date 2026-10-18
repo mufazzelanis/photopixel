@@ -48,7 +48,7 @@ export function PortfolioCategory() {
               index={i}
               className="transition duration-300 hover:-translate-y-1"
             >
-              <StaticCompare before={s.before_image} after={s.after_image} />
+              <StaticCompare image={s.image} before={s.before_image} after={s.after_image} />
             </Reveal>
           ))}
         </div>

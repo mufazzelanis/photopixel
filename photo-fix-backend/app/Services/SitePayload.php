@@ -455,7 +455,9 @@ class SitePayload
                 'name' => $cat->name,
                 'slug' => $cat->slug,
                 'icon' => $cat->icon,
-                'cover' => $cat->realCoverUrl() ?? Media::url($cat->samples->first(), 'after', 'web'),
+                'cover' => $cat->realCoverUrl()
+                    ?? Media::url($cat->samples->first(), 'combined', 'web')
+                    ?? Media::url($cat->samples->first(), 'after', 'web'),
                 'samples_count' => $cat->samples->count(),
             ])->all();
     }
@@ -476,6 +478,7 @@ class SitePayload
                 'try_free' => ['label' => $cat->try_free_label, 'url' => $cat->try_free_url ?: '/free-trial'],
                 'samples' => $cat->samples->map(fn ($s) => [
                     'title' => $s->title,
+                    'image' => Media::url($s, 'combined', 'web'),
                     'before_image' => Media::url($s, 'before', 'web'),
                     'after_image' => Media::url($s, 'after', 'web'),
                 ])->values(),
